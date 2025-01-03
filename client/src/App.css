@@ -3,11 +3,12 @@
   margin: 0;
   box-sizing: border-box;
   font-family: var(--font-heading);
+  font-weight: normal;
 }
 
 @font-face {
   font-family: "raleway";
-  src: url(./assets/font/raleway-font.ttf);
+  src: url(./assets/font/raleway.ttf);
 }
 
 :root {
