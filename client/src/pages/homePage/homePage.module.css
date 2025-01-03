@@ -2,11 +2,7 @@ main {
   padding: 1em;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-}
-
-.cardsContainer {
-  display: flex;
+  align-items: center;
 }
 
 /* bouton pour créer une prise de décision */
@@ -64,5 +60,26 @@ section {
 
   @media screen and (max-width: 768px) {
     padding: 1em 0;
+  }
+}
+
+.container {
+  min-height: 100vh;
+  background-color: #f3f4f6;
+  padding: 2rem;
+  align-items: center;
+}
+
+.grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+@media screen and (max-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
