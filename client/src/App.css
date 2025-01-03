@@ -1,0 +1,31 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: var(--font-heading);
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: "raleway";
+  src: url(./assets/font/raleway.ttf);
+}
+
+:root {
+  border-top: 1.5em solid var(--color-primary-active);
+  border-bottom: 1.5em solid var(--color-primary-active);
+  border-right: 1.5em solid var(--color-primary-active);
+  border-left: 1.5em solid var(--color-primary-active);
+
+  --color-primary-active: #2088a7;
+  --color-tertiary-active: #c10b63;
+  --color-secondary-active: #f4e804;
+  --font-heading: "raleway";
+
+  @media screen and (max-width: 768px) {
+    border-top: 2.5em solid var(--color-primary-active);
+    border-bottom: 2.5em solid var(--color-primary-active);
+    border-right: 0;
+    border-left: 0;
+  }
+}
