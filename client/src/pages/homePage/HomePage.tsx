@@ -7,7 +7,6 @@ export default function HomePage() {
         <button type="button" className={style.buttonCreateDecision}>
           Créer une prise de décision
         </button>
-
         <section>
           <h2>Les décisions où je participe</h2>
           <div className={style.cardsContainer}>
