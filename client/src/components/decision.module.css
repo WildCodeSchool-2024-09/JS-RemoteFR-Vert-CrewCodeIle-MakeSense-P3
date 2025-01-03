@@ -1,0 +1,93 @@
+.decision-container {
+  padding: 20px;
+  margin: 0 auto;
+  max-width: 100%;
+  background: #f9f9f9;
+  border-radius: 10px;
+}
+
+h1 {
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.section {
+  margin-bottom: 30px;
+}
+
+.section h2 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+label {
+  font-size: 14px;
+  display: block;
+  margin-bottom: 5px;
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  padding: 10px;
+}
+
+.button-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.cancel-button,
+.submit-button {
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.cancel-button {
+  background-color: #ccc;
+  color: #000;
+}
+
+.submit-button {
+  background-color: #007bff;
+  color: #fff;
+} /* Breakpoint : écrans plus larges (768px et plus) */
+@media (min-width: 768px) {
+  .decision-container {
+    max-width: 800px;
+    padding: 40px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  h1 {
+    font-size: 28px;
+  }
+
+  .section h2 {
+    font-size: 20px;
+  }
+
+  input,
+  select,
+  textarea {
+    font-size: 16px;
+    padding: 15px;
+  }
+
+  .button-container {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .cancel-button,
+  .submit-button {
+    font-size: 16px;
+    padding: 12px 20px;
+  }
+}
