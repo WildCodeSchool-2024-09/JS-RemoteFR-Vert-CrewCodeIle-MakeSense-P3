@@ -1,6 +1,6 @@
+import style from "./homePage.module.css";
 import DecisionCard from "../../components/decisionCard/DecisionCard";
 import decisionsData from "../../data/decisions.json";
-import style from "./homePage.module.css";
 
 export default function HomePage() {
   if (!decisionsData || !decisionsData.decisions) {
