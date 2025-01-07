@@ -4,7 +4,7 @@ import style from "./decisionCard.module.css";
 
 export default function DecisionCard({ decision }: { decision: Decision }) {
   return (
-    <div className={style.card}>
+    <section className={style.card}>
       <span
         className={style.category}
         style={{ backgroundColor: getCategoryColor(decision.DecisionCategory) }}
@@ -14,7 +14,7 @@ export default function DecisionCard({ decision }: { decision: Decision }) {
 
       <h2 className={style.title}>{decision.DecisionTitle}</h2>
 
-      <div className={style.footer}>
+      <article className={style.footer}>
         <img
           src={decision.ProfilePicture}
           alt={`${decision.UserName}'s profile`}
@@ -26,7 +26,7 @@ export default function DecisionCard({ decision }: { decision: Decision }) {
             {decision.UserName} {decision.UserFirstname}
           </span>
         </p>
-      </div>
-    </div>
+      </article>
+    </section>
   );
 }
