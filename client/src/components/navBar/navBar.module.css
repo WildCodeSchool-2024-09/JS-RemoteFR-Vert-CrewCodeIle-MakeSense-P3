@@ -1,3 +1,10 @@
+*:focus-visible {
+  outline-style: dashed;
+  outline-color: var(--outline-color);
+  outline-width: 3px;
+  outline-offset: 4px;
+}
+
 .navContainer {
   display: flex;
   align-items: center;
@@ -8,8 +15,7 @@
 .title {
   font-size: 24px;
   color: var(--color-primary-active);
-  font-family: "raleway", sans-serif;
-  font-weight: bolder;
+  font-weight: bold;
 }
 
 .navBarLink {
@@ -19,20 +25,9 @@
   list-style: none;
   padding: 0;
   margin: 0;
-  font-family: "raleway", sans-serif;
 }
 
-.navBarLink {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  font-family: "raleway", sans-serif;
-}
-
-.navBarLink > li {
+.navBarLink li {
   margin: 0 15px;
 }
 
@@ -45,6 +40,7 @@
   font-size: 16px;
   text-decoration: underline;
   text-underline-offset: 5px;
+  font-weight: bold;
 }
 
 .dropdownMenu {
@@ -53,24 +49,22 @@
   border: 1px solid var(--color-primary-active);
   padding: 10px;
   list-style: none;
-  margin-top: 5px;
+  margin-top: 10px;
   text-underline-offset: 5px;
 }
 
-.dropdownMenu > li {
-  margin-bottom: 5px;
+.dropdownMenu li {
+  margin-left: 8px;
+}
+
+.dropdownItemButton {
+  background: none;
+  border: none;
   cursor: pointer;
   color: var(--color-primary-active);
   text-decoration: underline;
-}
-
-.dropdownMenu > li:last-child {
-  margin-bottom: 0;
-}
-
-.notificationButton {
+  margin-bottom: 5px;
   font-size: 16px;
-  color: var(--color-primary-active);
 }
 
 .profileIcon {
@@ -106,7 +100,11 @@
     flex-direction: row;
   }
 
-  .navBarLink > li {
+  .navBarLink li {
     margin: 10px 10px;
+  }
+
+  .dropdownMenu li {
+    margin: 0px 8px;
   }
 }

@@ -13,12 +13,6 @@ function NavBar() {
     setIsDropdownOpen(false);
   };
 
-  const handleKeyPress = (event: React.KeyboardEvent, action: () => void) => {
-    if (event.key === "Enter" || event.key === " ") {
-      action();
-    }
-  };
-
   return (
     <div className={style.NavBar}>
       <nav className={style.navContainer}>
@@ -29,84 +23,61 @@ function NavBar() {
               type="button"
               className={style.dropdownButton}
               onClick={toggleDropdown}
-              onKeyDown={(event) => handleKeyPress(event, toggleDropdown)}
             >
               Les décisions
             </button>
             {isDropdownOpen && (
               <ul className={style.dropdownMenu}>
-                <li
-                  onClick={() => {
-                    closeDropdown();
-                  }}
-                  onKeyDown={(event) =>
-                    handleKeyPress(event, () => {
-                      closeDropdown();
-                    })
-                  }
-                >
-                  Les décisions où je participe
+                <li>
+                  <button
+                    type="button"
+                    className={style.dropdownItemButton}
+                    onClick={closeDropdown}
+                  >
+                    Les décisions où je participe
+                  </button>
                 </li>
-                <li
-                  onClick={() => {
-                    closeDropdown();
-                  }}
-                  onKeyDown={(event) =>
-                    handleKeyPress(event, () => {
-                      closeDropdown();
-                    })
-                  }
-                >
-                  Mes décisions
+                <li>
+                  <button
+                    type="button"
+                    className={style.dropdownItemButton}
+                    onClick={closeDropdown}
+                  >
+                    Mes décisions
+                  </button>
                 </li>
-                <li
-                  onClick={() => {
-                    closeDropdown();
-                  }}
-                  onKeyDown={(event) =>
-                    handleKeyPress(event, () => {
-                      closeDropdown();
-                    })
-                  }
-                >
-                  Les décisions en cours
+                <li>
+                  <button
+                    type="button"
+                    className={style.dropdownItemButton}
+                    onClick={closeDropdown}
+                  >
+                    Les décisions en cours
+                  </button>
                 </li>
-                <li
-                  onClick={() => {
-                    closeDropdown();
-                  }}
-                  onKeyDown={(event) =>
-                    handleKeyPress(event, () => {
-                      closeDropdown();
-                    })
-                  }
-                >
-                  Les décisions archivées
+                <li>
+                  <button
+                    type="button"
+                    className={style.dropdownItemButton}
+                    onClick={closeDropdown}
+                  >
+                    Les décisions archivées
+                  </button>
                 </li>
-                <li
-                  onClick={() => {
-                    closeDropdown();
-                  }}
-                  onKeyDown={(event) =>
-                    handleKeyPress(event, () => {
-                      closeDropdown();
-                    })
-                  }
-                >
-                  Toutes les décisions
+                <li>
+                  <button
+                    type="button"
+                    className={style.dropdownItemButton}
+                    onClick={closeDropdown}
+                  >
+                    Toutes les décisions
+                  </button>
                 </li>
               </ul>
             )}
           </li>
           <li>
-            <button
-              type="button"
-              className={style.notificationButton}
-              onClick={() => {}}
-              onKeyDown={(event) =>
-                handleKeyPress(event, () => console.log("Notification clicked"))
-              }
-            >
+            <button type="button" className={style.notificationButton}>
               Notification
             </button>
           </li>
@@ -114,7 +85,7 @@ function NavBar() {
             <NavLink to={"/profile"}>
               <div className={style.profileIcon}>
                 <img
-                  src="../../../public/utilisateur.png"
+                  src="/utilisateur.png"
                   alt="Profil img"
                   className={style.profileImage}
                 />
