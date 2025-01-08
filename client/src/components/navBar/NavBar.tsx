@@ -1,17 +1,16 @@
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
-//import style from "./NavBar.module.css";
+import style from "./NavBar.module.css";
 
 function NavBar() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [currentFilter, setCurrentFilter] = useState<string | null>(null);
 
   const toggleDropdown = () => {
     setIsDropdownOpen((currentState) => !currentState);
   };
 
-  const applyFilter = (filter: string) => {
-    setCurrentFilter(filter);
+  const closeDropdown = () => {
+    setIsDropdownOpen(false);
   };
 
   const handleKeyPress = (event: React.KeyboardEvent, action: () => void) => {
@@ -21,60 +20,77 @@ function NavBar() {
   };
 
   return (
-    <div className="NavBar">
-      <nav>
-        <ul className="navBarLink">
+    <div className={style.NavBar}>
+      <nav className={style.navContainer}>
+        <div className={style.title}>Intra_Sense</div>
+        <ul className={style.navBarLink}>
           <li>
             <button
               type="button"
-              className="dropdownButton"
+              className={style.dropdownButton}
               onClick={toggleDropdown}
               onKeyDown={(event) => handleKeyPress(event, toggleDropdown)}
             >
               Les décisions
             </button>
             {isDropdownOpen && (
-              <ul className="dropdownMenu">
+              <ul className={style.dropdownMenu}>
                 <li
-                  onClick={() => applyFilter("ParticipationDecisions")}
+                  onClick={() => {
+                    closeDropdown();
+                  }}
                   onKeyDown={(event) =>
-                    handleKeyPress(event, () =>
-                      applyFilter("ParticipationDecisions"),
-                    )
+                    handleKeyPress(event, () => {
+                      closeDropdown();
+                    })
                   }
                 >
                   Les décisions où je participe
                 </li>
                 <li
-                  onClick={() => applyFilter("MesDecisions")}
+                  onClick={() => {
+                    closeDropdown();
+                  }}
                   onKeyDown={(event) =>
-                    handleKeyPress(event, () => applyFilter("MesDecisions"))
+                    handleKeyPress(event, () => {
+                      closeDropdown();
+                    })
                   }
                 >
                   Mes décisions
                 </li>
                 <li
-                  onClick={() => applyFilter("DecisionsEnCours")}
+                  onClick={() => {
+                    closeDropdown();
+                  }}
                   onKeyDown={(event) =>
-                    handleKeyPress(event, () => applyFilter("DecisionsEnCours"))
+                    handleKeyPress(event, () => {
+                      closeDropdown();
+                    })
                   }
                 >
                   Les décisions en cours
                 </li>
                 <li
-                  onClick={() => applyFilter("DecisionsArchivees")}
+                  onClick={() => {
+                    closeDropdown();
+                  }}
                   onKeyDown={(event) =>
-                    handleKeyPress(event, () =>
-                      applyFilter("DecisionsArchivees"),
-                    )
+                    handleKeyPress(event, () => {
+                      closeDropdown();
+                    })
                   }
                 >
                   Les décisions archivées
                 </li>
                 <li
-                  onClick={() => applyFilter("ToutesDecisions")}
+                  onClick={() => {
+                    closeDropdown();
+                  }}
                   onKeyDown={(event) =>
-                    handleKeyPress(event, () => applyFilter("ToutesDecisions"))
+                    handleKeyPress(event, () => {
+                      closeDropdown();
+                    })
                   }
                 >
                   Toutes les décisions
@@ -85,10 +101,8 @@ function NavBar() {
           <li>
             <button
               type="button"
-              className="notificationButton"
-              onClick={() => {
-                // Action à réaliser pour les notifications ????
-              }}
+              className={style.notificationButton}
+              onClick={() => {}}
               onKeyDown={(event) =>
                 handleKeyPress(event, () => console.log("Notification clicked"))
               }
@@ -98,21 +112,16 @@ function NavBar() {
           </li>
           <li>
             <NavLink to={"/profile"}>
-              <div className="profileIcon">
+              <div className={style.profileIcon}>
                 <img
-                  src="../../assets/images/utilisateur.png"
+                  src="../../../public/utilisateur.png"
                   alt="Profil img"
-                  className="profileImage"
+                  className={style.profileImage}
                 />
               </div>
             </NavLink>
           </li>
         </ul>
-        {currentFilter && (
-          <div className="filterInfo">
-            <p>Filtre actuel : {currentFilter}</p>
-          </div>
-        )}
       </nav>
     </div>
   );
