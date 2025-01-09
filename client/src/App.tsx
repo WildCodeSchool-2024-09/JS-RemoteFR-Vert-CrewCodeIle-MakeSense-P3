@@ -5,7 +5,7 @@ import Decision from "./components/Decision";
 function App() {
   return (
     <>
-      <Outlet />;
+      <Outlet />
       <Decision />
     </>
   );

@@ -1,30 +1,40 @@
-.decision-container {
-  padding: 20px;
-  margin: 0 auto;
-  max-width: 100%;
-  background: #f9f9f9;
-  border-radius: 10px;
+/* style des éléments de haut de page: */
+.logo_exit {
+  flex-direction: row;
+  justify-content: space-between;
 }
 
+/* titres: */
 h1 {
-  text-align: center;
   font-size: 24px;
   margin-bottom: 20px;
+  color: #196c84;
+  font-weight: bold;
 }
-
-.section {
-  margin-bottom: 30px;
+legend {
+  font-size: 18px;
+  margin-bottom: 10px;
+  color: #196c84;
 }
-
 .section h2 {
   font-size: 18px;
   margin-bottom: 10px;
+}
+h2 {
+  display: flex;
+  justify-content: center;
+}
+
+/* général: */
+.section {
+  margin-bottom: 30px;
 }
 
 label {
   font-size: 14px;
   display: block;
   margin-bottom: 5px;
+  color: #196c84;
 }
 
 input,
@@ -33,32 +43,126 @@ textarea {
   width: 100%;
   padding: 10px;
 }
+textarea {
+  resize: vertical;
+  height: 300px;
+}
+section {
+  margin-bottom: 60px;
+}
+/* boutton: */
+.canceldButton {
+  background-color: #196c84;
+  color: white;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+.exitButton {
+  background-color: white;
 
-.button-container {
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  border: none;
+}
+.addDecisionButton {
+  background-color: #9b084f;
+  color: white;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+/* style liés à la décision: */
+.decision-container {
+  padding: 20px;
+  margin: 0 auto;
+  max-width: 100%;
+  background: #f9f9f9;
+  border-radius: 10px;
+}
+
+/* style liés aux catégories : */
+
+.addCategory {
+  margin-bottom: 20px;
+}
+.addCategoryContainer {
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+/* .addCategoryContainer input{
+  flex:1;
+  /* input prend toute la taille disponible */
+
+.addPlaceContainer {
+  display: flex;
+  align-items: center;
   gap: 10px;
 }
 
-.cancel-button,
-.submit-button {
+.addCategoryContainer button {
   padding: 10px;
-  border: none;
-  border-radius: 5px;
   cursor: pointer;
-  font-size: 14px;
+  border-radius: 5px;
+  color: black;
+  background-color: #fff30d;
+}
+.addCategoryContainer button:hover {
+  background-color: #9b084f;
+}
+.addPlaceButton {
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  color: black;
+  background-color: #fff30d;
+}
+.addPlaceContainer button:hover {
+  background-color: #9b084f;
 }
 
-.cancel-button {
-  background-color: #ccc;
-  color: #000;
+/* style de la grid et autres liés aux Planning: */
+.gridContainer {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Définit 3 colonnes de taille égale */
+  gap: 20px;
 }
 
-.submit-button {
-  background-color: #007bff;
-  color: #fff;
-} /* Breakpoint : écrans plus larges (768px et plus) */
-@media (min-width: 768px) {
+.gridContainer article {
+  display: flex;
+  flex-direction: column;
+}
+
+.gridContainer label {
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.gridContainer input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+.remarqueNb {
+  font-size: 12px;
+  color: #666;
+  margin-top: 10px;
+  line-height: 1.4; /* Pour améliorer la lisibilité */
+  font-style: italic;
+}
+
+/* style lié au bouttons en bas de page ( annuler, et crée la prise de décision): */
+.buttongroup {
+  display: flex;
+  /* gap: 50px; */
+  justify-content: space-evenly;
+  flex-direction: row;
+}
+/* Breakpoint : écrans plus larges (768px et plus) */
+@media (max-width: 768px) {
   .decision-container {
     max-width: 800px;
     padding: 40px;
@@ -80,14 +184,7 @@ textarea {
     padding: 15px;
   }
 
-  .button-container {
-    flex-direction: row;
-    justify-content: space-between;
-  }
-
-  .cancel-button,
-  .submit-button {
-    font-size: 16px;
-    padding: 12px 20px;
+  .gridContainer {
+    grid-template-columns: repeat(1, 1fr); /* 1 colonne sur les petits écrans */
   }
 }
