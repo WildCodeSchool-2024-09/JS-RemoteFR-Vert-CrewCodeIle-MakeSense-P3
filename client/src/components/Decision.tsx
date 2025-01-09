@@ -2,6 +2,7 @@ import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import style from "./decision.module.css";
 import "react-toastify/dist/ReactToastify.css";
+
 const decision = () => {
   /** état initialisant les catégories existantes:*/
   const [categories, setcategories] = useState(["Category1", "Category2"]);
@@ -53,7 +54,8 @@ const decision = () => {
   return (
     <section className={style.decisioncontainer}>
       <section className={style.logo_exit}>
-        <h1 id="logo">Intra_Sense</h1>
+        <img id="logo" src="/intrasenselogo.png" alt="logo" />
+
         <button type="button" className={style.exitButton}>
           {" "}
           ✖{" "}

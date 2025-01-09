@@ -81,6 +81,9 @@ section {
   background: #f9f9f9;
   border-radius: 10px;
 }
+#logo {
+  width: 20px;
+}
 
 /* style liés aux catégories : */
 
