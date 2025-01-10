@@ -1,5 +1,5 @@
 import { useState } from "react";
-import styles from "./loginForm.module.css";
+import style from "./loginForm.module.css";
 
 export default function LoginForm() {
   const [email, setEmail] = useState("");
@@ -42,15 +42,15 @@ export default function LoginForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className={styles.card}>
-      <h1 className={styles.title}>
+    <form onSubmit={handleSubmit} className={style.card}>
+      <h1 className={style.title}>
         Interface de
         <br />
         connexion
       </h1>
 
-      <section className={styles.formGroup}>
-        <label htmlFor="email" className={styles.label}>
+      <section className={style.formGroup}>
+        <label htmlFor="email" className={style.label}>
           Email :
         </label>
         <input
@@ -58,19 +58,21 @@ export default function LoginForm() {
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className={`${styles.input} ${errors.email ? styles.inputError : ""}`}
+          className={`${style.input} ${errors.email ? style.inputError : ""}`}
           placeholder="exemple@email.com"
+          aria-invalid={errors.email ? "true" : "false"}
           aria-describedby="email-error"
+          autoComplete="email"
         />
         {errors.email && (
-          <span id="email-error" className={styles.errorText}>
+          <span id="email-error" className={style.errorText}>
             {errors.email}
           </span>
         )}
       </section>
 
-      <section className={styles.formGroup}>
-        <label htmlFor="password" className={styles.label}>
+      <section className={style.formGroup}>
+        <label htmlFor="password" className={style.label}>
           Mot de passe :
         </label>
         <input
@@ -78,34 +80,34 @@ export default function LoginForm() {
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          className={`${styles.input} ${errors.password ? styles.inputError : ""}`}
+          className={`${style.input} ${errors.password ? style.inputError : ""}`}
           aria-describedby="password-error"
         />
         {errors.password && (
-          <span id="password-error" className={styles.errorText}>
+          <span id="password-error" className={style.errorText}>
             {errors.password}
           </span>
         )}
       </section>
 
-      <section className={styles.buttonGroup}>
+      <section className={style.buttonGroup}>
         <button
           type="button"
-          className={styles.buttonSignup}
+          className={style.buttonSignup}
           disabled={isSubmitting}
         >
           s'inscrire
         </button>
         <button
           type="submit"
-          className={styles.buttonLogin}
+          className={style.buttonLogin}
           disabled={isSubmitting}
         >
-          {isSubmitting ? "Connexion..." : "connexion"}
+          {isSubmitting ? "Connexion en cours ..." : "Connexion"}
         </button>
       </section>
 
-      <button type="button" className={styles.forgotPassword}>
+      <button type="button" className={style.forgotPassword}>
         mot de passe oublié ?
       </button>
     </form>
