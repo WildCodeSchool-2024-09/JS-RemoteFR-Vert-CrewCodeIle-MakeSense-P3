@@ -1,3 +1,4 @@
+// import CreateAccountForm from "../../components/createAccountForm/CreateAccountForm";
 import style from "./homePage.module.css";
 
 export default function HomePage() {
@@ -11,6 +12,7 @@ export default function HomePage() {
           <h2>Les décisions où je participe</h2>
           <div className={style.cardsContainer}>
             cards : Les décisions où je participe
+            {/* <CreateAccountForm /> */}
           </div>
         </section>
         <section>
