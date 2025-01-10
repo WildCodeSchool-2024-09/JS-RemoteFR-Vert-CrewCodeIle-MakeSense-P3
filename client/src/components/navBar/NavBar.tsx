@@ -14,9 +14,14 @@ function NavBar() {
   };
 
   return (
-    <div className={style.NavBar}>
       <nav className={style.navContainer}>
-        <div className={style.title}>Intra_Sense</div>
+        <NavLink to={"/homepage"}>
+          <img
+            src="/logo.png"
+            alt="Logo img"
+            className={style.logoImage}
+          />
+        </NavLink>
         <ul className={style.navBarLink}>
           <li>
             <button
@@ -83,18 +88,15 @@ function NavBar() {
           </li>
           <li>
             <NavLink to={"/profile"}>
-              <div className={style.profileIcon}>
                 <img
                   src="/utilisateur.png"
                   alt="Profil img"
                   className={style.profileImage}
                 />
-              </div>
             </NavLink>
           </li>
         </ul>
       </nav>
-    </div>
   );
 }
 
