@@ -1,21 +1,82 @@
-create table user (
-  id int unsigned primary key auto_increment not null,
-  email varchar(255) not null unique,
-  password varchar(255) not null
+CREATE TABLE user (
+id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+firstname VARCHAR(50) NOT NULL,
+lastname VARCHAR(50) NOT NULL,
+email VARCHAR(150) NOT NULL UNIQUE,
+password VARCHAR(50) NOT NULL,
+avatar VARCHAR(255) NOT NULL,
+created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+role_id INTEGER NOT NULL,
+FOREIGN KEY (role_id) REFERENCES role(id)
 );
 
-create table item (
-  id int unsigned primary key auto_increment not null,
-  title varchar(255) not null,
-  user_id int unsigned not null,
-  foreign key(user_id) references user(id)
+CREATE TABLE role (
+id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+label VARCHAR(50) NOT NULL,
+created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
+CREATE TABLE decision (
+id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+min_date DATE NOT NULL,
+max_date DATE NOT NULL,
+utility TEXT NOT NULL,
+context TEXT NOT NULL,
+profit TEXT NOT NULL,
+risk TEXT NOT NULL,
+step VARCHAR(50) NOT NULL,
+created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+user_id INTEGER NOT NULL,
+FOREIGN KEY (user_id) REFERENCES user(id),
+category_id INTEGER NOT NULL,
+FOREIGN KEY (category_id) REFERENCES category(id),
+comment_id INTEGER NOT NULL,
+FOREIGN KEY (comment_id) REFERENCES comment(id),
+country_id INTEGER NOT NULL,
+FOREIGN KEY (country_id) REFERENCES country(id)
+);
+CREATE TABLE vote (
+id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+comment TEXT NOT NULL,
+state BOOLEAN,
+created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+user_id INTEGER NOT NULL,
+FOREIGN KEY (user_id) REFERENCES user(id)
+);
+CREATE TABLE country (
+id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+label VARCHAR(150) NOT NULL,
+created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+CREATE TABLE category (
+id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+label VARCHAR(50) NOT NULL,
+created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+CREATE TABLE comment (
+id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+content TEXT NOT NULL,
+created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+user_id INTEGER NOT NULL,
+FOREIGN KEY (user_id) REFERENCES user(id)
+);
+CREATE TABLE user_vote_decision (
+id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+statut VARCHAR(50) NOT NULL,
+created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+user_id INTEGER NOT NULL,
+FOREIGN KEY (user_id) REFERENCES user(id),
+decision_id INTEGER NOT NULL,
+FOREIGN KEY (decision_id) REFERENCES decision(id),
+vote_id INTEGER NOT NULL,
+FOREIGN KEY (vote_id) REFERENCES vote(id)
+);
+INSERT INTO role (id,label) VALUES (1, 'user'), (2, 'administrator');
 
-insert into user(id, email, password)
-values
-  (1, "jdoe@mail.com", "123456");
-
-insert into item(id, title, user_id)
-values
-  (1, "Stuff", 1),
-  (2, "Doodads", 1);

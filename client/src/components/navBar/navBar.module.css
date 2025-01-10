@@ -1,0 +1,102 @@
+*:focus-visible {
+  outline-style: dashed;
+  outline-color: var(--outline-color);
+  outline-width: 3px;
+  outline-offset: 4px;
+}
+
+.navContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 15px;
+}
+
+.logoImage {
+  margin-top: 10px;
+  width: 70%;
+  height: 30%;
+}
+
+.navBarLink {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.navBarLink li {
+  margin: 0 15px;
+}
+
+.dropdownButton,
+.notificationButton {
+  background-color: white;
+  border: none;
+  color: var(--color-primary-active);
+  cursor: pointer;
+  font-size: 18px;
+  text-decoration: underline;
+  text-underline-offset: 5px;
+  font-weight: bold;
+}
+
+.dropdownMenu {
+  position: absolute;
+  background-color: white;
+  border: 1px solid var(--color-primary-active);
+  padding: 10px;
+  list-style: none;
+  margin-top: 10px;
+  text-underline-offset: 5px;
+}
+
+.dropdownMenu li {
+  margin-left: 8px;
+}
+
+.dropdownItemButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--color-primary-active);
+  text-decoration: underline;
+  margin-bottom: 5px;
+  font-size: 16px;
+}
+
+.profileImage {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+/* MOBILE */
+@media screen and (max-width: 768px) {
+  .navContainer {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .logoImage {
+    margin: 20px auto 10px;
+    display: block;
+    width: 50%;
+    height: 50%;
+  }
+
+  .navBarLink {
+    justify-content: center;
+    flex-direction: row;
+  }
+
+  .navBarLink li {
+    margin: 10px 10px;
+  }
+
+  .dropdownMenu li {
+    margin: 0px 8px;
+  }
+}

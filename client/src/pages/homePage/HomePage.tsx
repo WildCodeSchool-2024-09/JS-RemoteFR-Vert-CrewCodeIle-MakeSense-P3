@@ -1,9 +1,10 @@
-// import CreateAccountForm from "../../components/createAccountForm/CreateAccountForm";
+import NavBar from "../../components/navBar/NavBar";
 import style from "./homePage.module.css";
 
 export default function HomePage() {
   return (
     <div>
+      <NavBar />
       <main>
         <button type="button" className={style.buttonCreateDecision}>
           Créer une prise de décision
