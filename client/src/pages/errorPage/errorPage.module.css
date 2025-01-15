@@ -1,0 +1,72 @@
+*:focus-visible {
+  outline-style: dashed;
+  outline-color: var(--outline-color);
+  outline-width: 3px;
+  outline-offset: 4px;
+}
+
+.errorTitle {
+  text-align: center;
+  font-size: 5em;
+  margin: 1em 0 0.5em 0;
+}
+
+.gif {
+  display: flex;
+  justify-content: center;
+  height: 25em;
+  margin-bottom: 2em;
+}
+
+.textError {
+  font-size: 2em;
+  text-align: center;
+  margin-bottom: 1em;
+}
+
+.sectionButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.buttonContactUs {
+  width: 25%;
+  height: 2em;
+  background-color: var(--color-primary-active);
+  border-radius: 1em;
+  border-color: var(--color-tertiary-active);
+  font-size: 1em;
+  margin: 0 2em 2em 0;
+}
+
+.buttonHomePage {
+  width: 25%;
+  height: 2em;
+  background-color: var(--color-tertiary-active);
+  border-radius: 1em;
+  border-color: var(--color-primary-active);
+  font-size: 1em;
+  margin: 0 2em 2em 0;
+}
+
+a {
+  color: white;
+  text-decoration: none;
+}
+
+@media screen and (max-width: 768px) {
+  .gif {
+    height: 180px;
+  }
+
+  .buttonContactUs {
+    width: 45%;
+    margin: 0 2em 2em 2em;
+  }
+
+  .buttonHomePage {
+    width: 45%;
+    margin: 0 2em 2em 0;
+  }
+}
