@@ -13,6 +13,8 @@ router.get("/api/items", itemActions.browse);
 router.get("/api/items/:id", itemActions.read);
 router.post("/api/items", itemActions.add);
 
+router.post("/api/user/login");
+
 /* ************************************************************************* */
 
 export default router;

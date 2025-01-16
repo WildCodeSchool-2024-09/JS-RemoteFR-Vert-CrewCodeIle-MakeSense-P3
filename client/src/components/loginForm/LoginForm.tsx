@@ -1,26 +1,48 @@
-import { useForm } from "react-hook-form";
+import { useState } from "react";
 import style from "./loginForm.module.css";
 
-type FormValues = {
-  email: string;
-  password: string;
-};
-
 export default function LoginForm() {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors, isSubmitting },
-  } = useForm<FormValues>();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [errors, setErrors] = useState({ email: "", password: "" });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const MinimumCaract = 8;
+  const validateForm = () => {
+    const newErrors = { email: "", password: "" };
+    let isValid = true;
 
-  const onSubmit = async (data: FormValues) => {
-    await new Promise((resolve) => setTimeout(resolve, 2000));
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!email) {
+      newErrors.email = "L'email est requis";
+      isValid = false;
+    } else if (!emailRegex.test(email)) {
+      newErrors.email = "Format d'email invalide";
+      isValid = false;
+    }
+
+    if (!password) {
+      newErrors.password = "Le mot de passe est requis";
+      isValid = false;
+    } else if (password.length < 8) {
+      newErrors.password =
+        "Le mot de passe doit contenir au moins 8 caractères";
+      isValid = false;
+    }
+
+    setErrors(newErrors);
+    return isValid;
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (validateForm()) {
+      setIsSubmitting(true);
+      setIsSubmitting(false);
+    }
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className={style.card}>
+    <form onSubmit={handleSubmit} className={style.card}>
       <h1 className={style.title}>
         Interface de
         <br />
@@ -34,13 +56,8 @@ export default function LoginForm() {
         <input
           id="email"
           type="email"
-          {...register("email", {
-            required: "L'email est requis",
-            pattern: {
-              value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-              message: "Format d'email invalide",
-            },
-          })}
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
           className={`${style.input} ${errors.email ? style.inputError : ""}`}
           placeholder="exemple@email.com"
           aria-invalid={errors.email ? "true" : "false"}
@@ -49,7 +66,7 @@ export default function LoginForm() {
         />
         {errors.email && (
           <span id="email-error" className={style.errorText}>
-            {errors.email.message}
+            {errors.email}
           </span>
         )}
       </section>
@@ -61,21 +78,14 @@ export default function LoginForm() {
         <input
           id="password"
           type="password"
-          {...register("password", {
-            required: "Le mot de passe est requis",
-            minLength: {
-              value: MinimumCaract,
-              message: `Le mot de passe doit contenir au moins ${MinimumCaract} caractères`,
-            },
-          })}
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
           className={`${style.input} ${errors.password ? style.inputError : ""}`}
-          aria-invalid={errors.password ? "true" : "false"}
           aria-describedby="password-error"
-          autoComplete="current-password"
         />
         {errors.password && (
           <span id="password-error" className={style.errorText}>
-            {errors.password.message}
+            {errors.password}
           </span>
         )}
       </section>
