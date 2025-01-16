@@ -13,7 +13,6 @@ export default function HomePage() {
           <h2>Les décisions où je participe</h2>
           <div className={style.cardsContainer}>
             cards : Les décisions où je participe
-            {/* <CreateAccountForm /> */}
           </div>
         </section>
         <section>

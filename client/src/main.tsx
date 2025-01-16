@@ -7,6 +7,7 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
 // Import the main app component
 import App from "./App";
+import CreateUserPage from "./pages/createUserPage/CreateUserPage";
 import HomePage from "./pages/homePage/HomePage";
 
 // Import additional components for new routes
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
       {
         path: "/homepage",
         element: <HomePage />,
+      },
+      {
+        path: "/inscriptionpage",
+        element: <CreateUserPage />,
       },
     ],
   },
