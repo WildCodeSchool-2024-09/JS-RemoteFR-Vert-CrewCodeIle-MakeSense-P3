@@ -79,4 +79,3 @@ vote_id INTEGER NOT NULL,
 FOREIGN KEY (vote_id) REFERENCES vote(id)
 );
 INSERT INTO role (id,label) VALUES (1, 'user'), (2, 'administrator');
-
