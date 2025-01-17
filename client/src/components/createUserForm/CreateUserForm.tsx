@@ -1,22 +1,11 @@
+import { useState } from "react";
+import { useForm } from "react-hook-form";
 import style from "./createUserForm.module.css";
 
 export default function CreateUserForm() {
-  const handleSubmit = async (event: React.FormEvent) => {
-    event.preventDefault();
-    // const formData = new FormData(event.currentTarget);
-    // const lastname = formData.get("lastname");
-    // const firstname = formData.get("firstname");
-    // const password = formData.get("password");
-    // const email = formData.get("email");
-
-    // fetch(`${import.meta.env.VITE_API_URL}/api/users`, {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify(formData),
-    // });
-  };
+  const { register, handleSubmit } = useForm();
+  const [data, setData] = useState("");
+  // console.log(data);
 
   return (
     <>
@@ -31,49 +20,46 @@ export default function CreateUserForm() {
             Télécharger photo de profil
           </button>
         </form> */}
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit((data) => setData(JSON.stringify(data)))}>
           <label>
             Nom
             <input
               type="text"
-              name="lastname"
               aria-label="Saisissez votre nom"
               placeholder="Saisissez votre nom"
-              id="lastname"
-              value=""
+              {...register("lastname")}
             />
           </label>
           <label>
             Prénom
             <input
               type="text"
-              name="firstname"
               aria-label="Saisissez votre prénom"
               placeholder="Saisissez votre prénom"
-              id="firstname"
+              {...register("firstname")}
             />
           </label>
           <label>
             Mot de passe
             <input
               type="password"
-              name="password"
               aria-label="Saisissez votre mot de passe"
               placeholder="Saisissez votre mot de passe"
-              id="password"
+              {...register("password")}
+              required
+              minLength={8}
             />
           </label>
           <label>
             Email
             <input
               type="email"
-              name="email"
               aria-label="Saisissez votre email"
               placeholder="Saisissez votre email"
-              id="email"
+              {...register("email")}
             />
           </label>
-
+          {data}
           <button type="submit" className={style.buttonCreateAccount}>
             Envoyer ma demande à l'administrateur
           </button>
