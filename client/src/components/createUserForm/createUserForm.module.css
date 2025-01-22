@@ -85,6 +85,13 @@ input::placeholder {
   color: #9ca3af;
 }
 
+.errorText {
+  color: #ff0101;
+  font-size: 0.8rem;
+  margin-top: 0.25rem;
+  display: block;
+}
+
 @media (min-width: 768px) {
   .card {
     max-width: 480px;

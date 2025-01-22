@@ -3,7 +3,7 @@ type UserType = {
   firstname: string;
   lastname: string;
   email: string;
-  password: string;
+  hash_password: string;
   avatar: string;
   created_at: number;
   updated_at: number;
@@ -14,6 +14,6 @@ type NewUserType = {
   firstname: string;
   lastname: string;
   email: string;
-  password: string;
+  hash_password: string;
   avatar: string;
 };

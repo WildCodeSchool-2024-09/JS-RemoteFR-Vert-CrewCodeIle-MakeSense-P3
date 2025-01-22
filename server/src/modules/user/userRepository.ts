@@ -9,13 +9,19 @@ class UserRepository {
 
   async create(user: NewUserType) {
     const [result] = await databaseClient.query<Result>(
-      "INSERT INTO user (firstname, lastname, email, password, avatar) VALUES (?, ?, ?, ?, ?)",
-      [user.firstname, user.lastname, user.email, user.password, user.avatar],
+      "INSERT INTO user (firstname, lastname, email, hash_password, avatar) VALUES (?, ?, ?, ?, ?)",
+      [
+        user.firstname,
+        user.lastname,
+        user.email,
+        user.hash_password,
+        user.avatar,
+      ],
     );
     return [result];
   }
 
-  async findEmail(userEmail: string) {
+  async checkUniqueEmail(userEmail: string) {
     const [rows] = await databaseClient.query<Rows>(
       "SELECT * FROM user WHERE email= ?",
       [userEmail],
