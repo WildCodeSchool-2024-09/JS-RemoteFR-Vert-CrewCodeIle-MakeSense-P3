@@ -6,7 +6,7 @@ import style from "./createUserForm.module.css";
 export default function CreateUserForm() {
   const minPassword: number = 8;
   const maxPassword: number = 255;
-  // nombre minimum de caractères dans le mot de passe
+
   const {
     register,
     handleSubmit,
