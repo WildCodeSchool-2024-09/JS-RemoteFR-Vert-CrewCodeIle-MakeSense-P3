@@ -24,7 +24,7 @@ const add: RequestHandler = async (req, res, next) => {
   }
 };
 
-const validate: RequestHandler = async (req, res, next) => {
+const validateData: RequestHandler = async (req, res, next) => {
   const dataSchema = Joi.object({
     lastname: Joi.string()
       .max(50)
@@ -57,15 +57,13 @@ const checkEmail: RequestHandler = async (req, res, next) => {
     const user = await userRepository.checkUniqueEmail(req.body.email);
 
     if (user.length !== 0) {
-      // console.log("présent");
       res.sendStatus(422);
       return;
     }
-    // console.log("pas présent");
     next();
   } catch (e) {
     next(e);
   }
 };
 
-export default { browse, add, validate, checkEmail };
+export default { browse, add, validateData, checkEmail };

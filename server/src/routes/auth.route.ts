@@ -7,7 +7,7 @@ const router = express.Router();
 router.get("/api/auth", userActions.browse);
 router.post(
   "/api/auth",
-  userActions.validate,
+  userActions.validateData,
   hashPassword,
   userActions.checkEmail,
   userActions.add,

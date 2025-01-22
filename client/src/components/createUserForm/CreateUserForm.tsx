@@ -1,26 +1,31 @@
 import { useForm } from "react-hook-form";
 import type { FieldValues } from "react-hook-form";
+import { Bounce, ToastContainer, toast } from "react-toastify";
 import style from "./createUserForm.module.css";
 
 export default function CreateUserForm() {
   const minPassword: number = 8;
+  const maxPassword: number = 255;
   // nombre minimum de caractères dans le mot de passe
   const {
     register,
     handleSubmit,
     reset,
+    watch,
     formState: { errors },
   } = useForm<FormValues>();
 
   const onSubmit = async (data: FieldValues) => {
     try {
+      const { confirmed_password, ...rest } = data;
+
       const transformedData = {
-        ...data,
-        lastname: data.lastname.toLowerCase(),
-        firstname: data.firstname.toLowerCase(),
-        email: data.email.toLowerCase(),
-        hash_password: data.hash_password,
-        avatar: data.avatar.toLowerCase(),
+        ...rest,
+        lastname: rest.lastname.toLowerCase(),
+        firstname: rest.firstname.toLowerCase(),
+        email: rest.email.toLowerCase(),
+        hash_password: rest.hash_password,
+        avatar: rest.avatar.toLowerCase(),
       };
 
       const response = await fetch(`${import.meta.env.VITE_API_URL}/api/auth`, {
@@ -32,6 +37,17 @@ export default function CreateUserForm() {
       });
       await response.json();
       reset();
+      toast.success("Demande envoyée à l'administrateur", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
     } catch (error) {
       console.error("Erreur lors de l'envoi:", error);
     }
@@ -50,8 +66,8 @@ export default function CreateUserForm() {
               aria-label="Saisissez votre nom"
               placeholder="Pendragon"
               className={style.input}
-              required
               {...register("lastname", {
+                required: "champ obligatoire",
                 pattern: {
                   value: /^[A-Za-zÀ-ÿ\s-]+$/,
                   message:
@@ -89,6 +105,7 @@ export default function CreateUserForm() {
               placeholder="Saisissez votre mot de passe"
               className={style.input}
               minLength={minPassword}
+              maxLength={maxPassword}
               autoComplete="current-password"
               {...register("hash_password", {
                 required: "champ obligatoire",
@@ -104,6 +121,33 @@ export default function CreateUserForm() {
               {errors.hash_password?.message}
             </span>
           </label>
+          <label>
+            Vérification du mot de passe
+            <input
+              id="confirmed_password"
+              type="password"
+              aria-label="Confirmez votre mot de passe"
+              placeholder="Confirmez votre mot de passe"
+              className={style.input}
+              minLength={minPassword}
+              maxLength={maxPassword}
+              autoComplete="confirmed_password"
+              {...register("confirmed_password", {
+                pattern: {
+                  value:
+                    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>]).{8,}$/,
+                  message:
+                    "Le mot de passe doit contenir au minimum 8 caractères, 1 majuscule, 1 minuscule, 1 chiffre et 1 caractère spécial",
+                },
+                validate: (value) =>
+                  value === watch("hash_password") ||
+                  "Les mots de passe ne correspondent pas",
+              })}
+            />
+            <span className={style.errorText}>
+              {errors.confirmed_password?.message}
+            </span>
+          </label>
 
           <label htmlFor="email">
             Email
@@ -113,9 +157,8 @@ export default function CreateUserForm() {
               aria-label="Saisissez votre email"
               placeholder="arthur@kaamelott.fr"
               className={style.input}
-              required
               autoComplete="current-email"
-              {...register("email")}
+              {...register("email", { required: "champ obligatoire" })}
             />
           </label>
           <label htmlFor="avatar">
@@ -126,14 +169,26 @@ export default function CreateUserForm() {
               aria-label="URL de votre photo de profil"
               placeholder="URL de votre photo de profil"
               className={style.input}
-              {...register("avatar")}
-              required
+              {...register("avatar", { required: "champ obligatoire" })}
             />
           </label>
           <button type="submit" className={style.buttonCreateUser}>
             Envoyer ma demande à l'administrateur
           </button>
         </section>
+        <ToastContainer
+          position="bottom-center"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick={false}
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+          transition={Bounce}
+        />
       </form>
     </section>
   );
