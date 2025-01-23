@@ -7,13 +7,12 @@ function App() {
     <>
       <Outlet />
       <ToastContainer
-        position="bottom-center"
+        position="top-right"
         autoClose={5000}
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick={false}
         rtl={false}
-        pauseOnFocusLoss
         draggable
         pauseOnHover
         theme="light"
