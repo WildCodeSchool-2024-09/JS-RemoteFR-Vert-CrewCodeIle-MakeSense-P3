@@ -60,7 +60,6 @@ export default function CreateUserForm() {
         theme: "light",
         transition: Bounce,
       });
-      // console.error("Erreur lors de l'envoi:", error);
     }
   };
 
