@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import type { FieldValues } from "react-hook-form";
-import { Bounce, ToastContainer, toast } from "react-toastify";
+import { Bounce, toast } from "react-toastify";
 import style from "./createUserForm.module.css";
 
 export default function CreateUserForm() {
@@ -49,7 +49,18 @@ export default function CreateUserForm() {
         transition: Bounce,
       });
     } catch (error) {
-      console.error("Erreur lors de l'envoi:", error);
+      toast.error(`Erreur lors de l'envoi... ${error}`, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
+      // console.error("Erreur lors de l'envoi:", error);
     }
   };
 
@@ -176,19 +187,6 @@ export default function CreateUserForm() {
             Envoyer ma demande à l'administrateur
           </button>
         </section>
-        <ToastContainer
-          position="bottom-center"
-          autoClose={5000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick={false}
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-          theme="light"
-          transition={Bounce}
-        />
       </form>
     </section>
   );
