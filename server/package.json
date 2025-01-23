@@ -15,8 +15,7 @@
     "dotenv": "^16.4.5",
     "express": "^4.21.0",
     "joi": "^17.13.3",
-    "mysql2": "^3.11.3",
-    "react-toastify": "^11.0.3"
+    "mysql2": "^3.11.3"
   },
   "devDependencies": {
     "@faker-js/faker": "^9.0.3",

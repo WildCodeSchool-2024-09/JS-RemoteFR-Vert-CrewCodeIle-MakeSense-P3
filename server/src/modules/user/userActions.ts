@@ -1,6 +1,5 @@
 import type { RequestHandler } from "express";
 import Joi from "joi";
-import { Bounce, toast } from "react-toastify";
 import userRepository from "./userRepository";
 
 const add: RequestHandler = async (req, res, next) => {
@@ -11,7 +10,6 @@ const add: RequestHandler = async (req, res, next) => {
 
     res.status(201).json({ insertId });
   } catch (error) {
-    // console.error(e);
     next(error);
   }
 };

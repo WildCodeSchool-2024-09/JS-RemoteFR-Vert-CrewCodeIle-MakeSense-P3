@@ -49,7 +49,7 @@ export default function CreateUserForm() {
         transition: Bounce,
       });
     } catch (error) {
-      toast.error(`Erreur lors de l'envoi... ${error}`, {
+      toast.error(`Erreur lors de l'envoi...`, {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,
