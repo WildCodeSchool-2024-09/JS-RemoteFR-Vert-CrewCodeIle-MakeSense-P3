@@ -28,7 +28,7 @@ export default function CreateUserForm() {
         avatar: rest.avatar.toLowerCase(),
       };
 
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/auth`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/user`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
