@@ -1,26 +1,79 @@
-import { useState } from "react";
-import { ToastContainer, toast } from "react-toastify";
 import style from "./decisionForm.module.css";
 import "react-toastify/dist/ReactToastify.css";
+import { useForm } from "react-hook-form";
+import type { FieldValues } from "react-hook-form";
+import { Bounce, ToastContainer, toast } from "react-toastify";
 
-function DecisionForm() {
-  const [categories, setCategories] = useState(["Category1", "Category2"]);
-  const [newCategory, setNewCategory] = useState("");
+// const [categories, setCategories] = useState(["Category1", "Category2"]);
+// const [newCategory, setNewCategory] = useState("");
 
-  /**
-   * Funtion to add a new category to the array of existing categories, if the input field is not empty and if the category does not already exist.
-   */
+/**
+ * Funtion to add a new category to the array of existing categories, if the input field is not empty and if the category does not already exist.
+ */
+
+type dataDecision = {
+  title: string;
+  category: string;
+  addcategory: string;
+  place: string;
+  creationdate: Date;
+  datevote: Date;
+  canceleddecisiondate: Date;
+  description: string;
+  consequences: string;
+  benefice: string;
+  risks: string;
+  expert: string;
+  animateurs: string;
+  impactedperson: string;
+  categories: string[];
+  newcategories: string;
+};
+
+function CreateDecisionForm() {
+  const {
+    register,
+    handleSubmit,
+    // control,
+    setValue,
+    watch,
+    reset,
+    // formState: { errors },
+  } = useForm<dataDecision>({
+    defaultValues: {
+      title: "",
+      category: "",
+      addcategory: "",
+      place: "",
+      creationdate: new Date(),
+      datevote: new Date(),
+      canceleddecisiondate: new Date(),
+      description: "",
+      consequences: "",
+      benefice: "",
+      risks: "",
+      expert: "",
+      animateurs: "",
+      impactedperson: "",
+      categories: ["Category1", "Category2"],
+      newcategories: "",
+    },
+  });
+
+  const categories = watch("categories");
+  const newcategories = watch("newcategories");
   const AddCategory = () => {
-    if (!newCategory.trim()) {
+    if (!newcategories.trim()) {
       toast.warn("La catégorie ne peut pas être vide");
-    } else if (categories.includes(newCategory)) {
+    } else if (categories.includes(newcategories)) {
       toast.error("Cette catégorie existe déjà");
     } else {
-      setCategories([...categories, newCategory]);
-      setNewCategory("");
+      setValue("categories", [...categories, newcategories]);
+      setValue("newcategories", ""); //????
       toast.success("Catégorie ajoutée avec succès");
     }
   };
+
   const place = [
     "France",
     "Mexique",
@@ -33,6 +86,53 @@ function DecisionForm() {
     "Australie",
     "Ukraine",
   ];
+  const submitForm = async (data: FieldValues) => {
+    try {
+      const Data = {
+        ...data,
+        title: data.title,
+        category: data.category,
+        addcategory: data.addcategory,
+        place: data.place,
+        creationdate: data.creationdate,
+        datevote: data.datevote,
+        canceleddecisiondate: data.canceleddecisiondate,
+        description: data.description,
+        consequences: data.consequences,
+        benefice: data.benefice,
+        risks: data.risks,
+        expert: data.expert,
+        animateurs: data.animateurs,
+        impactedperson: data.impactedperson,
+      };
+
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/api/decisionform`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(Data),
+        },
+      );
+      await response.json();
+      reset();
+      toast.success("Demande envoyée à l'administrateur", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
+    } catch (error) {
+      console.error("Erreur lors de l'envoi:", error);
+    }
+  };
 
   return (
     <section className={style.decisioncontainer}>
@@ -46,22 +146,26 @@ function DecisionForm() {
       </section>
 
       <h2> Prise de décision: </h2>
-
-      <form>
-        {/* section intitulé */}
+      <form onSubmit={handleSubmit(submitForm)} className="formcontainer">
         <section>
           <label htmlFor="intitule"> Intitulé de la prise de décision: </label>
           <input
             type="text"
             id="intitule"
             placeholder="saisissez le texte ici"
+            {...register("title")}
           />
         </section>
 
         {/* liste déroulante des catégories */}
         <section>
           <label htmlFor="category"> Saisissez une catégorie: </label>
-          <select id="category">
+          <select
+            id="category"
+            {...register("category", {
+              required: "selectionnez une categorie",
+            })}
+          >
             <option value=""> Choississez une catégorie </option>
             {categories.map((category) => (
               <option key={category} value={category}>
@@ -79,8 +183,8 @@ function DecisionForm() {
             <input
               type="text"
               id="newCategory"
-              value={newCategory}
-              onChange={(event) => setNewCategory(event.target.value)}
+              placeholder="nouvelle catégorie"
+              {...register("newcategories")}
             />
             <button
               type="button"
@@ -97,7 +201,10 @@ function DecisionForm() {
         {/* liste déroulante des localisations */}
         <section>
           <label htmlFor="place"> Saisissez une localisation: </label>
-          <select id="place">
+          <select
+            id="place"
+            {...register("place", { required: "choisissez une localisation" })}
+          >
             <option value=""> Choississez une localisation </option>
             {place.map((place) => (
               <option key={place} value={place}>
@@ -113,25 +220,38 @@ function DecisionForm() {
           <textarea
             id="description"
             placeholder="saisissez la description ici"
+            {...register("description")}
           />
         </section>
 
         {/* section impact sur l'organisation  */}
         <section>
           <label htmlFor="impact"> Quel impact sur l'organisation ? </label>
-          <textarea id="impact" placeholder="saisissez l'impact ici" />
+          <textarea
+            id="impact"
+            placeholder="saisissez l'impact ici"
+            {...register("consequences")}
+          />
         </section>
 
         {/* Bénéfices :  */}
         <section>
           <label htmlFor="benefits"> Quels sont les bénéfices? </label>
-          <textarea id="benefits" placeholder="saisissez les bénéfices ici" />
+          <textarea
+            id="benefits"
+            placeholder="saisissez les bénéfices ici"
+            {...register("benefice")}
+          />
         </section>
 
         {/* Risques */}
         <section>
           <label htmlFor="risks"> Quels sont les risques? </label>
-          <textarea id="risks" placeholder="saisissez les risques ici" />
+          <textarea
+            id="risks"
+            placeholder="saisissez les risques ici"
+            {...register("risks")}
+          />
         </section>
 
         {/* section planning */}
@@ -141,17 +261,25 @@ function DecisionForm() {
             <article>
               {/* label doit encadrer mon input ?  */}
               <label htmlFor="createDate"> Date de création </label>
-              <input type="date" id="createDate" />
+              <input
+                type="date"
+                id="createDate"
+                {...register("creationdate")}
+              />
             </article>
             <article>
               <label htmlFor="finalDateVote"> Date de clôture des votes </label>
-              <input type="date" id="finalDateVote" />
+              <input type="date" id="finalDateVote" {...register("datevote")} />
             </article>
             <article>
               <label htmlFor="finalDateDecionEnded">
                 Date de clôture de la décision
               </label>
-              <input type="date" id="finalDateDecionEnded" />
+              <input
+                type="date"
+                id="finalDateDecionEnded"
+                {...register("canceleddecisiondate")}
+              />
             </article>
           </article>
           <p className={style.remarqueNb}>
@@ -167,13 +295,17 @@ function DecisionForm() {
             {" "}
             Qui sont les personnes impactées ?{" "}
           </label>
-          <input type="text" id="impactedperson" />
+          <input
+            type="text"
+            id="impactedperson"
+            {...register("impactedperson")}
+          />
 
           <label htmlFor="animateurs"> Qui sont les animateurs ? </label>
-          <input type="text" id="animateurs" />
+          <input type="text" id="animateurs" {...register("animateurs")} />
 
           <label htmlFor="experts"> Qui sont les experts ? </label>
-          <input type="text" id="experts" />
+          <input type="text" id="experts" {...register("expert")} />
         </section>
         {/* section boutons  */}
         <section className={style.buttongroup}>
@@ -181,7 +313,7 @@ function DecisionForm() {
             {" "}
             Annuler{" "}
           </button>
-          <button type="button" className={style.addDecisionButton}>
+          <button type="submit" className={style.addDecisionButton}>
             {" "}
             Ajouter une décision{" "}
           </button>
@@ -191,4 +323,4 @@ function DecisionForm() {
   );
 }
 
-export default DecisionForm;
+export default CreateDecisionForm;
