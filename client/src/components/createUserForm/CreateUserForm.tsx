@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import type { FieldValues } from "react-hook-form";
-import { Bounce, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import style from "./createUserForm.module.css";
 
 export default function CreateUserForm() {
@@ -37,29 +37,9 @@ export default function CreateUserForm() {
       });
       await response.json();
       reset();
-      toast.success("Demande envoyée à l'administrateur", {
-        position: "top-center",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: false,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-        transition: Bounce,
-      });
+      toast.success("Demande envoyée à l'administrateur");
     } catch (error) {
-      toast.error(`Erreur lors de l'envoi...`, {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: false,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-        transition: Bounce,
-      });
+      toast.error("Erreur lors de l'envoi...");
     }
   };
 
