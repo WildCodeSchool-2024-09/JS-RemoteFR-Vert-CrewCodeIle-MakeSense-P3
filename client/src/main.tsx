@@ -9,6 +9,7 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import App from "./App";
 import ErrorPage from "./pages/errorPage/ErrorPage";
 import HomePage from "./pages/homePage/HomePage";
+import RegisterPage from "./pages/registerPage/RegisterPage";
 
 import DecisionFormPage from "./pages/decisionFormPage/DecisionFormPage";
 
@@ -36,8 +37,16 @@ const router = createBrowserRouter([
         element: <ErrorPage />,
       },
       {
+        path: "/register",
+        element: <RegisterPage />,
+      },
+      {
         path: "/decisionformpage",
         element: <DecisionFormPage />,
+      },
+      {
+        path: "/register",
+        element: <RegisterPage />,
       },
     ],
   },
