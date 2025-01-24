@@ -86,37 +86,21 @@ function CreateDecisionForm() {
     "Australie",
     "Ukraine",
   ];
-  const submitForm = async (data: FieldValues) => {
+  const onSubmit = async (data: FieldValues) => {
     try {
-      const Data = {
-        ...data,
-        title: data.title,
-        category: data.category,
-        addcategory: data.addcategory,
-        place: data.place,
-        creationdate: data.creationdate,
-        datevote: data.datevote,
-        canceleddecisiondate: data.canceleddecisiondate,
-        description: data.description,
-        consequences: data.consequences,
-        benefice: data.benefice,
-        risks: data.risks,
-        expert: data.expert,
-        animateurs: data.animateurs,
-        impactedperson: data.impactedperson,
-      };
-
       const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/api/decisionform`,
+        `${import.meta.env.VITE_API_URL}/api/decision`,
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(Data),
+          body: JSON.stringify(data),
         },
       );
+
       await response.json();
+
       reset();
       toast.success("Demande envoyée à l'administrateur", {
         position: "top-center",
@@ -146,7 +130,7 @@ function CreateDecisionForm() {
       </section>
 
       <h2> Prise de décision: </h2>
-      <form onSubmit={handleSubmit(submitForm)} className="formcontainer">
+      <form onSubmit={handleSubmit(onSubmit)} className="formcontainer">
         <section>
           <label htmlFor="intitule"> Intitulé de la prise de décision: </label>
           <input

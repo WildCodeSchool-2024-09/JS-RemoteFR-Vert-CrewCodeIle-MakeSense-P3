@@ -7,6 +7,7 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
 // Import the main app component
 import App from "./App";
+import ErrorPage from "./pages/errorPage/ErrorPage";
 import HomePage from "./pages/homePage/HomePage";
 
 import DecisionFormPage from "./pages/decisionFormPage/DecisionFormPage";
@@ -29,6 +30,10 @@ const router = createBrowserRouter([
       {
         path: "/homepage",
         element: <HomePage />,
+      },
+      {
+        path: "*",
+        element: <ErrorPage />,
       },
       {
         path: "/decisionformpage",
