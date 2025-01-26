@@ -21,7 +21,7 @@ class VoteRepository {
   //READ & READ ALL vote
   async read(id: number) {
     const [rows] = await DatabaseClient.query<Rows>(
-      "SELECT * FROM vote WHERE id = ?",
+      "SELECT vote.comment, vote.state, user.firstname, user.lastname FROM vote JOIN user ON user.id=vote.user_id WHERE id = ?",
       [id],
     );
     return rows[0] as Vote;
