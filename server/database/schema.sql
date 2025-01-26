@@ -48,9 +48,10 @@ FOREIGN KEY (user_id) REFERENCES user(id)
 
 CREATE TABLE IF NOT EXISTS decision (
 id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+title VARCHAR(255) NOT NULL,
 min_date DATE NOT NULL,
 max_date DATE NOT NULL,
-utility TEXT NOT NULL,
+description TEXT NOT NULL,
 context TEXT NOT NULL,
 profit TEXT NOT NULL,
 risk TEXT NOT NULL,
@@ -93,4 +94,5 @@ FOREIGN KEY (vote_id) REFERENCES vote(id)
 );
 
 
-INSERT INTO role (id,label) VALUES (1, 'user'), (2, 'administrator');
+INSERT INTO role (id,label) VALUES (1, 'applicant'), (2, 'user'), (3, 'administrator'), (4, 'rejected');
+INSERT INTO country (id,label) VALUES (1, 'France'), (2, 'Mexique'), (3, 'Canada'), (4, 'Pérou'), (5, 'Sénégal'), (6, 'Philippines'), (7, 'Liban'), (8, 'Cote d''Ivoire'), (9, 'Australie'), (10, 'Ukraine');
