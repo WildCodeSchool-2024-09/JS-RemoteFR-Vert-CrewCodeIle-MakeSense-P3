@@ -4,7 +4,7 @@
   border-radius: 24px;
   width: 100%;
   max-width: 320px;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 6px -1px rgba(26, 26, 26, 0.1);
   position: relative;
 }
 
@@ -45,7 +45,7 @@
 }
 
 .errorText {
-  color: #ef4444;
+  color: #ff0101;
   font-size: 0.8rem;
   margin-top: 0.25rem;
   display: block;
