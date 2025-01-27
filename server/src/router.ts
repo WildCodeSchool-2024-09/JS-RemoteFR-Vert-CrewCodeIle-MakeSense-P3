@@ -9,20 +9,17 @@ import UserRoute from "./routes/user.route";
 
 router.use("/", UserRoute);
 
-import countryActions from "./modules/country/countryAction";
+import CountryRoute from "./routes/country.route";
 
-router.get("/api/country", countryActions.browse);
-router.get("/api/country/:id", countryActions.read);
-router.put("/api/country/:id", countryActions.edit);
-router.post("/api/country", countryActions.add);
-router.delete("/api/country/:id", countryActions.destroy);
+router.use("/", CountryRoute);
 
-import roleActions from "./modules/role/roleAction";
+import RoleRoute from "./routes/role.route";
 
-router.get("/api/role", roleActions.browse);
-router.get("/api/role/:id", roleActions.read);
-router.post("/api/role", roleActions.add);
-router.delete("/api/role/:id", roleActions.destroy);
+router.use("/", RoleRoute);
+
+import VoteRoute from "./routes/vote.route";
+
+router.use("/", VoteRoute);
 
 /* ************************************************************************* */
 
