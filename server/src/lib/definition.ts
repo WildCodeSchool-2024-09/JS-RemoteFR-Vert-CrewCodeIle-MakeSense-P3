@@ -17,3 +17,11 @@ type NewUserType = {
   hash_password: string;
   avatar: string;
 };
+
+type UpdatedUserType = {
+  id: number;
+  firstname: string;
+  lastname: string;
+  email: string;
+  avatar: string;
+};

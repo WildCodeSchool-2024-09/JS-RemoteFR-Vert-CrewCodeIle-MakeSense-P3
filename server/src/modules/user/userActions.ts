@@ -1,6 +1,51 @@
 import type { RequestHandler } from "express";
-import Joi from "joi";
+import Joi, { number } from "joi";
 import userRepository from "./userRepository";
+
+const browse: RequestHandler = async (req, res, next) => {
+  try {
+    const user = await userRepository.readAll();
+    res.json(user);
+  } catch (err) {
+    next(err);
+  }
+};
+
+const read: RequestHandler = async (req, res, next) => {
+  try {
+    const userId = Number.parseInt(req.params.id);
+    const user = await userRepository.read(userId);
+    if (user == null) {
+      res.sendStatus(404);
+    } else {
+      res.json(user);
+    }
+  } catch (err) {
+    next(err);
+  }
+};
+
+const edit: RequestHandler = async (req, res, next) => {
+  try {
+    const user: UpdatedUserType = {
+      id: Number.parseInt(req.params.id),
+      firstname: req.body.firstname,
+      lastname: req.body.lastname,
+      email: req.body.email,
+      avatar: req.body.avatar,
+    };
+
+    const affectedRows = await userRepository.update(user);
+
+    if (affectedRows === 0) {
+      res.sendStatus(404);
+    } else {
+      res.sendStatus(204);
+    }
+  } catch (err) {
+    next(err);
+  }
+};
 
 const add: RequestHandler = async (req, res, next) => {
   try {
@@ -56,4 +101,14 @@ const checkEmail: RequestHandler = async (req, res, next) => {
   }
 };
 
-export default { add, validateData, checkEmail };
+const destroy: RequestHandler = async (req, res, next) => {
+  try {
+    const userId = Number.parseInt(req.params.id);
+    await userRepository.delete(userId);
+    res.sendStatus(204);
+  } catch (err) {
+    next(err);
+  }
+};
+
+export default { browse, read, edit, add, validateData, checkEmail, destroy };

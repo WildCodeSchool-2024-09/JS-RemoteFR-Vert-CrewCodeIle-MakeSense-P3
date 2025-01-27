@@ -12,4 +12,12 @@ router.post(
   userActions.add,
 );
 
+router.get("/api/user", userActions.browse);
+
+router.get("/api/user/:id", userActions.read);
+
+router.put("/api/user/:id", userActions.edit);
+
+router.delete("/api/user/:id", userActions.destroy);
+
 export default router;

@@ -16,6 +16,35 @@ class UserRepository {
     return [result];
   }
 
+  async read(id: number) {
+    const [rows] = await databaseClient.query<Rows>(
+      "SELECT * FROM user WHERE id = ?",
+      [id],
+    );
+    return rows[0] as UserType;
+  }
+
+  async readAll() {
+    const [rows] = await databaseClient.query<Rows>("SELECT * FROM user");
+    return rows as UserType[];
+  }
+
+  async update(user: UpdatedUserType) {
+    const [result] = await databaseClient.query<Result>(
+      "UPDATE user SET firstname = ?, lastname = ?, email = ?, avatar = ? WHERE id = ?",
+      [user.firstname, user.lastname, user.email, user.avatar, user.id],
+    );
+    return result.affectedRows;
+  }
+
+  async delete(id: number) {
+    const [result] = await databaseClient.query<Result>(
+      "DELETE FROM user WHERE id = ?",
+      [id],
+    );
+    return result.affectedRows;
+  }
+
   async checkUniqueEmail(userEmail: string) {
     const [rows] = await databaseClient.query<Rows>(
       "SELECT * FROM user WHERE email= ?",
