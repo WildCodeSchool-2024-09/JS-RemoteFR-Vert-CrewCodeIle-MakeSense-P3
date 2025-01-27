@@ -98,7 +98,7 @@ function CreateDecisionForm() {
           body: JSON.stringify(data),
         },
       );
-
+      // console.log(data);
       await response.json();
 
       reset();
