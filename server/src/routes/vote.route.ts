@@ -3,13 +3,12 @@ import voteActions from "../modules/vote/voteActions";
 
 const router = express.Router();
 
-router.post(
-  "/api/vote",
+router.get("/api/vote", voteActions.browse);
 
-  voteActions.browse,
-  voteActions.read,
-  voteActions.edit,
-  voteActions.add,
-);
+router.get("/api/vote/:id", voteActions.read);
+
+router.put("/api/vote/:id", voteActions.edit);
+
+router.post("/api/vote", voteActions.add);
 
 export default router;

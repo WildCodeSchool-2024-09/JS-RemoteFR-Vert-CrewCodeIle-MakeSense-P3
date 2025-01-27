@@ -3,14 +3,14 @@ import countryActions from "../modules/country/countryAction";
 
 const router = express.Router();
 
-router.post(
-  "/api/country",
+router.get("/api/country", countryActions.browse, countryActions.read);
 
-  countryActions.browse,
-  countryActions.read,
-  countryActions.edit,
-  countryActions.add,
-  countryActions.destroy,
-);
+router.get("/api/country/:id", countryActions.read);
+
+router.put("/api/country/:id", countryActions.edit);
+
+router.post("/api/country", countryActions.add);
+
+router.delete("/api/country/:id", countryActions.destroy);
 
 export default router;
