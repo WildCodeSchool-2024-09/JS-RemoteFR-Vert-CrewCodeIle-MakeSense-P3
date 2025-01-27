@@ -3,13 +3,12 @@ import roleActions from "../modules/role/roleAction";
 
 const router = express.Router();
 
-router.post(
-  "/api/role",
+router.get("/api/role", roleActions.browse);
 
-  roleActions.browse,
-  roleActions.read,
-  roleActions.add,
-  roleActions.destroy,
-);
+router.get("/api/role/:id", roleActions.read);
+
+router.post("/api/role", roleActions.add);
+
+router.delete("/api/role/:id", roleActions.destroy);
 
 export default router;

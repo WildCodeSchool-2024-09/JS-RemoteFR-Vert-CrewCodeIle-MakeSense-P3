@@ -21,7 +21,7 @@ class VoteRepository {
   //READ & READ ALL vote
   async read(id: number) {
     const [rows] = await DatabaseClient.query<Rows>(
-      "SELECT vote.comment, vote.state, user.firstname, user.lastname FROM vote JOIN user ON user.id=vote.user_id WHERE id = ?",
+      "SELECT vote.comment, vote.state, user.firstname, user.lastname FROM vote JOIN user ON user.id=vote.user_id WHERE vote.id = ?",
       [id],
     );
     return rows[0] as Vote;
@@ -35,7 +35,7 @@ class VoteRepository {
   //UPDATE vote
   async update(vote: Vote) {
     const [result] = await DatabaseClient.query<Result>(
-      "UPDATE vote SET comment = ? AND state = ? WHERE id = ?",
+      "UPDATE vote SET comment = ?, state = ? WHERE id = ?",
       [vote.comment, vote.state, vote.id],
     );
     return result.affectedRows;
