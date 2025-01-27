@@ -36,6 +36,62 @@ const add: RequestHandler = async (req, res, next): Promise<void> => {
   }
 };
 
+//BROWSE category
+const browse: RequestHandler = async (req, res, next) => {
+  try {
+    const category = await categoryRepository.readAll();
+    res.json(category);
+  } catch (err) {
+    next(err);
+  }
+};
+//READ category
+const read: RequestHandler = async (req, res, next) => {
+  try {
+    const CategoryId = Number.parseInt(req.params.id);
+    const category = await categoryRepository.read(CategoryId);
+    if (category == null) {
+      res.sendStatus(404);
+    } else {
+      res.json(category);
+    }
+  } catch (err) {
+    next(err);
+  }
+};
+//EDIT category
+const edit: RequestHandler = async (req, res, next) => {
+  try {
+    const category = {
+      id: Number.parseInt(req.params.id),
+      label: req.body.label,
+    };
+    const affectedRows = await categoryRepository.update(category);
+    if (affectedRows === 0) {
+      res.sendStatus(404);
+    } else {
+      res.sendStatus(204);
+    }
+  } catch (err) {
+    next(err);
+  }
+};
+
+//DESTROY category
+const destroy: RequestHandler = async (req, res, next) => {
+  try {
+    const categoryId = Number.parseInt(req.params.id);
+    await categoryRepository.delete(categoryId);
+    res.sendStatus(204);
+  } catch (err) {
+    next(err);
+  }
+};
+
 export default {
+  browse,
+  read,
+  edit,
   add,
+  destroy,
 };

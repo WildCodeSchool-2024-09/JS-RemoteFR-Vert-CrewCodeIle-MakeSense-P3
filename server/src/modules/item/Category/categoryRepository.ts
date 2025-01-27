@@ -34,46 +34,45 @@ class CategoryRepository {
     return rows.length > 0;
   }
 
-  // async read(id: number) {
-  //   // Execute the SQL SELECT query to retrieve a specific category by its ID
-  //   const [rows] = await DatabaseClient.query<Rows>(
-  //     "SELECT * FROM category WHERE id = ?",
-  //     [id],
-  //   );
+  async read(id: number) {
+    //   // Execute the SQL SELECT query to retrieve a specific category by its ID
+    const [rows] = await DatabaseClient.query<Rows>(
+      "SELECT * FROM category WHERE id = ?",
+      [id],
+    );
 
-  //   // Return the first row of the result, which represents the category
-  //   return rows[0] as Category;
-  // }
+    //   // Return the first row of the result, which represents the category
+    return rows[0] as Category;
+  }
 
-  //   async readAll() {
-  //     // Execute the SQL SELECT query to retrieve all categories from the "category" table
-  //     const [rows] = await DatabaseClient.query<Rows>("SELECT * FROM category");
+  async readAll() {
+    //     // Execute the SQL SELECT query to retrieve all categories from the "category" table
+    const [rows] = await DatabaseClient.query<Rows>("SELECT * FROM category");
 
-  //     // Return the array of categories
-  //     return rows as Category[];
-  //   }
+    //     // Return the array of categories
+    return rows as Category[];
+  }
 
-  //   async update(category: Category) {
-  //     // Execute the SQL UPDATE query to update an existing category in the "category" table
-  //     const [result] = await DatabaseClient.query<Result>(
-  //       "UPDATE category SET label = ? WHERE id = ?",
-  //       [category.label, category.id],
-  //     );
+  async update(category: Category) {
+    //     // Execute the SQL UPDATE query to update an existing category in the "category" table
+    const [result] = await DatabaseClient.query<Result>(
+      "UPDATE category SET label = ? WHERE id = ?",
+      [category.label, category.id],
+    );
 
-  //     // Return how many rows were affected
-  //     return result.affectedRows;
-  //   }
+    //     // Return how many rows were affected
+    return result.affectedRows;
+  }
 
-  //   async delete(id: number) {
-  //     // Execute the SQL DELETE query to delete an existing category from the "category" table
-  //     const [result] = await DatabaseClient.query<Result>(
-  //       "DELETE FROM category WHERE id = ?",
-  //       [id],
-  //     );
+  async delete(id: number) {
+    //     // Execute the SQL DELETE query to delete an existing category from the "category" table
+    const [result] = await DatabaseClient.query<Result>(
+      "DELETE FROM category WHERE id = ?",
+      [id],
+    );
 
-  //     // Return how many rows were affected
-  //     return result.affectedRows;
-  //   }
-  // }
+    //     // Return how many rows were affected
+    return result.affectedRows;
+  }
 }
 export default new CategoryRepository();
