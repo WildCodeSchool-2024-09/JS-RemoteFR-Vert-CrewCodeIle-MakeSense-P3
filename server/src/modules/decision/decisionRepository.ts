@@ -22,8 +22,19 @@ class DecisionRepository {
 
   async read(decisionId: number) {
     const [rows] = await databaseClient.query<Rows>(
-      "SELECT decision.*, country.label FROM",
+      `SELECT 
+      decision.title, decision.min_date, decision.max_date, decision.description, decision.context, decision.profit, decision.risk, decision.step,
+      country.label, 
+      category.label,
+      user.lastname, user.firstname
+      FROM decision 
+      INNER JOIN country ON country.id = decision.country_id 
+      INNER JOIN category ON category.decision_id = decision.id
+      INNER JOIN user ON user.id = decision.user_id 
+      WHERE decision.id=1`,
+      [decisionId],
     );
+    return rows[0];
   }
 }
 
