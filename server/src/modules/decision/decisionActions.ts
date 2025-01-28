@@ -7,14 +7,12 @@ const add: RequestHandler = async (req, res, next) => {
       title: req.body.title,
       category: req.body.category,
       country: req.body.country,
-      created_at: new Date(),
       description: req.body.description,
-      max_date: new Date(req.body.max_date),
-      min_date: new Date(req.body.min_date),
+      max_date: req.body.max_date,
+      min_date: req.body.min_date,
       context: req.body.context,
       profit: req.body.profit,
       risk: req.body.risk,
-
     };
     const insertId = await decisionRepository.create(newDecision);
     res.status(201).json({ insertId });

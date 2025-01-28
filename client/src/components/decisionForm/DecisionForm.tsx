@@ -9,7 +9,6 @@ type dataDecision = {
   category: string;
   // addcategory: string;
   country: string;
-  created_at: Date;
   min_date: Date;
   max_date: Date;
   description: string;
@@ -24,39 +23,33 @@ type dataDecision = {
 };
 
 function CreateDecisionForm() {
-  const {
-    register,
-    handleSubmit,
-    setValue,
-    watch,
-    reset,
-   
-  } = useForm<dataDecision>({
-    defaultValues: {
-      title: "",
-      category: "",
-      // addcategory: "",
-      country: "",
-      created_at: new Date(),
-      min_date: new Date(),
-      max_date: new Date(),
-      description: "",
-      context: "",
-      profit: "",
-      risk: "",
-      expert: "",
-      animateurs: "",
-      impactedperson: "",
-      categories: ["Category1", "Category2"],
-      newcategories: "",
-    },
-  });
+  const { register, handleSubmit, setValue, watch, reset } =
+    useForm<dataDecision>({
+      defaultValues: {
+        title: "",
+        category: "",
+        // addcategory: "",
+        country: "",
+
+        min_date: new Date(),
+        max_date: new Date(),
+        description: "",
+        context: "",
+        profit: "",
+        risk: "",
+        expert: "",
+        animateurs: "",
+        impactedperson: "",
+        categories: ["Category1", "Category2"],
+        newcategories: "",
+      },
+    });
 
   const categories = watch("categories");
   const newcategories = watch("newcategories");
   /**
- * Funtion to add a new category to the array of existing categories, if the input field is not empty and if the category does not already exist.
- */
+   * Funtion to add a new category to the array of existing categories, if the input field is not empty and if the category does not already exist.
+   */
   const AddCategory = () => {
     if (!newcategories.trim()) {
       toast.warn("La catégorie ne peut pas être vide");
@@ -64,7 +57,7 @@ function CreateDecisionForm() {
       toast.error("Cette catégorie existe déjà");
     } else {
       setValue("categories", [...categories, newcategories]);
-      setValue("newcategories", ""); 
+      setValue("newcategories", "");
       toast.success("Catégorie ajoutée avec succès");
     }
   };
@@ -93,35 +86,35 @@ function CreateDecisionForm() {
           body: JSON.stringify(data),
         },
       );
-      console.log(data);
-if (response.ok) {
-  const result = await response.json();
-  console.log(result);
-  reset();
-      toast.success("Demande envoyée à l'administrateur", {
-        position: "top-center",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: false,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-        transition: Bounce,
-      });
-     } else {
-      toast.error("Erreur lors de l'envoi de la demande", {
-        position: "top-center",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: false,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-        transition: Bounce,
-      });
-     }
+      // console.log(data);
+      if (response.ok) {
+        await response.json();
+        // console.log(result);
+        reset();
+        toast.success("Demande envoyée à l'administrateur", {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Bounce,
+        });
+      } else {
+        toast.error("Erreur lors de l'envoi de la demande", {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Bounce,
+        });
+      }
     } catch (error) {
       console.error("Erreur lors de l'envoi:", error);
       toast.error("Erreur lors de l'envoi de la connexion au serveur", {
@@ -134,8 +127,8 @@ if (response.ok) {
         progress: undefined,
         theme: "light",
         transition: Bounce,
-    });
-  }
+      });
+    }
   };
 
   return (
@@ -207,7 +200,9 @@ if (response.ok) {
           <label htmlFor="country"> Saisissez une localisation: </label>
           <select
             id="country"
-            {...register("country", { required: "choisissez une localisation" })}
+            {...register("country", {
+              required: "choisissez une localisation",
+            })}
           >
             <option value=""> Choississez une localisation </option>
             {country.map((country) => (
@@ -264,26 +259,20 @@ if (response.ok) {
           <article className={style.gridContainer}>
             {/* <article>
               {/* label doit encadrer mon input ?  */}
-              {/* <label htmlFor="created_at"> Date de création </label>
+            {/* <label htmlFor="created_at"> Date de création </label>
               <input
                 type="date"
                 id="created_at"
                 {...register("created_at")}
               /> */}
-            {/* </article> */} 
+            {/* </article> */}
             <article>
               <label htmlFor="min_date"> Date de clôture des votes </label>
               <input type="date" id="min_date" {...register("min_date")} />
             </article>
             <article>
-              <label htmlFor="max_date">
-                Date de clôture de la décision
-              </label>
-              <input
-                type="date"
-                id="max_date"
-                {...register("max_date")}
-              />
+              <label htmlFor="max_date">Date de clôture de la décision</label>
+              <input type="date" id="max_date" {...register("max_date")} />
             </article>
           </article>
           <p className={style.remarqueNb}>
@@ -306,10 +295,10 @@ if (response.ok) {
           />
 
           <label htmlFor="animateurs"> Qui sont les animateurs ? </label>
-          <input type="text" id="animateurs"  />
+          <input type="text" id="animateurs" />
 
           <label htmlFor="experts"> Qui sont les experts ? </label>
-          <input type="text" id="experts"  />
+          <input type="text" id="experts" />
         </section>
         {/* section boutons  */}
         <section className={style.buttongroup}>
