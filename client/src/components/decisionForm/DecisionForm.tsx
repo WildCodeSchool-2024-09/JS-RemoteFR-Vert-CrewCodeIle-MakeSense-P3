@@ -4,25 +4,18 @@ import { useForm } from "react-hook-form";
 import type { FieldValues } from "react-hook-form";
 import { Bounce, ToastContainer, toast } from "react-toastify";
 
-// const [categories, setCategories] = useState(["Category1", "Category2"]);
-// const [newCategory, setNewCategory] = useState("");
-
-/**
- * Funtion to add a new category to the array of existing categories, if the input field is not empty and if the category does not already exist.
- */
-
 type dataDecision = {
   title: string;
   category: string;
-  addcategory: string;
-  place: string;
-  creationdate: Date;
-  datevote: Date;
-  canceleddecisiondate: Date;
+  // addcategory: string;
+  country: string;
+  created_at: Date;
+  min_date: Date;
+  max_date: Date;
   description: string;
-  consequences: string;
-  benefice: string;
-  risks: string;
+  context: string;
+  profit: string;
+  risk: string;
   expert: string;
   animateurs: string;
   impactedperson: string;
@@ -34,24 +27,23 @@ function CreateDecisionForm() {
   const {
     register,
     handleSubmit,
-    // control,
     setValue,
     watch,
     reset,
-    // formState: { errors },
+   
   } = useForm<dataDecision>({
     defaultValues: {
       title: "",
       category: "",
-      addcategory: "",
-      place: "",
-      creationdate: new Date(),
-      datevote: new Date(),
-      canceleddecisiondate: new Date(),
+      // addcategory: "",
+      country: "",
+      created_at: new Date(),
+      min_date: new Date(),
+      max_date: new Date(),
       description: "",
-      consequences: "",
-      benefice: "",
-      risks: "",
+      context: "",
+      profit: "",
+      risk: "",
       expert: "",
       animateurs: "",
       impactedperson: "",
@@ -62,6 +54,9 @@ function CreateDecisionForm() {
 
   const categories = watch("categories");
   const newcategories = watch("newcategories");
+  /**
+ * Funtion to add a new category to the array of existing categories, if the input field is not empty and if the category does not already exist.
+ */
   const AddCategory = () => {
     if (!newcategories.trim()) {
       toast.warn("La catégorie ne peut pas être vide");
@@ -69,12 +64,12 @@ function CreateDecisionForm() {
       toast.error("Cette catégorie existe déjà");
     } else {
       setValue("categories", [...categories, newcategories]);
-      setValue("newcategories", ""); //????
+      setValue("newcategories", ""); 
       toast.success("Catégorie ajoutée avec succès");
     }
   };
 
-  const place = [
+  const country = [
     "France",
     "Mexique",
     "Canada",
@@ -98,10 +93,11 @@ function CreateDecisionForm() {
           body: JSON.stringify(data),
         },
       );
-      // console.log(data);
-      await response.json();
-
-      reset();
+      console.log(data);
+if (response.ok) {
+  const result = await response.json();
+  console.log(result);
+  reset();
       toast.success("Demande envoyée à l'administrateur", {
         position: "top-center",
         autoClose: 5000,
@@ -113,9 +109,33 @@ function CreateDecisionForm() {
         theme: "light",
         transition: Bounce,
       });
+     } else {
+      toast.error("Erreur lors de l'envoi de la demande", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
+     }
     } catch (error) {
       console.error("Erreur lors de l'envoi:", error);
-    }
+      toast.error("Erreur lors de l'envoi de la connexion au serveur", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+    });
+  }
   };
 
   return (
@@ -135,7 +155,7 @@ function CreateDecisionForm() {
           <label htmlFor="intitule"> Intitulé de la prise de décision: </label>
           <input
             type="text"
-            id="intitule"
+            id="title"
             placeholder="saisissez le texte ici"
             {...register("title")}
           />
@@ -184,16 +204,16 @@ function CreateDecisionForm() {
         {/* section localisation : */}
         {/* liste déroulante des localisations */}
         <section>
-          <label htmlFor="place"> Saisissez une localisation: </label>
+          <label htmlFor="country"> Saisissez une localisation: </label>
           <select
-            id="place"
-            {...register("place", { required: "choisissez une localisation" })}
+            id="country"
+            {...register("country", { required: "choisissez une localisation" })}
           >
             <option value=""> Choississez une localisation </option>
-            {place.map((place) => (
-              <option key={place} value={place}>
+            {country.map((country) => (
+              <option key={country} value={country}>
                 {" "}
-                {place}{" "}
+                {country}{" "}
               </option>
             ))}
           </select>
@@ -208,33 +228,33 @@ function CreateDecisionForm() {
           />
         </section>
 
-        {/* section impact sur l'organisation  */}
+        {/* section context sur l'organisation  */}
         <section>
-          <label htmlFor="impact"> Quel impact sur l'organisation ? </label>
+          <label htmlFor="context"> Quel impact sur l'organisation ? </label>
           <textarea
-            id="impact"
+            id="context"
             placeholder="saisissez l'impact ici"
-            {...register("consequences")}
+            {...register("context")}
           />
         </section>
 
         {/* Bénéfices :  */}
         <section>
-          <label htmlFor="benefits"> Quels sont les bénéfices? </label>
+          <label htmlFor="profit"> Quels sont les bénéfices? </label>
           <textarea
-            id="benefits"
+            id="profit"
             placeholder="saisissez les bénéfices ici"
-            {...register("benefice")}
+            {...register("profit")}
           />
         </section>
 
         {/* Risques */}
         <section>
-          <label htmlFor="risks"> Quels sont les risques? </label>
+          <label htmlFor="risk"> Quels sont les risques? </label>
           <textarea
-            id="risks"
+            id="risk"
             placeholder="saisissez les risques ici"
-            {...register("risks")}
+            {...register("risk")}
           />
         </section>
 
@@ -242,27 +262,27 @@ function CreateDecisionForm() {
         <section className={style.planningDates}>
           <legend>Planning: </legend>
           <article className={style.gridContainer}>
-            <article>
+            {/* <article>
               {/* label doit encadrer mon input ?  */}
-              <label htmlFor="createDate"> Date de création </label>
+              {/* <label htmlFor="created_at"> Date de création </label>
               <input
                 type="date"
-                id="createDate"
-                {...register("creationdate")}
-              />
+                id="created_at"
+                {...register("created_at")}
+              /> */}
+            {/* </article> */} 
+            <article>
+              <label htmlFor="min_date"> Date de clôture des votes </label>
+              <input type="date" id="min_date" {...register("min_date")} />
             </article>
             <article>
-              <label htmlFor="finalDateVote"> Date de clôture des votes </label>
-              <input type="date" id="finalDateVote" {...register("datevote")} />
-            </article>
-            <article>
-              <label htmlFor="finalDateDecionEnded">
+              <label htmlFor="max_date">
                 Date de clôture de la décision
               </label>
               <input
                 type="date"
-                id="finalDateDecionEnded"
-                {...register("canceleddecisiondate")}
+                id="max_date"
+                {...register("max_date")}
               />
             </article>
           </article>
@@ -282,14 +302,14 @@ function CreateDecisionForm() {
           <input
             type="text"
             id="impactedperson"
-            {...register("impactedperson")}
+            // {...register("impactedperson")}
           />
 
           <label htmlFor="animateurs"> Qui sont les animateurs ? </label>
-          <input type="text" id="animateurs" {...register("animateurs")} />
+          <input type="text" id="animateurs"  />
 
           <label htmlFor="experts"> Qui sont les experts ? </label>
-          <input type="text" id="experts" {...register("expert")} />
+          <input type="text" id="experts"  />
         </section>
         {/* section boutons  */}
         <section className={style.buttongroup}>

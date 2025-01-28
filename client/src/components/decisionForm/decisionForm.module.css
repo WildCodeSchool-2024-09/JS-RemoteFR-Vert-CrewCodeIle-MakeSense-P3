@@ -190,4 +190,5 @@ section {
   .gridContainer {
     grid-template-columns: repeat(1, 1fr); /* 1 colonne sur les petits écrans */
   }
+ 
 }

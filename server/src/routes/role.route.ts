@@ -1,5 +1,5 @@
 import express from "express";
-import roleActions from "../modules/role/roleAction";
+import roleActions from "../modules/role/roleActions";
 
 const router = express.Router();
 

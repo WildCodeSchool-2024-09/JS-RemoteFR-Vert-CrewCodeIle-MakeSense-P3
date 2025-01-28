@@ -1,0 +1,26 @@
+import type { RequestHandler } from "express";
+import decisionRepository from "./decisionRepository";
+
+const add: RequestHandler = async (req, res, next) => {
+  try {
+    const newDecision = {
+      title: req.body.title,
+      category: req.body.category,
+      country: req.body.country,
+      created_at: new Date(),
+      description: req.body.description,
+      max_date: new Date(req.body.max_date),
+      min_date: new Date(req.body.min_date),
+      context: req.body.context,
+      profit: req.body.profit,
+      risk: req.body.risk,
+
+    };
+    const insertId = await decisionRepository.create(newDecision);
+    res.status(201).json({ insertId });
+  } catch (err) {
+    next(err);
+  }
+};
+
+export default { add };

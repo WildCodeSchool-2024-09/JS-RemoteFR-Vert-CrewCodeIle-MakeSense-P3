@@ -1,9 +1,9 @@
 import express from "express";
-import countryActions from "../modules/country/countryAction";
+import countryActions from "../modules/country/countryActions";
 
 const router = express.Router();
 
-router.get("/api/country", countryActions.browse, countryActions.read);
+router.get("/api/country", countryActions.browse);
 
 router.get("/api/country/:id", countryActions.read);
 

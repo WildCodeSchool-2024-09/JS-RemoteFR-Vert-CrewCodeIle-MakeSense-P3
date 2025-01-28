@@ -1,11 +1,16 @@
 import express from "express";
+import categoryActions from "../modules/category/categoryActions";
 
-import categoryAction from "../modules/item/Category/categoryAction";
 const router = express.Router();
 
-router.post("/api/category", categoryAction.add);
-router.get("/api/category", categoryAction.browse, categoryAction.read);
-router.put("/api/category", categoryAction.edit);
-router.delete("/api/category", categoryAction.destroy);
-//pour le browse router.get ...faire edit
+router.post("/api/category", categoryActions.add);
+
+router.get("/api/category", categoryActions.browse);
+
+router.get("/api/category/:id", categoryActions.read);
+
+router.put("/api/category/:id", categoryActions.edit);
+
+router.delete("/api/category/:id", categoryActions.destroy);
+
 export default router;

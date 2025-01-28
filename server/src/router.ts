@@ -23,6 +23,10 @@ router.use("/", VoteRoute);
 import CategoryRoute from "./routes/category.route";
 
 router.use("/", CategoryRoute);
+
+import DecisionRoute from "./routes/decision.route";
+
+router.use("/", DecisionRoute);
 /* ************************************************************************* */
 
 export default router;
