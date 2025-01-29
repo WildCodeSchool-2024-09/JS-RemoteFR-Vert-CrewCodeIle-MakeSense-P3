@@ -4,12 +4,13 @@ import type { Result, Rows } from "../../../database/client";
 type Category = {
   id: number;
   label: string;
+  color: string;
 };
 class CategoryRepository {
   async create(category: Omit<Category, "id">) {
     const [result] = await DatabaseClient.query<Result>(
-      " INSERT INTO category (label) VALUES (?);",
-      [category.label],
+      "INSERT INTO category (label, color) VALUES (?, ?);",
+      [category.label, category.color],
     );
 
     return result.insertId;
@@ -26,7 +27,7 @@ class CategoryRepository {
 
   async read(id: number) {
     const [rows] = await DatabaseClient.query<Rows>(
-      "SELECT * FROM category WHERE id = ?",
+      "SELECT category.label, category.color FROM category WHERE category.id = ?",
       [id],
     );
 
@@ -41,8 +42,8 @@ class CategoryRepository {
 
   async update(category: Category) {
     const [result] = await DatabaseClient.query<Result>(
-      "UPDATE category SET label = ? WHERE id = ?",
-      [category.label, category.id],
+      "UPDATE category SET label = ?, color = ? WHERE id = ?",
+      [category.label, category.color, category.id],
     );
 
     return result.affectedRows;

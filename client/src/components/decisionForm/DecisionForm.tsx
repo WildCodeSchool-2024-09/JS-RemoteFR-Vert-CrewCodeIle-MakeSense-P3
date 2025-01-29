@@ -2,7 +2,8 @@ import style from "./decisionForm.module.css";
 import "react-toastify/dist/ReactToastify.css";
 import { useForm } from "react-hook-form";
 import type { FieldValues } from "react-hook-form";
-import { Bounce, ToastContainer, toast } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
+// import AddCategoryForm from "./addCategoryForm";
 
 type dataDecision = {
   title: string;
@@ -28,9 +29,7 @@ function CreateDecisionForm() {
       defaultValues: {
         title: "",
         category: "",
-        // addcategory: "",
         country: "",
-
         min_date: new Date(),
         max_date: new Date(),
         description: "",
@@ -74,6 +73,9 @@ function CreateDecisionForm() {
     "Australie",
     "Ukraine",
   ];
+  
+  // console.log(fetchCategories);
+
   const onSubmit = async (data: FieldValues) => {
     try {
       const response = await fetch(
@@ -86,48 +88,18 @@ function CreateDecisionForm() {
           body: JSON.stringify(data),
         },
       );
+
       // console.log(data);
       if (response.ok) {
         await response.json();
         // console.log(result);
         reset();
-        toast.success("Demande envoyée à l'administrateur", {
-          position: "top-center",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: false,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-          transition: Bounce,
-        });
+        toast.success("Demande envoyée à l'administrateur");
       } else {
-        toast.error("Erreur lors de l'envoi de la demande", {
-          position: "top-center",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: false,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-          transition: Bounce,
-        });
+        toast.error("Erreur lors de l'envoi de la demande");
       }
     } catch (error) {
-      console.error("Erreur lors de l'envoi:", error);
-      toast.error("Erreur lors de l'envoi de la connexion au serveur", {
-        position: "top-center",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: false,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-        transition: Bounce,
-      });
+      toast.error("Erreur lors de l'envoi de la connexion au serveur");
     }
   };
 

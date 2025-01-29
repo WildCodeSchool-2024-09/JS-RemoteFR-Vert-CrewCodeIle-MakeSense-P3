@@ -3,7 +3,11 @@ import categoryActions from "../modules/category/categoryActions";
 
 const router = express.Router();
 
-router.post("/api/category", categoryActions.add);
+router.post(
+  "/api/category",
+  categoryActions.catAlreadyExist,
+  categoryActions.add,
+);
 
 router.get("/api/category", categoryActions.browse);
 

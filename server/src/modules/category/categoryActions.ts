@@ -2,11 +2,9 @@ import type { RequestHandler } from "express";
 
 import categoryRepository from "./categoryRepository";
 
-const add: RequestHandler = async (req, res, next): Promise<void> => {
+const catAlreadyExist: RequestHandler = async (req, res, next) => {
   try {
-    const newCategory = {
-      label: req.body.label,
-    };
+    const newCategory = { label: req.body.label, color: req.body.color };
     const categoryExist =
       await categoryRepository.findIfCategoryLabelAlreadyExist(
         newCategory.label,
@@ -14,14 +12,22 @@ const add: RequestHandler = async (req, res, next): Promise<void> => {
 
     if (categoryExist) {
       res.status(400).json({ message: "Cette catégorie existe déjà" });
-    } else {
-      const newCategory = {
-        label: req.body.label,
-      };
-      const insertId = await categoryRepository.create(newCategory);
-
-      res.status(201).json({ id: insertId });
     }
+    next();
+  } catch (error) {
+    next(error);
+  }
+};
+
+const add: RequestHandler = async (req, res, next): Promise<void> => {
+  try {
+    const newCategory = {
+      label: req.body.label,
+      color: req.body.color,
+    };
+    const insertId = await categoryRepository.create(newCategory);
+
+    res.status(201).json({ id: insertId });
   } catch (err) {
     next(err);
   }
@@ -55,6 +61,7 @@ const edit: RequestHandler = async (req, res, next) => {
     const category = {
       id: Number.parseInt(req.params.id),
       label: req.body.label,
+      color: req.body.color,
     };
     const affectedRows = await categoryRepository.update(category);
     if (affectedRows === 0) {
@@ -82,5 +89,6 @@ export default {
   read,
   edit,
   add,
+  catAlreadyExist,
   destroy,
 };
