@@ -6,6 +6,7 @@ const add: RequestHandler = async (req, res, next): Promise<void> => {
   try {
     const newCategory = {
       label: req.body.label,
+      decision_id: req.body.decision_id,
     };
     const categoryExist =
       await categoryRepository.findIfCategoryLabelAlreadyExist(
@@ -17,6 +18,7 @@ const add: RequestHandler = async (req, res, next): Promise<void> => {
     } else {
       const newCategory = {
         label: req.body.label,
+        decision_id: req.body.decision_id,
       };
       const insertId = await categoryRepository.create(newCategory);
 
@@ -55,6 +57,7 @@ const edit: RequestHandler = async (req, res, next) => {
     const category = {
       id: Number.parseInt(req.params.id),
       label: req.body.label,
+      decision_id: req.body.decision_id,
     };
     const affectedRows = await categoryRepository.update(category);
     if (affectedRows === 0) {

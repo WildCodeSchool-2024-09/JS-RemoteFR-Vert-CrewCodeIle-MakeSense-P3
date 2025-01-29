@@ -4,12 +4,13 @@ import type { Result, Rows } from "../../../database/client";
 type Category = {
   id: number;
   label: string;
+  decision_id: number;
 };
 class CategoryRepository {
   async create(category: Omit<Category, "id">) {
     const [result] = await DatabaseClient.query<Result>(
-      " INSERT INTO category (label) VALUES (?);",
-      [category.label],
+      "INSERT INTO category (label, decision_id) VALUES (?, ?);",
+      [category.label, category.decision_id],
     );
 
     return result.insertId;
@@ -26,7 +27,7 @@ class CategoryRepository {
 
   async read(id: number) {
     const [rows] = await DatabaseClient.query<Rows>(
-      "SELECT * FROM category WHERE id = ?",
+      "SELECT category.label, decision.id FROM category JOIN decision ON decision.id=category.decision_id WHERE category.id = ?",
       [id],
     );
 
