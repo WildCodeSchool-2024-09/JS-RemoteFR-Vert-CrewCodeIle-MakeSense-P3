@@ -16,7 +16,7 @@ class CategoryRepository {
     return result.insertId;
   }
 
-  async findIfCategoryLabelAlreadyExist(label: string): Promise<boolean> {
+  async CategoryExist(label: string): Promise<boolean> {
     const [rows] = await DatabaseClient.query<Rows>(
       "SELECT id FROM category WHERE label = ?",
       [label],

@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.post(
   "/api/category",
-  categoryActions.catAlreadyExist,
+  categoryActions.categoryExist,
   categoryActions.add,
 );
 

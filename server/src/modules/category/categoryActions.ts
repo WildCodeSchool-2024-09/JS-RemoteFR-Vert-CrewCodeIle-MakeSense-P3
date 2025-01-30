@@ -2,13 +2,12 @@ import type { RequestHandler } from "express";
 
 import categoryRepository from "./categoryRepository";
 
-const catAlreadyExist: RequestHandler = async (req, res, next) => {
+const categoryExist: RequestHandler = async (req, res, next) => {
   try {
     const newCategory = { label: req.body.label, color: req.body.color };
-    const categoryExist =
-      await categoryRepository.findIfCategoryLabelAlreadyExist(
-        newCategory.label,
-      );
+    const categoryExist = await categoryRepository.CategoryExist(
+      newCategory.label,
+    );
 
     if (categoryExist) {
       res.status(400).json({ message: "Cette catégorie existe déjà" });
@@ -89,6 +88,6 @@ export default {
   read,
   edit,
   add,
-  catAlreadyExist,
+  categoryExist,
   destroy,
 };
