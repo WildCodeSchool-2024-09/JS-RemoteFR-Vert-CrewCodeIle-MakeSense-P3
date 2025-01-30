@@ -1,9 +1,10 @@
 import style from "./decisionForm.module.css";
 import "react-toastify/dist/ReactToastify.css";
+// import { useEffect } from "react"; // Pour effectuer le fetch au montage du composant
 import { useForm } from "react-hook-form";
 import type { FieldValues } from "react-hook-form";
-import { ToastContainer, toast } from "react-toastify";
-// import AddCategoryForm from "./addCategoryForm";
+import { toast } from "react-toastify";
+import AddCategoryForm from "./Add";
 
 type dataDecision = {
   title: string;
@@ -45,20 +46,39 @@ function CreateDecisionForm() {
     });
 
   const categories = watch("categories");
-  const newcategories = watch("newcategories");
+  //BEUG GRISÉ
+  // const newcategories = watch("newcategories");
+  // const fetchCategories = async () => {
+  //   try {
+  //     const response = await fetch(
+  //       `${import.meta.env.VITE_API_URL}/api/category`,
+  //     ); // Récupère les catégories avec un GET
+  //     if (response.ok) {
+  //       const data = await response.json();
+  //       // console.log("categories recupérées :", data);
+  //       setValue(
+  //         "categories",
+  //         data.map((category: { label: string }) => category.label),
+  //       ); // Met à jour les catégories
+  //     } else {
+  //       toast.error("Erreur lors du chargement des catégories");
+  //     }
+  //   } catch (error) {
+  //     toast.error("Erreur de connexion au serveur");
+  //   }
+  // };
+
+  // // Appelle `fetchCategories` au montage du composant
+  // useEffect(() => {
+  //   fetchCategories();
+  // }, []);
+
   /**
-   * Funtion to add a new category to the array of existing categories, if the input field is not empty and if the category does not already exist.
+   * 🔹 Fonction appelée après l'ajout d'une nouvelle catégorie par `AddCategoryForm`
    */
-  const AddCategory = () => {
-    if (!newcategories.trim()) {
-      toast.warn("La catégorie ne peut pas être vide");
-    } else if (categories.includes(newcategories)) {
-      toast.error("Cette catégorie existe déjà");
-    } else {
-      setValue("categories", [...categories, newcategories]);
-      setValue("newcategories", "");
-      toast.success("Catégorie ajoutée avec succès");
-    }
+  const handleCategoryAdded = (newCategory: string) => {
+    // console.log("nouvelle catégorie ajoutée", newCategory);
+    setValue("categories", [...categories, newCategory]); // Met à jour la liste localement
   };
 
   const country = [
@@ -73,7 +93,7 @@ function CreateDecisionForm() {
     "Australie",
     "Ukraine",
   ];
-  
+
   // console.log(fetchCategories);
 
   const onSubmit = async (data: FieldValues) => {
@@ -144,30 +164,9 @@ function CreateDecisionForm() {
             ))}
           </select>
         </section>
+        {/* 🔹 Ajout du formulaire d'ajout de catégorie */}
+        <AddCategoryForm onCategoryAdded={handleCategoryAdded} />
 
-        {/* section pour ajouter une catégorie */}
-        <section className={style.addCategory}>
-          <label htmlFor="newCategory"> Ajoutez une nouvelle catégorie: </label>
-          <article className={style.addCategoryContainer}>
-            <input
-              type="text"
-              id="newCategory"
-              placeholder="nouvelle catégorie"
-              {...register("newcategories")}
-            />
-            <button
-              type="button"
-              onClick={AddCategory}
-              className={style.addButton}
-            >
-              {" "}
-              ➕{" "}
-            </button>
-          </article>
-          <ToastContainer position="top-right" autoClose={3000} />
-        </section>
-        {/* section localisation : */}
-        {/* liste déroulante des localisations */}
         <section>
           <label htmlFor="country"> Saisissez une localisation: </label>
           <select
@@ -229,15 +228,6 @@ function CreateDecisionForm() {
         <section className={style.planningDates}>
           <legend>Planning: </legend>
           <article className={style.gridContainer}>
-            {/* <article>
-              {/* label doit encadrer mon input ?  */}
-            {/* <label htmlFor="created_at"> Date de création </label>
-              <input
-                type="date"
-                id="created_at"
-                {...register("created_at")}
-              /> */}
-            {/* </article> */}
             <article>
               <label htmlFor="min_date"> Date de clôture des votes </label>
               <input type="date" id="min_date" {...register("min_date")} />

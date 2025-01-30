@@ -10,7 +10,6 @@ import App from "./App";
 import ErrorPage from "./pages/errorPage/ErrorPage";
 import HomePage from "./pages/homePage/HomePage";
 import RegisterPage from "./pages/registerPage/RegisterPage";
-
 import DecisionFormPage from "./pages/decisionFormPage/DecisionFormPage";
 
 // Import additional components for new routes
