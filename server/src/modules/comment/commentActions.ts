@@ -1,0 +1,18 @@
+import type { RequestHandler } from "express";
+import commentRepository from "./commentRepository";
+
+const add: RequestHandler = async (req, res, next) => {
+  // try {
+  //   const newComment = {
+  //     content: req.body.content,
+  //     user_id: req.body.user_id,
+  //     decision_id: req.body.decision_id,
+  //   };
+  //   const insertId = await commentRepository.create(newComment);
+  //   res.status(201).json({ insertId });
+  // } catch (err) {
+  //   next(err);
+  // }
+};
+
+export default { add };
