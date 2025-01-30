@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import type { FieldValues } from "react-hook-form";
 import { toast } from "react-toastify";
+import type { FormValues } from "../../lib/definitions";
 import style from "./createUserForm.module.css";
 
 export default function CreateUserForm() {
