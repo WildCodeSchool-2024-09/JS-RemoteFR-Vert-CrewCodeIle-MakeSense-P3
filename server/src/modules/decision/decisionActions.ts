@@ -2,9 +2,10 @@ import type { RequestHandler } from "express";
 import decisionRepository from "./decisionRepository";
 
 const read: RequestHandler = async (req, res, next) => {
-  const decisionId = Number.parseInt(req.params.id);
-  const decision = await decisionRepository.read(decisionId);
   try {
+    const decisionId = Number.parseInt(req.params.id);
+    const decision = await decisionRepository.read(decisionId);
+
     if (decision == null) {
       res.sendStatus(404);
     } else {
