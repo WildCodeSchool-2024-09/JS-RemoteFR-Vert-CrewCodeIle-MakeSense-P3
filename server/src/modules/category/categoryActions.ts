@@ -2,12 +2,9 @@ import type { RequestHandler } from "express";
 
 import categoryRepository from "./categoryRepository";
 
-const add: RequestHandler = async (req, res, next): Promise<void> => {
+const catAlreadyExist: RequestHandler = async (req, res, next) => {
   try {
-    const newCategory = {
-      label: req.body.label,
-      color: req.body.color,
-    };
+    const newCategory = { label: req.body.label, color: req.body.color };
     const categoryExist =
       await categoryRepository.findIfCategoryLabelAlreadyExist(
         newCategory.label,
@@ -15,15 +12,22 @@ const add: RequestHandler = async (req, res, next): Promise<void> => {
 
     if (categoryExist) {
       res.status(400).json({ message: "Cette catégorie existe déjà" });
-    } else {
-      const newCategory = {
-        label: req.body.label,
-        color: req.body.color,
-      };
-      const insertId = await categoryRepository.create(newCategory);
-
-      res.status(201).json({ id: insertId });
     }
+    next();
+  } catch (error) {
+    next(error);
+  }
+};
+
+const add: RequestHandler = async (req, res, next): Promise<void> => {
+  try {
+    const newCategory = {
+      label: req.body.label,
+      color: req.body.color,
+    };
+    const insertId = await categoryRepository.create(newCategory);
+
+    res.status(201).json({ id: insertId });
   } catch (err) {
     next(err);
   }
@@ -85,5 +89,6 @@ export default {
   read,
   edit,
   add,
+  catAlreadyExist,
   destroy,
 };
