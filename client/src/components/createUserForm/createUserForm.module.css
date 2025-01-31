@@ -1,6 +1,6 @@
 .container {
   background-color: aliceblue;
-  padding: 3em;
+  padding: 1em;
 }
 
 .form {
@@ -81,6 +81,10 @@
 /* responsive */
 
 @media (min-width: 768px) {
+  .container {
+    background-color: aliceblue;
+    padding: 3em;
+  }
   .card {
     max-width: 480px;
     padding: 3rem;
@@ -91,12 +95,12 @@
     margin-bottom: 3rem;
   }
 
-  input {
+  .input {
     padding: 1rem;
     font-size: 1rem;
   }
 
-  label {
+  .label {
     font-size: 1rem;
   }
 }
