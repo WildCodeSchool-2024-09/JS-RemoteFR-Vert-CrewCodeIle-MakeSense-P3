@@ -7,6 +7,7 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
 // Import the main app component
 import App from "./App";
+import DecisionDetailPage from "./pages/decisionDetailPage/DecisionDetailPage";
 import ErrorPage from "./pages/errorPage/ErrorPage";
 import HomePage from "./pages/homePage/HomePage";
 import RegisterPage from "./pages/registerPage/RegisterPage";
@@ -21,22 +22,27 @@ import RegisterPage from "./pages/registerPage/RegisterPage";
 
 // Create router configuration with routes
 // You can add more routes as you build out your app!
+
 const router = createBrowserRouter([
   {
     path: "/", // The root path
     element: <App />, // Renders the App component for the home page
     children: [
       {
+        path: "/register",
+        element: <RegisterPage />,
+      },
+      {
         path: "/homepage",
         element: <HomePage />,
       },
       {
-        path: "*",
-        element: <ErrorPage />,
+        path: "/decisionslist/:id",
+        element: <DecisionDetailPage />,
       },
       {
-        path: "/register",
-        element: <RegisterPage />,
+        path: "*",
+        element: <ErrorPage />,
       },
     ],
   },
