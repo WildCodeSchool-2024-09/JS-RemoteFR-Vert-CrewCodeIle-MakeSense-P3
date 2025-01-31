@@ -11,10 +11,19 @@
   gap: 0.5em;
 }
 
+.calendar {
+  display: flex;
+  gap: 2em;
+}
+
+.logo {
+  margin: 1em;
+  width: 20%;
+}
+
 /* titres: */
 .titleH2 {
   font-size: 2.5em;
-  margin-bottom: 20px;
   color: #196c84;
   font-weight: bold;
   display: flex;

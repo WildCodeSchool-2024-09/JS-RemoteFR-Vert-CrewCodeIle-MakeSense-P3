@@ -21,8 +21,8 @@ const add: RequestHandler = async (req, res, next) => {
     const newDecision = {
       title: req.body.title,
       description: req.body.description,
-      // max_date: req.body.max_date,
-      // min_date: req.body.min_date,
+      max_date: req.body.max_date,
+      min_date: req.body.min_date,
       context: req.body.context,
       profit: req.body.profit,
       risk: req.body.risk,
