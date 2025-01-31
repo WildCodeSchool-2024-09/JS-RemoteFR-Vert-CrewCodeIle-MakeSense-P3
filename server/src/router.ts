@@ -8,7 +8,6 @@ const router = express.Router();
 import UserRoute from "./routes/user.route";
 
 router.use("/", UserRoute);
-router.use("/", DecisionRoute);
 
 import CountryRoute from "./routes/country.route";
 
