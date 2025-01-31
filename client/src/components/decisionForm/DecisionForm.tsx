@@ -126,17 +126,18 @@ function CreateDecisionForm() {
     <section className={style.decisioncontainer}>
       <section className={style.logo_exit}>
         <img id="logo" src="/intrasenselogo.png" alt="logo" />
-        <button type="button" className={style.exitButton}>
+        {/* <button type="button" className={style.exitButton}>
           ✖
-        </button>
+        </button> */}
       </section>
 
-      <h2>Prise de décision:</h2>
-      <form onSubmit={handleSubmit(onSubmit)} className="formcontainer">
+      <h2 className={style.titleH2}>Création d'une décision :</h2>
+      <form onSubmit={handleSubmit(onSubmit)} className={style.form}>
         <section>
-          <label htmlFor="title">
+          <label htmlFor="title" className={style.label}>
             Intitulé de la prise de décision:
             <input
+              className={style.input}
               type="text"
               id="title"
               placeholder="Saisissez le texte ici"
@@ -159,9 +160,10 @@ function CreateDecisionForm() {
         </section> */}
         {/* <AddCategoryForm onCategoryAdded={handleCategoryAdded} /> */}
         <section>
-          <label htmlFor="country_id">
+          <label htmlFor="country_id" className={style.label}>
             Saisissez une localisation:
             <select
+              className={style.select}
               id="country_id"
               {...register("country_id", { required: true })}
             >
@@ -175,9 +177,10 @@ function CreateDecisionForm() {
           </label>
         </section>
         <section>
-          <label htmlFor="description">
+          <label htmlFor="description" className={style.label}>
             Description:
             <textarea
+              className={style.textarea}
               id="description"
               placeholder="Saisissez la description ici"
               {...register("description", { required: true })}
@@ -185,9 +188,10 @@ function CreateDecisionForm() {
           </label>
         </section>
         <section>
-          <label htmlFor="context">
+          <label htmlFor="context" className={style.label}>
             Quel impact sur l'organisation ?
             <textarea
+              className={style.textarea}
               id="context"
               placeholder="Saisissez l'impact ici"
               {...register("context", { required: true })}
@@ -195,9 +199,10 @@ function CreateDecisionForm() {
           </label>
         </section>
         <section>
-          <label htmlFor="profit">
+          <label htmlFor="profit" className={style.label}>
             Quels sont les bénéfices?
             <textarea
+              className={style.textarea}
               id="profit"
               placeholder="Saisissez les bénéfices ici"
               {...register("profit", { required: true })}
@@ -205,9 +210,10 @@ function CreateDecisionForm() {
           </label>
         </section>
         <section>
-          <label htmlFor="risk">
+          <label htmlFor="risk" className={style.label}>
             Quels sont les risques?
             <textarea
+              className={style.textarea}
               id="risk"
               placeholder="Saisissez les risques ici"
               {...register("risk", { required: true })}

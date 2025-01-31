@@ -4,50 +4,60 @@
   justify-content: space-between;
 }
 
+.form {
+  margin: 2em 7em;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+}
+
 /* titres: */
-h1 {
-  font-size: 24px;
+.titleH2 {
+  font-size: 2.5em;
   margin-bottom: 20px;
   color: #196c84;
   font-weight: bold;
+  display: flex;
+  justify-content: center;
+  text-decoration: underline;
 }
 legend {
   font-size: 18px;
   margin-bottom: 10px;
   color: #196c84;
 }
-.section h2 {
+/* .section h2 {
   font-size: 18px;
   margin-bottom: 10px;
-}
-h2 {
-  display: flex;
-  justify-content: center;
-}
+} */
 
 /* général: */
-.section {
+/* .section {
   margin-bottom: 30px;
-}
+} */
 
-label {
-  font-size: 14px;
+.label {
+  font-size: 1em;
   display: block;
   margin-bottom: 5px;
   color: #196c84;
 }
 
-input,
-select,
-textarea {
+.input,
+.select,
+.textarea {
   width: 100%;
   padding: 10px;
+  border: 1px solid #b8bcc5;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  background: white;
 }
-textarea {
+.textarea {
   resize: vertical;
   height: 300px;
 }
-section {
+.section {
   margin-bottom: 60px;
 }
 /* boutton: */
@@ -172,17 +182,21 @@ section {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   }
 
-  h1 {
-    font-size: 28px;
+  .form {
+    margin: 1em 1em;
+  }
+
+  .titleH2 {
+    font-size: 1.5em;
   }
 
   .section h2 {
     font-size: 20px;
   }
 
-  input,
-  select,
-  textarea {
+  .input,
+  .select,
+  .textarea {
     font-size: 16px;
     padding: 15px;
   }
