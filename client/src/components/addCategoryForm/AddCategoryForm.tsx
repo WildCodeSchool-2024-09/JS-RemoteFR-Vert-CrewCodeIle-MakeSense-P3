@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
-import style from "./decisionForm.module.css";
+import style from "./addCategoryForm.module.css";
 
 /*double type à revérifier*/
 type CategoryFormData = {
@@ -53,22 +53,25 @@ function AddCategoryForm({ onCategoryAdded }: AddCategoryFormProps) {
 
   return (
     <form onSubmit={handleSubmit(AddCategory)} className={style.addCategory}>
-      <label htmlFor="newCategory"> Ajoutez une nouvelle catégorie: </label>
-      <article className={style.addCategoryContainer}>
-        <input
-          type="text"
-          id="newCategory"
-          placeholder="Nouvelle catégorie"
-          {...register("newCategory", {
-            required: "Veuillez entrer une catégorie",
-            minLength: { value: 2, message: "Au moins 2 caractères requis" },
-            maxLength: { value: 50, message: "Maximum 50 caractères" },
-          })}
-        />
+      <section className={style.addCategoryContainer}>
+        <article>
+          <label htmlFor="newCategory"> Ajoutez une nouvelle catégorie: </label>
+          <input
+            type="text"
+            id="newCategory"
+            placeholder="Nouvelle catégorie"
+            {...register("newCategory", {
+              required: "Veuillez entrer une catégorie",
+              minLength: { value: 2, message: "Au moins 2 caractères requis" },
+              maxLength: { value: 50, message: "Maximum 50 caractères" },
+            })}
+          />
+        </article>
+
         <button type="submit" className={style.addButton}>
           ➕
         </button>
-      </article>
+      </section>
     </form>
   );
 }

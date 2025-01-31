@@ -1,23 +1,33 @@
-// import { useState } from "react";
-// import { useForm } from "react-hook-form";
-// import { toast } from "react-toastify";
+import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 // import AddCategoryForm from "../addCategoryForm/AddCategoryForm";
 import style from "./decisionForm.module.css";
 
-// type dataDecision = {
-//   title: string;
-//   category: string;
-//   country: string;
-//   description: string;
-//   context: string;
-//   profit: string;
-//   risk: string;
+type dataDecision = {
+  title: string;
+  country_id: string;
+  description: string;
+  context: string;
+  profit: string;
+  risk: string;
+};
+
+// type CategoryType = {
+//   id: number;
+//   label: string;
+//   color: string;
 // };
 
+type CountryType = {
+  id: number;
+  label: string;
+};
+
 function CreateDecisionForm() {
-  // const { register, handleSubmit, setValue, reset } = useForm<dataDecision>();
-  // const [categories, setCategories] = useState<string[]>([]);
-  // const [countries, setCountries] = useState<string[]>([]);
+  const { register, handleSubmit, reset } = useForm<dataDecision>();
+  // const [categories, setCategories] = useState([] as CategoryType[]);
+  const [countries, setCountries] = useState([] as CountryType[]);
 
   // const fetchCategories = async () => {
   //   try {
@@ -26,7 +36,6 @@ function CreateDecisionForm() {
   //     );
   //     if (response.ok) {
   //       const data = await response.json();
-
   //       setCategories(data);
   //     } else {
   //       toast.error("Erreur lors du chargement des catégories");
@@ -34,6 +43,39 @@ function CreateDecisionForm() {
   //   } catch (error) {
   //     toast.error("Erreur de connexion au serveur");
   //   }
+  // };
+  useEffect(() => {
+    fetch(`${import.meta.env.VITE_API_URL}/api/country`)
+      .then((response) => response.json())
+      .then((data: CountryType[]) => {
+        setCountries(data);
+      })
+      .catch(() => toast.error("Erreur de connexion au serveur"));
+  }, []);
+
+  // useEffect(() => {
+  //   fetch(`${import.meta.env.VITE_API_URL}/api/category`)
+  //     .then((response) => response.json())
+  //     .then((data: CategoryType[]) => {
+  //       setCategories(data);
+  //     })
+  //     .catch(() => toast.error("Erreur de connexion au serveur"));
+  // }, []);
+
+  // console.log(categories);
+  // console.log(countries);
+
+  // const fetchCategories = async () => {
+  //   try {
+  //     const response = await fetch(
+  //       `${import.meta.env.VITE_API_URL}/api/category`,
+  //     );
+  // if (response.ok) {
+  //   const data = await response.json();
+  //   setCategories(data);
+  // } else {
+  //   toast.error("Erreur lors du chargement des catégories");
+  // }
   // };
 
   // const fetchCountries = async () => {
@@ -43,6 +85,7 @@ function CreateDecisionForm() {
   //     );
   //     if (response.ok) {
   //       const data = await response.json();
+  //       setCountries(data);
   //     } else {
   //       toast.error("Erreur lors du chargement des pays");
   //     }
@@ -55,38 +98,33 @@ function CreateDecisionForm() {
   //   setCategories((prev) => [...prev, newCategory]);
   // };
 
-  // useEffect(() => {
-  //   fetchCategories();
-  //   fetchCountries();
-  // }, []);
-
-  // const onSubmit = async (data: dataDecision) => {
-  //   try {
-  //     const response = await fetch(
-  //       `${import.meta.env.VITE_API_URL}/api/decision`,
-  //       {
-  //         method: "POST",
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //         },
-  //         body: JSON.stringify(data),
-  //       },
-  //     );
-
-  //     if (response.ok) {
-  //       reset();
-  //       toast.success("Décision envoyée à l'administrateur");
-  //     } else {
-  //       toast.error("Erreur lors de l'envoi de la décision");
-  //     }
-  //   } catch (error) {
-  //     toast.error("Erreur de connexion au serveur");
-  //   }
-  // };
+  const onSubmit = async (data: dataDecision) => {
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/api/decision`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        },
+      );
+      // console.log(data);
+      if (response.ok) {
+        reset();
+        toast.success("Décision envoyée à l'administrateur");
+      } else {
+        toast.error("Erreur lors de l'envoi de la décision");
+      }
+    } catch (error) {
+      toast.error("Erreur de connexion au serveur");
+    }
+  };
 
   return (
     <section className={style.decisioncontainer}>
-      {/* <section className={style.logo_exit}>
+      <section className={style.logo_exit}>
         <img id="logo" src="/intrasenselogo.png" alt="logo" />
         <button type="button" className={style.exitButton}>
           ✖
@@ -96,77 +134,86 @@ function CreateDecisionForm() {
       <h2>Prise de décision:</h2>
       <form onSubmit={handleSubmit(onSubmit)} className="formcontainer">
         <section>
-          <label htmlFor="title">Intitulé de la prise de décision:</label>
-          <input
-            type="text"
-            id="title"
-            placeholder="Saisissez le texte ici"
-            {...register("title", { required: true })}
-          />
+          <label htmlFor="title">
+            Intitulé de la prise de décision:
+            <input
+              type="text"
+              id="title"
+              placeholder="Saisissez le texte ici"
+              {...register("title", { required: true })}
+            />
+          </label>
         </section>
-
+        {/* <section>
+          <label htmlFor="category">
+            Saisissez une catégorie:
+            <select id="category" {...register("category", { required: true })}>
+              <option value="">Choisissez une catégorie</option>
+              {categories.map((category) => (
+                <option key={category.id} value={category.id}>
+                  {category.label}
+                </option>
+              ))}
+            </select>
+          </label>
+        </section> */}
+        {/* <AddCategoryForm onCategoryAdded={handleCategoryAdded} /> */}
         <section>
-          <label htmlFor="category">Saisissez une catégorie:</label>
-          <select id="category" {...register("category", { required: true })}>
-            <option value="">Choisissez une catégorie</option>
-            {categories.map((category) => (
-              <option key={category} value={category}>
-                {category}
-              </option>
-            ))}
-          </select>
+          <label htmlFor="country_id">
+            Saisissez une localisation:
+            <select
+              id="country_id"
+              {...register("country_id", { required: true })}
+            >
+              <option value="">Choisissez une localisation</option>
+              {countries.map((country) => (
+                <option key={country.id} value={country.id}>
+                  {country.label}
+                </option>
+              ))}
+            </select>
+          </label>
         </section>
-
-        <AddCategoryForm onCategoryAdded={handleCategoryAdded} />
-
         <section>
-          <label htmlFor="country">Saisissez une localisation:</label>
-          <select id="country" {...register("country", { required: true })}>
-            <option value="">Choisissez une localisation</option>
-            {countries.map((country) => (
-              <option key={country} value={country}>
-                {country}
-              </option>
-            ))}
-          </select>
+          <label htmlFor="description">
+            Description:
+            <textarea
+              id="description"
+              placeholder="Saisissez la description ici"
+              {...register("description", { required: true })}
+            />
+          </label>
         </section>
-
         <section>
-          <label htmlFor="description">Description:</label>
-          <textarea
-            id="description"
-            placeholder="Saisissez la description ici"
-            {...register("description", { required: true })}
-          />
+          <label htmlFor="context">
+            Quel impact sur l'organisation ?
+            <textarea
+              id="context"
+              placeholder="Saisissez l'impact ici"
+              {...register("context", { required: true })}
+            />
+          </label>
         </section>
-
         <section>
-          <label htmlFor="context">Quel impact sur l'organisation ?</label>
-          <textarea
-            id="context"
-            placeholder="Saisissez l'impact ici"
-            {...register("context", { required: true })}
-          />
+          <label htmlFor="profit">
+            Quels sont les bénéfices?
+            <textarea
+              id="profit"
+              placeholder="Saisissez les bénéfices ici"
+              {...register("profit", { required: true })}
+            />
+          </label>
         </section>
-
         <section>
-          <label htmlFor="profit">Quels sont les bénéfices?</label>
-          <textarea
-            id="profit"
-            placeholder="Saisissez les bénéfices ici"
-            {...register("profit", { required: true })}
-          />
+          <label htmlFor="risk">
+            Quels sont les risques?
+            <textarea
+              id="risk"
+              placeholder="Saisissez les risques ici"
+              {...register("risk", { required: true })}
+            />
+          </label>
         </section>
-
-        <section>
-          <label htmlFor="risk">Quels sont les risques?</label>
-          <textarea
-            id="risk"
-            placeholder="Saisissez les risques ici"
-            {...register("risk", { required: true })}
-          />
-        </section>
-
         <section className={style.buttongroup}>
           <button type="button" className={style.canceldButton}>
             Annuler
@@ -175,7 +222,7 @@ function CreateDecisionForm() {
             Ajouter une décision
           </button>
         </section>
-      </form> */}
+      </form>
     </section>
   );
 }
