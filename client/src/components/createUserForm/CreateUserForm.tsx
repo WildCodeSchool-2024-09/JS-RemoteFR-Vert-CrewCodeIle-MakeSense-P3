@@ -46,8 +46,8 @@ export default function CreateUserForm() {
   return (
     <section className={style.container}>
       <form onSubmit={handleSubmit(onSubmit)} className={style.card}>
-        <h1 className={style.title}>Formulaire d'inscription</h1>
-        <section>
+        <h1 className={style.titleH1}>Formulaire d'inscription</h1>
+        <section className={style.form}>
           <label htmlFor="lastname" className={style.label}>
             Nom
             <input

@@ -1,5 +1,12 @@
 .container {
   background-color: aliceblue;
+  padding: 3em;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
 }
 
 .card {
@@ -13,7 +20,7 @@
   margin: auto;
 }
 
-.title {
+.titleH1 {
   color: #9b084f;
   font-size: 1.5rem;
   font-weight: 600;
@@ -51,12 +58,14 @@
 .buttonCreateUser {
   width: 80%;
   padding: 0.25em 0.25em;
-  background-color: var(--color-tertiary-active);
   border-radius: 1em;
   color: white;
   border-color: var(--color-tertiary-active);
+  background-color: var(--color-tertiary-active);
   font-size: 1em;
   margin: auto;
+  display: block;
+
   @media screen and (max-width: 768px) {
     width: 60%;
     margin: auto auto;
