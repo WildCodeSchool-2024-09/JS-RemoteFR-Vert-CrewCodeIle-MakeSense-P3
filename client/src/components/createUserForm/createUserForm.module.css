@@ -1,5 +1,12 @@
 .container {
   background-color: aliceblue;
+  padding: 1em;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
 }
 
 .card {
@@ -13,7 +20,7 @@
   margin: auto;
 }
 
-.title {
+.titleH1 {
   color: #9b084f;
   font-size: 1.5rem;
   font-weight: 600;
@@ -21,7 +28,7 @@
   text-align: center;
 }
 
-input {
+.input {
   width: 100%;
   padding: 0.75rem;
   border: 1px solid #e5e7eb;
@@ -30,11 +37,11 @@ input {
   background: white;
 }
 
-input::placeholder {
+.input::placeholder {
   color: #9ca3af;
 }
 
-label {
+.label {
   display: block;
   color: #0891b2;
   margin-bottom: 0.5rem;
@@ -51,12 +58,14 @@ label {
 .buttonCreateUser {
   width: 80%;
   padding: 0.25em 0.25em;
-  background-color: var(--color-tertiary-active);
   border-radius: 1em;
   color: white;
   border-color: var(--color-tertiary-active);
+  background-color: var(--color-tertiary-active);
   font-size: 1em;
   margin: auto;
+  display: block;
+
   @media screen and (max-width: 768px) {
     width: 60%;
     margin: auto auto;
@@ -72,6 +81,10 @@ label {
 /* responsive */
 
 @media (min-width: 768px) {
+  .container {
+    background-color: aliceblue;
+    padding: 3em;
+  }
   .card {
     max-width: 480px;
     padding: 3rem;
@@ -82,12 +95,12 @@ label {
     margin-bottom: 3rem;
   }
 
-  input {
+  .input {
     padding: 1rem;
     font-size: 1rem;
   }
 
-  label {
+  .label {
     font-size: 1rem;
   }
 }
