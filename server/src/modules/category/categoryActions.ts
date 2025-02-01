@@ -22,7 +22,7 @@ const add: RequestHandler = async (req, res, next): Promise<void> => {
   try {
     const newCategory = {
       label: req.body.label,
-      color: req.body.color,
+      // color: req.body.color,
     };
     const insertId = await categoryRepository.create(newCategory);
 

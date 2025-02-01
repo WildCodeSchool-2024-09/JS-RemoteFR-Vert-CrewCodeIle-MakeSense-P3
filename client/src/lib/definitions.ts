@@ -1,3 +1,5 @@
+// user
+
 type FormValues = {
   firstname: string;
   lastname: string;
@@ -6,6 +8,8 @@ type FormValues = {
   confirmed_password: string;
   avatar: string;
 };
+
+// decision
 
 type DecisionDetailType = {
   id: number;
@@ -20,4 +24,42 @@ type DecisionDetailType = {
   country: string;
   lastname: string;
   firstname: string;
+};
+
+type DataFormDecisionType = {
+  id: number;
+  title: string;
+  country_id: string;
+  description: string;
+  context: string;
+  profit: string;
+  risk: string;
+  min_date: Date;
+  max_date: Date;
+  category: string;
+};
+
+// country
+
+type CountryType = {
+  id: number;
+  label: string;
+};
+
+// category
+
+type FormValuesCategory = {
+  id: number;
+  label: string;
+};
+
+type CategoryFormData = {
+  id: number;
+  label: string;
+};
+
+type CategoryType = {
+  id: number;
+  label: string;
+  color: string;
 };

@@ -3,29 +3,11 @@ import { toast } from "react-toastify";
 import style from "./addCategoryForm.module.css";
 
 /*double type à revérifier*/
-type CategoryFormData = {
-  newCategory: string;
-};
 
-type AddCategoryFormProps = {
-  onCategoryAdded: (category: string) => void;
-};
+function AddCategoryForm() {
+  const { register, handleSubmit, reset } = useForm<FormValuesCategory>();
 
-function AddCategoryForm({ onCategoryAdded }: AddCategoryFormProps) {
-  const { register, handleSubmit, reset } = useForm<CategoryFormData>({
-    defaultValues: {
-      newCategory: "",
-    },
-  });
-
-  const AddCategory = async (data: CategoryFormData) => {
-    const newCategory = data.newCategory.trim();
-
-    if (newCategory === "") {
-      toast.warn("La catégorie ne peut pas être vide");
-      return;
-    }
-
+  const onSubmit = async (data: CategoryFormData) => {
     try {
       const response = await fetch(
         `${import.meta.env.VITE_API_URL}/api/category`,
@@ -34,44 +16,38 @@ function AddCategoryForm({ onCategoryAdded }: AddCategoryFormProps) {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ label: newCategory }),
+          body: JSON.stringify(data),
         },
       );
-
       if (response.ok) {
-        onCategoryAdded(newCategory);
         reset();
-        toast.success("Catégorie ajoutée avec succès !");
+        toast.success("Décision envoyée à l'administrateur");
       } else {
-        const errorMessage = await response.text();
-        toast.error(`Erreur lors de l'ajout : ${errorMessage}`);
+        toast.error("Erreur lors de l'envoi...");
       }
     } catch (error) {
-      toast.error("Erreur de connexion au serveur");
+      toast.error("Erreur lors de l'envoi...");
     }
   };
 
   return (
-    <form onSubmit={handleSubmit(AddCategory)} className={style.addCategory}>
-      <section className={style.addCategoryContainer}>
-        <article>
-          <label htmlFor="newCategory"> Ajoutez une nouvelle catégorie: </label>
-          <input
-            type="text"
-            id="newCategory"
-            placeholder="Nouvelle catégorie"
-            {...register("newCategory", {
-              required: "Veuillez entrer une catégorie",
-              minLength: { value: 2, message: "Au moins 2 caractères requis" },
-              maxLength: { value: 50, message: "Maximum 50 caractères" },
-            })}
-          />
-        </article>
-
+    <form onSubmit={handleSubmit(onSubmit)} className={style.addCategory}>
+      <label htmlFor="label"> Ajoutez une nouvelle catégorie: </label>
+      <article className={style.addCategoryContainer}>
+        <input
+          type="text"
+          id="label"
+          placeholder="Nouvelle catégorie"
+          {...register("label", {
+            required: "Veuillez entrer une catégorie",
+            minLength: { value: 2, message: "Au moins 2 caractères requis" },
+            maxLength: { value: 50, message: "Maximum 50 caractères" },
+          })}
+        />
         <button type="submit" className={style.addButton}>
           ➕
         </button>
-      </section>
+      </article>
     </form>
   );
 }

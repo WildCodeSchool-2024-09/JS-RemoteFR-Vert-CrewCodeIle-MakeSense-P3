@@ -4,13 +4,13 @@ import type { Result, Rows } from "../../../database/client";
 type Category = {
   id: number;
   label: string;
-  color: string;
+  // color: string;
 };
 class CategoryRepository {
   async create(category: Omit<Category, "id">) {
     const [result] = await DatabaseClient.query<Result>(
-      "INSERT INTO category (label, color) VALUES (?, ?);",
-      [category.label, category.color],
+      `INSERT INTO category (label, color) VALUES (?, "multicolor")`,
+      [category.label],
     );
 
     return result.insertId;
@@ -43,7 +43,8 @@ class CategoryRepository {
   async update(category: Category) {
     const [result] = await DatabaseClient.query<Result>(
       "UPDATE category SET label = ?, color = ? WHERE id = ?",
-      [category.label, category.color, category.id],
+      // [category.label, category.color, category.id],
+      [category.label, category.id],
     );
 
     return result.affectedRows;
