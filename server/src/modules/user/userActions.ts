@@ -4,8 +4,14 @@ import userRepository from "./userRepository";
 
 const add: RequestHandler = async (req, res, next) => {
   try {
-    const { firstname, lastname, email, hash_password, avatar, country_id } =
-      req.body;
+    const user = {
+      firstname: req.body.firstname,
+      lastname: req.body.lastname,
+      email: req.body.email,
+      hash_password: req.body.hash_password,
+      avatar: req.body.avatar,
+      country_id: Number.parseInt(req.body.country_id),
+    };
 
     const insertId = await userRepository.create(req.body);
 

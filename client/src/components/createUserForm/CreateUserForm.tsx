@@ -1,4 +1,4 @@
-// import { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import type { FieldValues } from "react-hook-form";
 import { toast } from "react-toastify";
@@ -7,7 +7,7 @@ import style from "./createUserForm.module.css";
 export default function CreateUserForm() {
   const minPassword: number = 8;
   const maxPassword: number = 255;
-  // const [countries, setCountries] = useState<string[]>([]);
+  const [countries, setCountries] = useState([]);
 
   const {
     register,
@@ -17,13 +17,13 @@ export default function CreateUserForm() {
     formState: { errors },
   } = useForm<FormValues>();
 
-  // useEffect(() => {
-  //   fetch(`${import.meta.env.VITE_API_URL}/api/country`)
-  //     .then((response) => response.json())
-  //     .then((data) => setCountries(data));
-  // });
-
-  // console.log(countries);
+  useEffect(() => {
+    fetch(`${import.meta.env.VITE_API_URL}/api/country`)
+      .then((response) => response.json())
+      .then((data) => {
+        setCountries(data);
+      });
+  }, []);
 
   const onSubmit = async (data: FieldValues) => {
     try {
@@ -36,6 +36,7 @@ export default function CreateUserForm() {
         email: rest.email.toLowerCase(),
         hash_password: rest.hash_password,
         avatar: rest.avatar.toLowerCase(),
+        country_id: rest.country_id,
       };
 
       const response = await fetch(`${import.meta.env.VITE_API_URL}/api/user`, {
@@ -58,7 +59,7 @@ export default function CreateUserForm() {
       <form onSubmit={handleSubmit(onSubmit)} className={style.card}>
         <h1 className={style.title}>Formulaire d'inscription</h1>
         <section>
-          <label htmlFor="lastname">
+          <label htmlFor="lastname" className={style.label}>
             Nom
             <input
               id="lastname"
@@ -77,7 +78,7 @@ export default function CreateUserForm() {
             />
             <span className={style.errorText}>{errors.lastname?.message}</span>
           </label>
-          <label htmlFor="firstname">
+          <label htmlFor="firstname" className={style.label}>
             Prénom
             <input
               id="firstname"
@@ -95,19 +96,29 @@ export default function CreateUserForm() {
               })}
             />
             <span className={style.errorText}>{errors.firstname?.message}</span>
-            {/* <label>
-              Pays
-              <select id="country" {...register("country", { required: true })}>
-                <option value="">Choisissez une localisation</option>
-                {countries.map((country) => (
-                  <option key={country.id} value={country.id}>
-                    {country.label}
-                  </option>
-                ))}
-              </select>
-            </label> */}
           </label>
-          <label htmlFor="hash_password">
+          <label htmlFor="country_id" className={style.label}>
+            Pays
+            <select
+              className={style.select}
+              id="country_id"
+              aria-label="Choisissez une localisation"
+              required
+              {...register("country_id")}
+            >
+              <option value="">Choisissez une localisation</option>
+              {countries.map((country: CountryType) => (
+                <option
+                  key={country.id}
+                  value={country.id}
+                  title={country.label}
+                >
+                  {country.label}
+                </option>
+              ))}
+            </select>
+          </label>
+          <label htmlFor="hash_password" className={style.label}>
             Mot de passe
             <input
               id="hash_password"
@@ -132,7 +143,7 @@ export default function CreateUserForm() {
               {errors.hash_password?.message}
             </span>
           </label>
-          <label>
+          <label className={style.label}>
             Vérification du mot de passe
             <input
               id="confirmed_password"
@@ -160,7 +171,7 @@ export default function CreateUserForm() {
             </span>
           </label>
 
-          <label htmlFor="email">
+          <label htmlFor="email" className={style.label}>
             Email
             <input
               id="email"
@@ -172,7 +183,7 @@ export default function CreateUserForm() {
               {...register("email", { required: "champ obligatoire" })}
             />
           </label>
-          <label htmlFor="avatar">
+          <label htmlFor="avatar" className={style.label}>
             Photo de profil
             <input
               id="avatar"

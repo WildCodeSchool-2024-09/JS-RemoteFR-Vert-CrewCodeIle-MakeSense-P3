@@ -19,3 +19,8 @@ type NewUserType = {
   avatar: string;
   country_id: string;
 };
+
+type Country = {
+  id: number;
+  label: string;
+};
