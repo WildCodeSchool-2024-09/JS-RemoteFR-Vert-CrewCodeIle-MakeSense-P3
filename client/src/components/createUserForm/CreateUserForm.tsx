@@ -1,3 +1,4 @@
+// import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import type { FieldValues } from "react-hook-form";
 import { toast } from "react-toastify";
@@ -6,6 +7,7 @@ import style from "./createUserForm.module.css";
 export default function CreateUserForm() {
   const minPassword: number = 8;
   const maxPassword: number = 255;
+  // const [countries, setCountries] = useState<string[]>([]);
 
   const {
     register,
@@ -14,6 +16,14 @@ export default function CreateUserForm() {
     watch,
     formState: { errors },
   } = useForm<FormValues>();
+
+  // useEffect(() => {
+  //   fetch(`${import.meta.env.VITE_API_URL}/api/country`)
+  //     .then((response) => response.json())
+  //     .then((data) => setCountries(data));
+  // });
+
+  // console.log(countries);
 
   const onSubmit = async (data: FieldValues) => {
     try {
@@ -85,6 +95,17 @@ export default function CreateUserForm() {
               })}
             />
             <span className={style.errorText}>{errors.firstname?.message}</span>
+            {/* <label>
+              Pays
+              <select id="country" {...register("country", { required: true })}>
+                <option value="">Choisissez une localisation</option>
+                {countries.map((country) => (
+                  <option key={country.id} value={country.id}>
+                    {country.label}
+                  </option>
+                ))}
+              </select>
+            </label> */}
           </label>
           <label htmlFor="hash_password">
             Mot de passe
