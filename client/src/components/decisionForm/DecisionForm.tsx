@@ -55,7 +55,7 @@ function CreateDecisionForm() {
           body: JSON.stringify(data),
         },
       );
-
+      // console.log(data);
       if (response.ok) {
         reset();
         toast.success("Décision envoyée à l'administrateur");
@@ -208,7 +208,7 @@ function CreateDecisionForm() {
         <section className={style.users}>
           <article>
             <label htmlFor="user-expert" className={style.label}>
-              Selectionnez les experts :
+              Qui sont les experts ?
               <select
                 id="user-expert"
                 className={style.select}
@@ -227,7 +227,7 @@ function CreateDecisionForm() {
           </article>
           <article>
             <label htmlFor="user-impacted" className={style.label}>
-              Selectionnez les personnes impactées :
+              Qui sont les impactés ?
               <select
                 id="user-impacted"
                 className={style.select}
@@ -246,7 +246,7 @@ function CreateDecisionForm() {
           </article>
           <article>
             <label htmlFor="user-animators" className={style.label}>
-              Selectionnez les personnes animateurs :
+              Qui sont les animateurs ?
               <select
                 id="user-impacted"
                 className={style.select}
