@@ -1,5 +1,4 @@
 import type { RequestHandler } from "express";
-
 import categoryRepository from "./categoryRepository";
 
 const categoryExist: RequestHandler = async (req, res, next) => {

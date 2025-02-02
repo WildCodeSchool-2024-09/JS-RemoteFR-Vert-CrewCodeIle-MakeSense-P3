@@ -36,7 +36,10 @@ type DataFormDecisionType = {
   risk: string;
   min_date: Date;
   max_date: Date;
-  category: string;
+  category_id: string;
+  user_animator_id: number;
+  user_expert_id: number;
+  user_impacted_id: number;
 };
 
 // country

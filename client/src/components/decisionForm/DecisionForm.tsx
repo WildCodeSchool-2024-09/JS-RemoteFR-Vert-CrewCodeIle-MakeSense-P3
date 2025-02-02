@@ -46,7 +46,7 @@ function CreateDecisionForm() {
   const onSubmit = async (data: DataFormDecisionType) => {
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/api/decision`,
+        `${import.meta.env.VITE_API_URL}/api/decisionform`,
         {
           method: "POST",
           headers: {
@@ -194,7 +194,7 @@ function CreateDecisionForm() {
               className={style.select}
               multiple={true}
               size={3}
-              {...register("category", { required: true })}
+              {...register("category_id", { required: true })}
             >
               <option value="">Choisissez une catégorie</option>
               {categories.map((category) => (
@@ -214,7 +214,7 @@ function CreateDecisionForm() {
                 className={style.select}
                 multiple={true}
                 size={3}
-                // {...register("user-expert", { required: true })}
+                {...register("user_expert_id", { required: true })}
               >
                 <option value="">Les experts</option>
                 {users.map((userExpert) => (
@@ -233,7 +233,7 @@ function CreateDecisionForm() {
                 className={style.select}
                 multiple={true}
                 size={3}
-                // {...register("user-impacted", { required: true })}
+                {...register("user_impacted_id", { required: true })}
               >
                 <option value="">Les impactées</option>
                 {users.map((userImpacted) => (
@@ -245,19 +245,19 @@ function CreateDecisionForm() {
             </label>
           </article>
           <article>
-            <label htmlFor="user-impacted" className={style.label}>
+            <label htmlFor="user-animators" className={style.label}>
               Selectionnez les personnes animateurs :
               <select
                 id="user-impacted"
                 className={style.select}
                 multiple={true}
                 size={3}
-                // {...register("user-impacted", { required: true })}
+                {...register("user_animator_id", { required: true })}
               >
                 <option value="">Les animateurs</option>
-                {users.map((userImpacted) => (
-                  <option key={userImpacted.id} value={userImpacted.id}>
-                    {userImpacted.firstname} {userImpacted.lastname}
+                {users.map((userAnimator) => (
+                  <option key={userAnimator.id} value={userAnimator.id}>
+                    {userAnimator.firstname} {userAnimator.lastname}
                   </option>
                 ))}
               </select>
