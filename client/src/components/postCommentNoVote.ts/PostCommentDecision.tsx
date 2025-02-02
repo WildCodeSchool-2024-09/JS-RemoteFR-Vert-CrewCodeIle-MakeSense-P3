@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import type { FieldValues } from "react-hook-form";
 import { toast } from "react-toastify";
 
-export default function PostCommentDecision() {
+export default function PostCommentNoVote() {
   const { register, handleSubmit, reset } = useForm();
   const onSubmit = async (data: FieldValues) => {
     try {
