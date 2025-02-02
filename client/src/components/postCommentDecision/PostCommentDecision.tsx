@@ -18,8 +18,7 @@ export default function PostCommentDecision() {
       );
       await response.json();
       reset();
-      //   console.log(data);
-      toast.success("Demande envoyée à l'administrateur");
+      toast.success("Commentaire envoyé");
     } catch (error) {
       toast.error("Erreur lors de l'envoi...");
       console.error(error);
@@ -37,7 +36,7 @@ export default function PostCommentDecision() {
             {...register("content", { required: "champ obligatoire" })}
           />
         </label>
-        <button type="submit">Poster</button>
+        <button type="submit">Publier</button>
       </form>
     </section>
   );

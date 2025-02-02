@@ -1,3 +1,5 @@
+// user
+
 type UserType = {
   id: number;
   firstname: string;
@@ -16,4 +18,12 @@ type NewUserType = {
   email: string;
   hash_password: string;
   avatar: string;
+};
+
+// comment
+
+type CommentType = {
+  content: string;
+  // user_id: number;
+  // decision_id: number;
 };
