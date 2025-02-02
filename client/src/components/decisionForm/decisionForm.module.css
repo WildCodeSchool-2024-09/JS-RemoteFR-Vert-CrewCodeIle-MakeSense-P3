@@ -18,6 +18,7 @@
   border: 1px solid #b8bcc5;
   border-radius: 8px;
   padding: 1rem;
+  align-items: center;
 }
 
 .logo {
@@ -34,9 +35,9 @@
   justify-content: center;
   text-decoration: underline;
 }
-legend {
-  font-size: 18px;
-  margin-bottom: 10px;
+
+.legend {
+  font-size: 1rem;
   color: var(--color-primary-active);
 }
 /* .section h2 {
@@ -68,7 +69,7 @@ legend {
 }
 .textarea {
   resize: vertical;
-  height: 300px;
+  height: 15rem;
 }
 .section {
   margin-bottom: 60px;
@@ -106,6 +107,12 @@ legend {
 }
 #logo {
   width: 20px;
+}
+
+.users {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
 }
 
 /* style liés aux catégories : */
@@ -150,9 +157,9 @@ legend {
 }
 
 /* style de la grid et autres liés aux Planning: */
-.gridContainer {
+/* .gridContainer {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* Définit 3 colonnes de taille égale */
+  grid-template-columns: repeat(3, 1fr); 
   gap: 20px;
 }
 
@@ -176,9 +183,9 @@ legend {
   font-size: 12px;
   color: #666;
   margin-top: 10px;
-  line-height: 1.4; /* Pour améliorer la lisibilité */
+  line-height: 1.4; Pour améliorer la lisibilité
   font-style: italic;
-}
+} */
 
 /* style lié au bouttons en bas de page ( annuler, et crée la prise de décision): */
 .buttongroup {
@@ -212,6 +219,14 @@ legend {
   .textarea {
     font-size: 16px;
     padding: 15px;
+  }
+
+  .calendar {
+    flex-direction: column;
+  }
+
+  .users {
+    flex-direction: column;
   }
 
   .gridContainer {

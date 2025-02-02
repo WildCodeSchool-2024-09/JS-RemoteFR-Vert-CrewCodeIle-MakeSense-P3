@@ -4,10 +4,18 @@ import { toast } from "react-toastify";
 import AddCategoryForm from "../addCategoryForm/AddCategoryForm";
 import style from "./decisionForm.module.css";
 
+type UserCommentType = {
+  id: number;
+  content: string;
+  firstname: string;
+  lastname: string;
+};
+
 function CreateDecisionForm() {
   const { register, handleSubmit, reset } = useForm<DataFormDecisionType>();
   const [categories, setCategories] = useState([] as CategoryType[]);
   const [countries, setCountries] = useState([] as CountryType[]);
+  const [users, setUsers] = useState([] as UserCommentType[]);
   const min_date_vote = new Date().toISOString().split("T")[0];
 
   useEffect(() => {
@@ -21,6 +29,12 @@ function CreateDecisionForm() {
       .then((response) => response.json())
       .then((data: CategoryType[]) => {
         setCategories(data);
+      })
+      .catch(() => toast.error("Erreur de connexion au serveur"));
+    fetch(`${import.meta.env.VITE_API_URL}/api/user`)
+      .then((response) => response.json())
+      .then((data: UserCommentType[]) => {
+        setUsers(data);
       })
       .catch(() => toast.error("Erreur de connexion au serveur"));
   }, []);
@@ -127,6 +141,10 @@ function CreateDecisionForm() {
         </section>
         <section>
           <article className={style.calendar}>
+            <legend className={style.legend}>
+              La période de prise de décision totale doit être comprise entre 15
+              jours et 90 jours
+            </legend>
             <label htmlFor="min_date" className={style.label}>
               Date de clotûre des votes :
               <input
@@ -187,7 +205,65 @@ function CreateDecisionForm() {
             </select>
           </label>
         </section>
-
+        <section className={style.users}>
+          <article>
+            <label htmlFor="user-expert" className={style.label}>
+              Selectionnez les experts :
+              <select
+                id="user-expert"
+                className={style.select}
+                multiple={true}
+                size={3}
+                // {...register("user-expert", { required: true })}
+              >
+                <option value="">Les experts</option>
+                {users.map((userExpert) => (
+                  <option key={userExpert.id} value={userExpert.id}>
+                    {userExpert.firstname} {userExpert.lastname}
+                  </option>
+                ))}
+              </select>
+            </label>
+          </article>
+          <article>
+            <label htmlFor="user-impacted" className={style.label}>
+              Selectionnez les personnes impactées :
+              <select
+                id="user-impacted"
+                className={style.select}
+                multiple={true}
+                size={3}
+                // {...register("user-impacted", { required: true })}
+              >
+                <option value="">Les impactées</option>
+                {users.map((userImpacted) => (
+                  <option key={userImpacted.id} value={userImpacted.id}>
+                    {userImpacted.firstname} {userImpacted.lastname}
+                  </option>
+                ))}
+              </select>
+            </label>
+          </article>
+          <article>
+            <label htmlFor="user-impacted" className={style.label}>
+              Selectionnez les personnes animateurs :
+              <select
+                id="user-impacted"
+                className={style.select}
+                multiple={true}
+                size={3}
+                // {...register("user-impacted", { required: true })}
+              >
+                <option value="">Les animateurs</option>
+                {users.map((userImpacted) => (
+                  <option key={userImpacted.id} value={userImpacted.id}>
+                    {userImpacted.firstname} {userImpacted.lastname}
+                  </option>
+                ))}
+              </select>
+            </label>
+          </article>
+        </section>
         <section className={style.buttongroup}>
           <button type="button" className={style.canceldButton}>
             Annuler
