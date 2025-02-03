@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import type { FieldValues } from "react-hook-form";
 import { toast } from "react-toastify";
@@ -6,6 +7,7 @@ import style from "./createUserForm.module.css";
 export default function CreateUserForm() {
   const minPassword: number = 8;
   const maxPassword: number = 255;
+  const [countries, setCountries] = useState([]);
 
   const {
     register,
@@ -14,6 +16,14 @@ export default function CreateUserForm() {
     watch,
     formState: { errors },
   } = useForm<FormValues>();
+
+  useEffect(() => {
+    fetch(`${import.meta.env.VITE_API_URL}/api/country`)
+      .then((response) => response.json())
+      .then((data) => {
+        setCountries(data);
+      });
+  }, []);
 
   const onSubmit = async (data: FieldValues) => {
     try {
@@ -26,6 +36,7 @@ export default function CreateUserForm() {
         email: rest.email.toLowerCase(),
         hash_password: rest.hash_password,
         avatar: rest.avatar.toLowerCase(),
+        country_id: rest.country_id,
       };
 
       const response = await fetch(`${import.meta.env.VITE_API_URL}/api/user`, {
@@ -85,6 +96,27 @@ export default function CreateUserForm() {
               })}
             />
             <span className={style.errorText}>{errors.firstname?.message}</span>
+          </label>
+          <label htmlFor="country_id" className={style.label}>
+            Pays
+            <select
+              className={style.select}
+              id="country_id"
+              aria-label="Choisissez une localisation"
+              required
+              {...register("country_id")}
+            >
+              <option value="">Choisissez une localisation</option>
+              {countries.map((country: CountryType) => (
+                <option
+                  key={country.id}
+                  value={country.id}
+                  title={country.label}
+                >
+                  {country.label}
+                </option>
+              ))}
+            </select>
           </label>
           <label htmlFor="hash_password" className={style.label}>
             Mot de passe

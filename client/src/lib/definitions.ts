@@ -7,6 +7,7 @@ type FormValues = {
   hash_password: string;
   confirmed_password: string;
   avatar: string;
+  country_id: number;
 };
 
 // decision
