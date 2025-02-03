@@ -8,6 +8,11 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 // Import the main app component
 import App from "./App";
 import DecisionDetailPage from "./pages/decisionDetailPage/DecisionDetailPage";
+import AllDecision from "./pages/decisionsPage/AllDecisions";
+import ArchivedDecision from "./pages/decisionsPage/ArchivedDecisions";
+import MyDecision from "./pages/decisionsPage/MyDecisions";
+import ParticipatingDecision from "./pages/decisionsPage/ParticipatingDecisions";
+import RunningDecision from "./pages/decisionsPage/RunningDecisions";
 import ErrorPage from "./pages/errorPage/ErrorPage";
 import HomePage from "./pages/homePage/HomePage";
 import RegisterPage from "./pages/registerPage/RegisterPage";
@@ -39,6 +44,26 @@ const router = createBrowserRouter([
       {
         path: "/decisionslist/:id",
         element: <DecisionDetailPage />,
+      },
+      {
+        path: "/participatingdecision",
+        element: <ParticipatingDecision />,
+      },
+      {
+        path: "/mydecision",
+        element: <MyDecision />,
+      },
+      {
+        path: "/runningdecision",
+        element: <RunningDecision />,
+      },
+      {
+        path: "/archiveddecision",
+        element: <ArchivedDecision />,
+      },
+      {
+        path: "/alldecision",
+        element: <AllDecision />,
       },
       {
         path: "*",
