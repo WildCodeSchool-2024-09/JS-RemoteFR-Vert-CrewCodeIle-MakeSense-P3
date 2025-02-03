@@ -4,13 +4,14 @@ import type { Result, Rows } from "../../../database/client";
 class UserRepository {
   async create(user: NewUserType) {
     const [result] = await databaseClient.query<Result>(
-      "INSERT INTO user (firstname, lastname, email, hash_password, avatar) VALUES (?, ?, ?, ?, ?)",
+      "INSERT INTO user (firstname, lastname, email, hash_password, avatar, country_id) VALUES (?, ?, ?, ?, ?, ?)",
       [
         user.firstname,
         user.lastname,
         user.email,
         user.hash_password,
         user.avatar,
+        user.country_id,
       ],
     );
     return [result];
