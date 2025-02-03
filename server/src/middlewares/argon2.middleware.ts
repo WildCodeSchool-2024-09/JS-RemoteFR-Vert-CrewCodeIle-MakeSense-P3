@@ -12,7 +12,6 @@ export const hashPassword: RequestHandler = async (req, res, next) => {
     const newPassword: string = await hashPasswordHelper(hash_password);
     if (newPassword) {
       req.body.hash_password = newPassword;
-
       next();
     }
   } catch (err) {
@@ -22,11 +21,12 @@ export const hashPassword: RequestHandler = async (req, res, next) => {
 
 export const comparePassword: RequestHandler = async (req, res, next) => {
   try {
-    const { hash_password, dbpassword } = req.body;
+    const { newPassword, dbpassword } = req.body;
 
-    const isValid = await verifyPasswordHelper(hash_password, dbpassword);
-
+    const isValid = await verifyPasswordHelper(newPassword, dbpassword);
     if (!isValid) {
+      req.body.dbpassword = undefined;
+
       res.status(403).json({
         message: "Le couple email / mot de passe est incorrect.",
       });

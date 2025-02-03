@@ -10,7 +10,7 @@ import DecisionRoute from "./routes/decision.route";
 import UserRoute from "./routes/user.route";
 
 router.use("/", UserRoute);
-router.use("/auth", AuthRoute);
+router.use("/", AuthRoute);
 router.use("/", DecisionRoute);
 
 /* ************************************************************************* */

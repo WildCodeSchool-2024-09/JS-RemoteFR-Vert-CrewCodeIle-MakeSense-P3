@@ -23,20 +23,22 @@ export default function LoginForm() {
         hash_password,
       };
 
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/auth`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/auth`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(loginData),
       });
-      const result = await response.json();
-
-      if (!response.ok) {
-        throw new Error(result.message || "Erreur de connexion");
+      if (response.ok) {
+        reset();
+        toast.success("Décision envoyée à l'administrateur");
+      } else {
+        toast.error("Erreur lors de l'envoi de la décision");
       }
-      reset();
-      toast.success("Connexion réussie !");
+      // await response.json();
+      // reset();
+      // toast.success("Connexion réussie !");
     } catch (error) {
       toast.error("Erreur de connexion. Vérifiez vos identifiants.");
     } finally {

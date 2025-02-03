@@ -9,7 +9,6 @@ export const getUserByEmail: RequestHandler = async (
   try {
     const { email } = req.body;
     const user: UserType | null = await userRepository.readByEmail(email);
-
     if (!email) {
       res.status(400).json({
         message: "Le champ email est requis.",
