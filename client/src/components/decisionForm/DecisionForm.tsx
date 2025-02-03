@@ -39,10 +39,6 @@ function CreateDecisionForm() {
       .catch(() => toast.error("Erreur de connexion au serveur"));
   }, []);
 
-  // const handleCategoryAdded = (newCategory) => {
-  //   setCategories((prev) => [...prev, newCategory]);
-  // };
-
   const onSubmit = async (data: DataFormDecisionType) => {
     try {
       const response = await fetch(
@@ -54,8 +50,8 @@ function CreateDecisionForm() {
           },
           body: JSON.stringify(data),
         },
+        // console.log(data),
       );
-      // console.log(data);
       if (response.ok) {
         reset();
         toast.success("Décision envoyée à l'administrateur");

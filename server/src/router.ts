@@ -5,27 +5,22 @@ const router = express.Router();
 /* ************************************************************************* */
 // Define Your API Routes Here
 
+import CategoryRoute from "./routes/category.route";
+import CountryRoute from "./routes/country.route";
+import DecisionRoute from "./routes/decision.route";
+import RoleRoute from "./routes/role.route";
 import UserRoute from "./routes/user.route";
+import VoteRoute from "./routes/vote.route";
 
 router.use("/", UserRoute);
 
-import CountryRoute from "./routes/country.route";
-
 router.use("/", CountryRoute);
-
-import RoleRoute from "./routes/role.route";
 
 router.use("/", RoleRoute);
 
-import VoteRoute from "./routes/vote.route";
-
 router.use("/", VoteRoute);
 
-import CategoryRoute from "./routes/category.route";
-
 router.use("/", CategoryRoute);
-
-import DecisionRoute from "./routes/decision.route";
 
 router.use("/", DecisionRoute);
 /* ************************************************************************* */
