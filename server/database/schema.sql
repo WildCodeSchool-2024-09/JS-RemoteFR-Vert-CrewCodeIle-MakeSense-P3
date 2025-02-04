@@ -97,5 +97,3 @@ FOREIGN KEY (decision_id) REFERENCES decision(id)
 
 INSERT INTO role (id,label) VALUES (1, 'applicant'), (2, 'user'), (3, 'administrator'), (4, 'rejected');
 INSERT INTO country (id,label) VALUES (1, 'France'), (2, 'Mexique'), (3, 'Canada'), (4, 'Pérou'), (5, 'Sénégal'), (6, 'Philippines'), (7, 'Liban'), (8, 'Cote d''Ivoire'), (9, 'Australie'), (10, 'Ukraine');
-
-INSERT INTO user (firstname, lastname, email, hash_password, avatar, country_id) VALUES ('damien', 'baczkiewicz', 'damien@karnott.fr', '$argon2id$v=19$m=19456,t=2,p=1$CwNq3yki3uG6bXP2LJyxfA$r+jUStDW3wYwB5jbLx/aEO4DKP+yqHGmY/6ugmliUlw', 'v', '1');

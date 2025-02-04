@@ -25,5 +25,7 @@ export const getUserByEmail: RequestHandler = async (
     req.body.dbpassword = user.hash_password;
 
     next();
-  } catch (e) {}
+  } catch (e) {
+    next(e);
+  }
 };
