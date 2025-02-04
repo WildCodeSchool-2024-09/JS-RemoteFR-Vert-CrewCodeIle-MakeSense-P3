@@ -27,3 +27,9 @@ type CountryType = {
   id: number;
   label: string;
 };
+
+type CommentType = {
+  content: string;
+  firstname: string;
+  lastname: string;
+};

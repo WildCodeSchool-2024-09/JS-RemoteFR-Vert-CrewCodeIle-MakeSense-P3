@@ -1,12 +1,6 @@
 import { useEffect, useState } from "react";
 import style from "./commentsList.module.css";
 
-type CommentType = {
-  content: string;
-  firstname: string;
-  lastname: string;
-};
-
 export default function CommentsList({ id }: { id: string }) {
   const [comments, setComments] = useState<CommentType[]>([]);
 

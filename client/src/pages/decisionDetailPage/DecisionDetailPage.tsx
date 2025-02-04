@@ -1,4 +1,5 @@
 import { useParams } from "react-router-dom";
+// import AnimatorsList from "../../components/animatorsList/AnimatorsList";
 import CommentsList from "../../components/commentsList/CommentsList";
 import DecisionDetail from "../../components/decisionDetail/DecisionDetail";
 import NavBar from "../../components/navBar/NavBar";
@@ -17,6 +18,7 @@ export default function DecisionDetailPage() {
       <DecisionDetail id={id} />
       <PostCommentDecision id={id} />
       <CommentsList id={id} />
+      {/* <AnimatorsList id={id} /> */}
     </div>
   );
 }
