@@ -1,6 +1,6 @@
 import type { RequestHandler } from "express";
-import commentRepository from "./commentRepository";
 import Joi from "joi";
+import commentRepository from "./commentRepository";
 
 const add: RequestHandler = async (req, res, next) => {
   try {
