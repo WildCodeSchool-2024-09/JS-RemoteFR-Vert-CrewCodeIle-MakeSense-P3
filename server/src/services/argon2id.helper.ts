@@ -6,6 +6,13 @@ const hashingOptions = {
   parallelism: 1,
 };
 
-export const hashPasswordHelper = async (password: string) => {
-  return await argon2.hash(password, hashingOptions);
+export const hashPasswordHelper = async (hash_password: string) => {
+  return await argon2.hash(hash_password, hashingOptions);
+};
+
+export const verifyPasswordHelper = async (
+  dbpassword: string,
+  hash_password: string,
+) => {
+  return await argon2.verify(dbpassword, hash_password);
 };
