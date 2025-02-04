@@ -53,7 +53,7 @@ function CreateDecisionForm() {
         toast.error("Erreur lors de l'envoi de la décision");
       }
     } catch (error) {
-      toast.error("Erreur de connexion au serveur");
+      toast.error("Erreur de connexion au serveur...");
     }
   };
 
