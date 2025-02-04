@@ -4,8 +4,8 @@ import type { Result, Rows } from "../../../database/client";
 class CommentRepository {
   async create(comment: CommentType) {
     const [result] = await databaseClient.query<Result>(
-      "INSERT INTO comment(content, user_id, decision_id) VALUES (?,2,2)",
-      [comment.content],
+      "INSERT INTO comment(content, user_id, decision_id) VALUES (?,2,?)",
+      [comment.content, comment.decision_id],
     );
     return result.insertId;
   }

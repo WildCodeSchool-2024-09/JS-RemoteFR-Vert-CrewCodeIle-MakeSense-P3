@@ -25,5 +25,5 @@ type NewUserType = {
 type CommentType = {
   content: string;
   // user_id: number;
-  // decision_id: number;
+  decision_id: number;
 };

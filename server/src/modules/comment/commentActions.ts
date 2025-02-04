@@ -6,7 +6,7 @@ const add: RequestHandler = async (req, res, next) => {
     const newComment = {
       content: req.body.content,
       user_id: req.body.user_id,
-      decision_id: req.body.decision_id,
+      decision_id: req.body.id,
     };
     const insertId = await commentRepository.create(newComment);
     res.status(201).json({ insertId });
