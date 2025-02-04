@@ -58,15 +58,10 @@ function CreateDecisionForm() {
   };
 
   return (
-    <section className={style.decisioncontainer}>
+    <section className={style.decisionContainer}>
       <section className={style.logo_exit}>
         <NavLink to={"/homepage"}>
-          <img
-            id="logo"
-            src="/intrasenselogo.png"
-            alt="logo"
-            className={style.logo}
-          />
+          <img src="/intrasenselogo.png" alt="logo" className={style.logo} />
         </NavLink>
       </section>
       <h2 className={style.titleH2}>Création d'une décision</h2>
