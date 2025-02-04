@@ -4,7 +4,14 @@ import userRepository from "./userRepository";
 
 const add: RequestHandler = async (req, res, next) => {
   try {
-    const { firstname, lastname, email, hash_password, avatar } = req.body;
+    const user = {
+      firstname: req.body.firstname,
+      lastname: req.body.lastname,
+      email: req.body.email,
+      hash_password: req.body.hash_password,
+      avatar: req.body.avatar,
+      country_id: Number.parseInt(req.body.country_id),
+    };
 
     const insertId = await userRepository.create(req.body);
 
@@ -32,6 +39,7 @@ const validateData: RequestHandler = async (req, res, next) => {
       ),
     email: Joi.string().max(155).required(),
     avatar: Joi.string().max(255).required(),
+    country_id: Joi.number().required(),
   });
 
   const { error } = dataSchema.validate(req.body, { abortEarly: false });
