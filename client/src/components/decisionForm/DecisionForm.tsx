@@ -1,21 +1,15 @@
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { NavLink } from "react-router-dom";
 import { toast } from "react-toastify";
 import AddCategoryForm from "../addCategoryForm/AddCategoryForm";
 import style from "./decisionForm.module.css";
-
-type UserCommentType = {
-  id: number;
-  content: string;
-  firstname: string;
-  lastname: string;
-};
 
 function CreateDecisionForm() {
   const { register, handleSubmit, reset } = useForm<DataFormDecisionType>();
   const [categories, setCategories] = useState([] as CategoryType[]);
   const [countries, setCountries] = useState([] as CountryType[]);
-  const [users, setUsers] = useState([] as UserCommentType[]);
+  const [users, setUsers] = useState([] as UserType[]);
   const min_date_vote = new Date().toISOString().split("T")[0];
 
   useEffect(() => {
@@ -33,7 +27,7 @@ function CreateDecisionForm() {
       .catch(() => toast.error("Erreur de connexion au serveur"));
     fetch(`${import.meta.env.VITE_API_URL}/api/user`)
       .then((response) => response.json())
-      .then((data: UserCommentType[]) => {
+      .then((data: UserType[]) => {
         setUsers(data);
       })
       .catch(() => toast.error("Erreur de connexion au serveur"));
@@ -50,8 +44,8 @@ function CreateDecisionForm() {
           },
           body: JSON.stringify(data),
         },
-        // console.log(data),
       );
+
       if (response.ok) {
         reset();
         toast.success("Décision envoyée à l'administrateur");
@@ -66,17 +60,15 @@ function CreateDecisionForm() {
   return (
     <section className={style.decisioncontainer}>
       <section className={style.logo_exit}>
-        <img
-          id="logo"
-          src="/intrasenselogo.png"
-          alt="logo"
-          className={style.logo}
-        />
-        {/* <button type="button" className={style.exitButton}>
-          ✖
-        </button> */}
+        <NavLink to={"/homepage"}>
+          <img
+            id="logo"
+            src="/intrasenselogo.png"
+            alt="logo"
+            className={style.logo}
+          />
+        </NavLink>
       </section>
-
       <h2 className={style.titleH2}>Création d'une décision</h2>
       <form onSubmit={handleSubmit(onSubmit)} className={style.form}>
         <section>
@@ -136,34 +128,37 @@ function CreateDecisionForm() {
           </label>
         </section>
         <section>
-          <article className={style.calendar}>
-            <legend className={style.legend}>
-              La période de prise de décision totale doit être comprise entre 15
-              jours et 90 jours
-            </legend>
-            <label htmlFor="min_date" className={style.label}>
-              Date de clotûre des votes :
-              <input
-                type="date"
-                id="min_date"
-                className={style.input}
-                min={min_date_vote}
-                required
-                {...register("min_date")}
-              />
-            </label>
-            <label htmlFor="max_date" className={style.label}>
-              Date définitive de la décision :
-              <input
-                type="date"
-                id="max_date"
-                className={style.input}
-                min={min_date_vote}
-                required
-                {...register("max_date")}
-              />
-            </label>
-          </article>
+          <label className={style.label}>
+            Le planning :
+            <article className={style.calendar}>
+              <legend className={style.legend}>
+                La période de prise de décision totale doit être comprise entre
+                15 jours et 90 jours
+              </legend>
+              <label htmlFor="min_date" className={style.label}>
+                Date de clotûre des votes :
+                <input
+                  type="date"
+                  id="min_date"
+                  className={style.input}
+                  min={min_date_vote}
+                  required
+                  {...register("min_date")}
+                />
+              </label>
+              <label htmlFor="max_date" className={style.label}>
+                Date définitive de la décision :
+                <input
+                  type="date"
+                  id="max_date"
+                  className={style.input}
+                  min={min_date_vote}
+                  required
+                  {...register("max_date")}
+                />
+              </label>
+            </article>
+          </label>
         </section>
         <section>
           <label htmlFor="country_id" className={style.label}>
@@ -201,6 +196,7 @@ function CreateDecisionForm() {
             </select>
           </label>
         </section>
+
         <section className={style.users}>
           <article>
             <label htmlFor="user-expert" className={style.label}>
@@ -261,9 +257,11 @@ function CreateDecisionForm() {
           </article>
         </section>
         <section className={style.buttongroup}>
-          <button type="button" className={style.canceldButton}>
-            Annuler
-          </button>
+          <NavLink to={"/homepage"}>
+            <button type="button" className={style.canceldButton}>
+              Annuler
+            </button>
+          </NavLink>
           <button type="submit" className={style.addDecisionButton}>
             Ajouter une décision
           </button>

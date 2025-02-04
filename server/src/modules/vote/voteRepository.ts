@@ -1,13 +1,6 @@
 import DatabaseClient from "../../../database/client";
 import type { Result, Rows } from "../../../database/client";
 
-type Vote = {
-  id: number;
-  comment: string;
-  state: boolean;
-  user_id: string;
-};
-
 //CREATE vote
 class VoteRepository {
   async create(vote: Omit<Vote, "id">) {

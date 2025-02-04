@@ -10,11 +10,8 @@ router.post(
 );
 
 router.get("/api/category", categoryActions.browse);
-
 router.get("/api/category/:id", categoryActions.read);
-
 router.put("/api/category/:id", categoryActions.edit);
-
 router.delete("/api/category/:id", categoryActions.destroy);
 
 export default router;

@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom";
 import NavBar from "../../components/navBar/NavBar";
 import style from "./homePage.module.css";
 
@@ -6,9 +7,11 @@ export default function HomePage() {
     <div>
       <NavBar />
       <main className={style.main}>
-        <button type="button" className={style.buttonCreateDecision}>
-          Créer une prise de décision
-        </button>
+        <NavLink to={"/decisionformpage"}>
+          <button type="button" className={style.buttonCreateDecision}>
+            Créer une prise de décision
+          </button>
+        </NavLink>
         <section className={style.section}>
           <h2 className={style.titleH2}>Les décisions où je participe</h2>
           <div className={style.cardsContainer}>

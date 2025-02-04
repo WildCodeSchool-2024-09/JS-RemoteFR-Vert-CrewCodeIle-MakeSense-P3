@@ -1,8 +1,5 @@
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
-import style from "./addCategoryForm.module.css";
-
-/*double type à revérifier*/
 
 function AddCategoryForm() {
   const { register, handleSubmit, reset } = useForm<FormValuesCategory>();
@@ -21,7 +18,7 @@ function AddCategoryForm() {
       );
       if (response.ok) {
         reset();
-        toast.success("Décision envoyée à l'administrateur");
+        toast.success("Catégorie ajoutée");
       } else {
         toast.error("Erreur lors de l'envoi...");
       }
@@ -31,9 +28,9 @@ function AddCategoryForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className={style.addCategory}>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <label htmlFor="label"> Ajoutez une nouvelle catégorie: </label>
-      <article className={style.addCategoryContainer}>
+      <article>
         <input
           type="text"
           id="label"
@@ -44,9 +41,7 @@ function AddCategoryForm() {
             maxLength: { value: 50, message: "Maximum 50 caractères" },
           })}
         />
-        <button type="submit" className={style.addButton}>
-          ➕
-        </button>
+        <button type="submit">➕</button>
       </article>
     </form>
   );

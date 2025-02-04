@@ -1,11 +1,6 @@
 import DatabaseClient from "../../../database/client";
 import type { Result, Rows } from "../../../database/client";
 
-type Category = {
-  id: number;
-  label: string;
-  // color: string;
-};
 class CategoryRepository {
   async create(category: Omit<Category, "id">) {
     const [result] = await DatabaseClient.query<Result>(
@@ -43,8 +38,7 @@ class CategoryRepository {
   async update(category: Category) {
     const [result] = await DatabaseClient.query<Result>(
       "UPDATE category SET label = ?, color = ? WHERE id = ?",
-      // [category.label, category.color, category.id],
-      [category.label, category.id],
+      [category.label, category.color, category.id],
     );
 
     return result.affectedRows;

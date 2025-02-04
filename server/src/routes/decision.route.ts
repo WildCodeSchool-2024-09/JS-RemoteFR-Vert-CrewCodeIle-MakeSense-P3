@@ -8,13 +8,12 @@ const router = express.Router();
 router.get("/api/decision/:id", decisionActions.read);
 router.post(
   "/api/decisionform",
+  decisionActions.validateDataDecisionForm,
   decisionActions.addDecision,
   decisionCategoryActions.addDecisionCategory,
   userDecisionActions.addUserDecisionAnimator,
   userDecisionActions.addUserDecisionExpert,
   userDecisionActions.addUserDecisionImpacted,
 );
-
-// router.post("/api/decisionToto", decisionActions.addToto, categoryActions.add);
 
 export default router;

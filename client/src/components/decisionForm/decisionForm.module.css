@@ -1,7 +1,7 @@
 /* style des éléments de haut de page: */
-.logo_exit {
-  flex-direction: row;
-  justify-content: space-between;
+
+.exitButton {
+  margin: 0.5rem;
 }
 
 .form {
@@ -40,18 +40,9 @@
   font-size: 1rem;
   color: var(--color-primary-active);
 }
-/* .section h2 {
-  font-size: 18px;
-  margin-bottom: 10px;
-} */
-
-/* général: */
-/* .section {
-  margin-bottom: 30px;
-} */
 
 .label {
-  font-size: 1em;
+  font-size: 1.2rem;
   display: block;
   margin-bottom: 5px;
   color: #196c84;
@@ -84,7 +75,6 @@
 }
 .exitButton {
   background-color: white;
-
   padding: 10px;
   cursor: pointer;
   border-radius: 5px;
@@ -112,80 +102,11 @@
 .users {
   display: flex;
   gap: 2rem;
-  justify-content: center;
+  justify-content: space-between;
+  padding: 2rem;
+  border: 1px solid #b8bcc5;
+  border-radius: 8px;
 }
-
-/* style liés aux catégories : */
-
-.addCategory {
-  margin-bottom: 20px;
-}
-.addCategoryContainer {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-/* .addCategoryContainer input{
-  flex:1;
-  /* input prend toute la taille disponible */
-
-.addPlaceContainer {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.addCategoryContainer button {
-  padding: 10px;
-  cursor: pointer;
-  border-radius: 5px;
-  color: black;
-  background-color: #fff30d;
-}
-.addCategoryContainer button:hover {
-  background-color: #9b084f;
-}
-.addPlaceButton {
-  padding: 10px;
-  cursor: pointer;
-  border-radius: 5px;
-  color: black;
-  background-color: #fff30d;
-}
-.addPlaceContainer button:hover {
-  background-color: #9b084f;
-}
-
-/* style de la grid et autres liés aux Planning: */
-/* .gridContainer {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr); 
-  gap: 20px;
-}
-
-.gridContainer article {
-  display: flex;
-  flex-direction: column;
-}
-
-.gridContainer label {
-  margin-bottom: 5px;
-  font-weight: bold;
-}
-
-.gridContainer input {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-.remarqueNb {
-  font-size: 12px;
-  color: #666;
-  margin-top: 10px;
-  line-height: 1.4; Pour améliorer la lisibilité
-  font-style: italic;
-} */
 
 /* style lié au bouttons en bas de page ( annuler, et crée la prise de décision): */
 .buttongroup {
@@ -200,6 +121,11 @@
     max-width: 800px;
     padding: 40px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .logo {
+    margin: 1em;
+    width: 50%;
   }
 
   .form {
@@ -227,9 +153,5 @@
 
   .users {
     flex-direction: column;
-  }
-
-  .gridContainer {
-    grid-template-columns: repeat(1, 1fr); /* 1 colonne sur les petits écrans */
   }
 }

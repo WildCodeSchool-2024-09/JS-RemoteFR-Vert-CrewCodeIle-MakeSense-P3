@@ -1,4 +1,10 @@
 // user
+type UserType = {
+  id: number;
+  content: string;
+  firstname: string;
+  lastname: string;
+};
 
 type FormValues = {
   firstname: string;
