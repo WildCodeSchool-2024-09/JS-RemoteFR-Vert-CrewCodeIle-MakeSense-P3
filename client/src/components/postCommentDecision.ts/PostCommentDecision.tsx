@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import type { FieldValues } from "react-hook-form";
 import { toast } from "react-toastify";
+import style from "./postCommentDecision.module.css";
 
 export default function PostCommentDecision({ id }: { id: string }) {
   const { register, handleSubmit, reset } = useForm();
@@ -30,7 +31,7 @@ export default function PostCommentDecision({ id }: { id: string }) {
   return (
     <section>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <label>
+        <label className={style.label}>
           Postez votre commentaire
           <input
             type="textarea"

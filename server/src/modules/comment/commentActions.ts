@@ -1,5 +1,6 @@
 import type { RequestHandler } from "express";
 import commentRepository from "./commentRepository";
+import Joi from "joi";
 
 const add: RequestHandler = async (req, res, next) => {
   try {
@@ -30,4 +31,18 @@ const readComments: RequestHandler = async (req, res, next) => {
   }
 };
 
-export default { add, readComments };
+const validateDataForm: RequestHandler = async (req, res, next) => {
+  const dataSchema = Joi.object({
+    content: Joi.string().required(),
+    id: Joi.number().required(),
+  });
+
+  const { error } = dataSchema.validate(req.body, { abortEarly: false });
+  if (error == null) {
+    next();
+  } else {
+    res.status(400).json({ validationErrors: error.details });
+  }
+};
+
+export default { add, readComments, validateDataForm };
