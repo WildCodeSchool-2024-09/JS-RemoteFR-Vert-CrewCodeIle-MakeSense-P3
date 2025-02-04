@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useForm } from "react-hook-form";
 import type { FieldValues } from "react-hook-form";
 import { toast } from "react-toastify";
@@ -11,10 +10,8 @@ export default function LoginForm() {
     reset,
     formState: { errors },
   } = useForm<FieldValues>();
-  const [isLoading, setIsLoading] = useState(false);
 
   const onSubmit = async (data: FieldValues) => {
-    setIsLoading(true);
     try {
       const { email, hash_password } = data;
 
@@ -36,13 +33,8 @@ export default function LoginForm() {
       } else {
         toast.error("Erreur lors de l'envoi de la décision");
       }
-      // await response.json();
-      // reset();
-      // toast.success("Connexion réussie !");
     } catch (error) {
       toast.error("Erreur de connexion. Vérifiez vos identifiants.");
-    } finally {
-      setIsLoading(false);
     }
   };
 
@@ -93,12 +85,8 @@ export default function LoginForm() {
             </span>
           </label>
 
-          <button
-            type="submit"
-            className={style.buttonLogin}
-            disabled={isLoading}
-          >
-            {isLoading ? "Chargement..." : "Se connecter"}
+          <button type="submit" className={style.buttonLogin}>
+            Login
           </button>
         </section>
       </form>

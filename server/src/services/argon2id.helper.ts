@@ -11,8 +11,8 @@ export const hashPasswordHelper = async (hash_password: string) => {
 };
 
 export const verifyPasswordHelper = async (
-  newPassword: string,
   dbpassword: string,
+  hash_password: string,
 ) => {
-  return await argon2.verify(newPassword, dbpassword);
+  return await argon2.verify(dbpassword, hash_password);
 };

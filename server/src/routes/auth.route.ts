@@ -8,6 +8,6 @@ import { login } from "../modules/auth/authActions";
 
 const router = express.Router();
 
-router.post("/api/auth", getUserByEmail, hashPassword, comparePassword, login);
+router.post("/api/auth", getUserByEmail, comparePassword, login);
 
 export default router;
