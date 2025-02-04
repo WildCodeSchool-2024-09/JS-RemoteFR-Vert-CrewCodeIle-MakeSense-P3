@@ -27,11 +27,12 @@ export default function LoginForm() {
         },
         body: JSON.stringify(loginData),
       });
+      const result = await response.json();
       if (response.ok) {
         reset();
-        toast.success("Décision envoyée à l'administrateur");
+        toast.success(result.message || "Connexion réussie !");
       } else {
-        toast.error("Erreur lors de l'envoi de la décision");
+        toast.error(result.message || "Erreur lors de la connexion");
       }
     } catch (error) {
       toast.error("Erreur de connexion. Vérifiez vos identifiants.");
