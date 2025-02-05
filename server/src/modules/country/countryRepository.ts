@@ -1,6 +1,11 @@
 import DatabaseClient from "../../../database/client";
 import type { Result, Rows } from "../../../database/client";
 
+type Country = {
+  id: number;
+  label: string;
+};
+
 //CREATE country
 class CountryRepository {
   async create(country: Omit<Country, "id">) {

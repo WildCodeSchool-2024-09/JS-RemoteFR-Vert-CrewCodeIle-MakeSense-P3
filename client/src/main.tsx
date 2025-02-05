@@ -8,6 +8,7 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 // Import the main app component
 import App from "./App";
 import DecisionDetailPage from "./pages/decisionDetailPage/DecisionDetailPage";
+import DecisionFormPage from "./pages/decisionFormPage/DecisionFormPage";
 import ErrorPage from "./pages/errorPage/ErrorPage";
 import HomePage from "./pages/homePage/HomePage";
 import Loginpage from "./pages/loginPage/LoginPage";
@@ -48,6 +49,10 @@ const router = createBrowserRouter([
       {
         path: "/login",
         element: <Loginpage />,
+      },
+      {
+        path: "/decisionformpage",
+        element: <DecisionFormPage />,
       },
     ],
   },

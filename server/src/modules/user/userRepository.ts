@@ -17,6 +17,11 @@ class UserRepository {
     return [result];
   }
 
+  async readAll() {
+    const [rows] = await databaseClient.query<Rows>("SELECT * FROM user");
+    return rows as UserType[];
+  }
+
   async checkUniqueEmail(userEmail: string) {
     const [rows] = await databaseClient.query<Rows>(
       "SELECT * FROM user WHERE email= ?",

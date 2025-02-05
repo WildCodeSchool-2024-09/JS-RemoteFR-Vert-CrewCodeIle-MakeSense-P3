@@ -1,3 +1,4 @@
+// user
 type UserType = {
   id: number;
   firstname: string;
@@ -20,7 +21,23 @@ type NewUserType = {
   country_id: string;
 };
 
+// country
 type Country = {
   id: number;
   label: string;
+};
+
+// category
+type Category = {
+  id: number;
+  label: string;
+  color: string;
+};
+
+//vote
+type Vote = {
+  id: number;
+  comment: string;
+  state: boolean;
+  user_id: string;
 };
