@@ -1,10 +1,10 @@
 import { useParams } from "react-router-dom";
 
+// import AnimatorsList from "../../components/animatorsList/AnimatorsList";
 import CommentsList from "../../components/commentsList/CommentsList";
 import DecisionDetail from "../../components/decisionDetail/DecisionDetail";
 import NavBar from "../../components/navBar/NavBar";
 import PostCommentDecision from "../../components/postCommentDecision.ts/PostCommentDecision";
-import AnimatorsList from "../../components/animatorsList/AnimatorsList";
 
 export default function DecisionDetailPage() {
   const { id } = useParams<string>();
@@ -19,7 +19,7 @@ export default function DecisionDetailPage() {
       <DecisionDetail id={id} />
       <PostCommentDecision id={id} />
       <CommentsList id={id} />
-      <AnimatorsList id={id} />
+      {/* <AnimatorsList id={id} /> */}
     </div>
   );
 }
