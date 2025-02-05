@@ -33,3 +33,17 @@ type CommentType = {
   firstname: string;
   lastname: string;
 };
+
+type DataUserType = {
+  avatar: string;
+  country_id: number;
+  decision_id: number;
+  email: string;
+  firstname: string;
+  hash_password: string;
+  id: number;
+  lastname: string;
+  role: string;
+  role_id: number;
+  user_id: number;
+};
