@@ -8,11 +8,11 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 // Import the main app component
 import App from "./App";
 import DecisionDetailPage from "./pages/decisionDetailPage/DecisionDetailPage";
-import AllDecision from "./pages/decisionsPage/AllDecisions";
-import ArchivedDecision from "./pages/decisionsPage/ArchivedDecisions";
-import MyDecision from "./pages/decisionsPage/MyDecisions";
-import ParticipatingDecision from "./pages/decisionsPage/ParticipatingDecisions";
-import RunningDecision from "./pages/decisionsPage/RunningDecisions";
+import AllDecisionPage from "./pages/decisionsPage/AllDecisionsPage";
+import ArchivedDecisionPage from "./pages/decisionsPage/ArchivedDecisionsPage";
+import MyDecisionPage from "./pages/decisionsPage/MyDecisionsPage";
+import ParticipatingDecisionPage from "./pages/decisionsPage/ParticipatingDecisionsPage";
+import RunningDecisionPage from "./pages/decisionsPage/RunningDecisionsPage";
 import ErrorPage from "./pages/errorPage/ErrorPage";
 import HomePage from "./pages/homePage/HomePage";
 import RegisterPage from "./pages/registerPage/RegisterPage";
@@ -47,23 +47,23 @@ const router = createBrowserRouter([
       },
       {
         path: "/participatingdecision",
-        element: <ParticipatingDecision />,
+        element: <ParticipatingDecisionPage />,
       },
       {
         path: "/mydecision",
-        element: <MyDecision />,
+        element: <MyDecisionPage />,
       },
       {
         path: "/runningdecision",
-        element: <RunningDecision />,
+        element: <RunningDecisionPage />,
       },
       {
         path: "/archiveddecision",
-        element: <ArchivedDecision />,
+        element: <ArchivedDecisionPage />,
       },
       {
         path: "/alldecision",
-        element: <AllDecision />,
+        element: <AllDecisionPage />,
       },
       {
         path: "*",

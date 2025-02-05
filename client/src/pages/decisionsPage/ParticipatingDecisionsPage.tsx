@@ -1,7 +1,7 @@
 import NavBar from "../../components/navBar/NavBar";
 import style from "./decisions.module.css";
 
-export default function RunningDecision() {
+export default function ParticipatingDecisionPage() {
   return (
     <div>
       <NavBar />
@@ -10,9 +10,9 @@ export default function RunningDecision() {
           Créer une prise de décision
         </button>
         <section>
-          <h2>Les décisions en cours</h2>
+          <h2>Les décisions où je participe</h2>
           <div className={style.cardsContainer}>
-            cards : Les décisions en cours
+            cards : Les décisions où je participe
           </div>
         </section>
         <button type="button" className={style.buttonScrollToTop}>
