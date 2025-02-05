@@ -5,6 +5,7 @@ type FormValues = {
   hash_password: string;
   confirmed_password: string;
   avatar: string;
+  country_id: number;
 };
 
 type DecisionDetailType = {
@@ -20,6 +21,11 @@ type DecisionDetailType = {
   country: string;
   lastname: string;
   firstname: string;
+};
+
+type CountryType = {
+  id: number;
+  label: string;
 };
 
 type Decision = {
