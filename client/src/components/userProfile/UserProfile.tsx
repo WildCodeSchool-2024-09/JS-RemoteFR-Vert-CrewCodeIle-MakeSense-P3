@@ -1,6 +1,6 @@
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
-import { useEffect, useState } from "react";
 import styles from "./userProfile.module.css";
 
 export default function UserProfile() {
