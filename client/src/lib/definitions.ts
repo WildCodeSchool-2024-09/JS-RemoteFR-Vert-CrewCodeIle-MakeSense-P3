@@ -27,3 +27,15 @@ type CountryType = {
   id: number;
   label: string;
 };
+
+type ProfileFormValues = {
+  firstname: string;
+  lastname: string;
+  email: string;
+  avatar?: string;
+};
+
+type PasswordFormValues = {
+  hash_password: string;
+  confirmed_password: string;
+};
