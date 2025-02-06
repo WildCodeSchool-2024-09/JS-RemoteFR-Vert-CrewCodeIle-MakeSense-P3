@@ -63,5 +63,19 @@ const checkEmail: RequestHandler = async (req, res, next) => {
     next(e);
   }
 };
+const read: RequestHandler = async (req, res, next) => {
+  try {
+    const userId = Number.parseInt(req.params.id);
+    const user = await userRepository.read(userId);
 
-export default { add, validateData, checkEmail };
+    if (user == null) {
+      res.sendStatus(404);
+    } else {
+      res.json(user);
+    }
+  } catch (err) {
+    next(err);
+  }
+};
+
+export default { add, validateData, checkEmail, read };

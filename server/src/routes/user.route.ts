@@ -11,5 +11,6 @@ router.post(
   userActions.checkEmail,
   userActions.add,
 );
+router.get("/api/user", userActions.read); // pour lire la country de user
 
 export default router;

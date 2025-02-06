@@ -16,6 +16,15 @@ class DecisionRepository {
     );
     return rows[0];
   }
+  // action read country
+  async readCountryAndDates(decisionId: number) {
+    const [rows] = await databaseClient.query<Rows>(
+      `SELECT decision.country_id AS country_id, decision.min_date AS min_date, decision.created_at AS created_at FROM decision
+      WHERE decision.id=?`,
+      [decisionId],
+    );
+    return rows[0];
+  }
 }
 
 export default new DecisionRepository();

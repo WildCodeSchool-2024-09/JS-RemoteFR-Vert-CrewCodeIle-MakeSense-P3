@@ -24,6 +24,14 @@ class UserRepository {
     );
     return rows as UserType[];
   }
+  async read(userId: number) {
+    const [rows] = await databaseClient.query<Rows>(
+      `SELECT user.country_id AS country_id FROM user
+      WHERE user.id=?`,
+      [userId],
+    );
+    return rows[0];
+  }
 }
 
 export default new UserRepository();

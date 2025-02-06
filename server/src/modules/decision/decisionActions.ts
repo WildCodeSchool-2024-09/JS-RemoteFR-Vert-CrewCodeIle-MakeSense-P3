@@ -15,5 +15,19 @@ const read: RequestHandler = async (req, res, next) => {
     next(err);
   }
 };
+const readCountryAndMaxDate: RequestHandler = async (req, res, next) => {
+  try {
+    const decisionId = Number.parseInt(req.params.id);
+    const decision = await decisionRepository.readCountryAndDates(decisionId);
 
-export default { read };
+    if (decision == null) {
+      res.sendStatus(404);
+    } else {
+      res.json(decision);
+    }
+  } catch (err) {
+    next(err);
+  }
+};
+
+export default { read, readCountryAndMaxDate };
