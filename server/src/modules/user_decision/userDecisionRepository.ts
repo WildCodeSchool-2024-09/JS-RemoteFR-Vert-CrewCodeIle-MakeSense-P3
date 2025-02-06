@@ -7,7 +7,7 @@ type UserDecisionType = {
   role: string;
 };
 
-class UserDecisonRepository {
+class UserDecisionRepository {
   async create(userDecision: UserDecisionType) {
     const [result] = await databaseClient.query<Result>(
       `INSERT INTO user_decision (decision_id, user_id, role) 
@@ -17,4 +17,4 @@ class UserDecisonRepository {
     return [result];
   }
 }
-export default new UserDecisonRepository();
+export default new UserDecisionRepository();
