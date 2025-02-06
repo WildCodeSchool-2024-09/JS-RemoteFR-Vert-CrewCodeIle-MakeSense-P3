@@ -1,0 +1,7 @@
+.container {
+  display: flex;
+}
+
+.comment {
+  border: 1px solid grey;
+}
