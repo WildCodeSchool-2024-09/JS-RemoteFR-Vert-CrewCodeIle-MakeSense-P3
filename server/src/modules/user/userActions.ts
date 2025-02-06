@@ -2,6 +2,15 @@ import type { RequestHandler } from "express";
 import Joi from "joi";
 import userRepository from "./userRepository";
 
+const browse: RequestHandler = async (req, res, next) => {
+  try {
+    const users = await userRepository.readAll();
+    res.json(users);
+  } catch (err) {
+    next(err);
+  }
+};
+
 const add: RequestHandler = async (req, res, next) => {
   try {
     const user = {
@@ -64,4 +73,4 @@ const checkEmail: RequestHandler = async (req, res, next) => {
   }
 };
 
-export default { add, validateData, checkEmail };
+export default { add, validateData, checkEmail, browse };

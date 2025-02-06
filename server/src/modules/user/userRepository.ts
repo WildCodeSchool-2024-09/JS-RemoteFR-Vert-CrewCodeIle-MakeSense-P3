@@ -17,12 +17,27 @@ class UserRepository {
     return [result];
   }
 
+  async readAll() {
+    const [rows] = await databaseClient.query<Rows>("SELECT * FROM user");
+    return rows as UserType[];
+  }
+
   async checkUniqueEmail(userEmail: string) {
     const [rows] = await databaseClient.query<Rows>(
       "SELECT * FROM user WHERE email= ?",
       [userEmail],
     );
     return rows as UserType[];
+  }
+
+  async readByEmail(email: string): Promise<UserType | null> {
+    const [user] = await databaseClient.query<Rows>(
+      "SELECT * FROM user WHERE email = ?",
+      [email],
+    );
+
+    const result = user as UserType[];
+    return result.length > 0 ? result[0] : null;
   }
 }
 
