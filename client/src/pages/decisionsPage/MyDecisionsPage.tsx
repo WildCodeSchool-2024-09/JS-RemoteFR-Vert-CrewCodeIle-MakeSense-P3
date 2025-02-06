@@ -8,7 +8,9 @@ export default function AllDecisionPage() {
   const [decisions, setDecisions] = useState<DecisionDetailCard[]>([]);
 
   useEffect(() => {
-    fetch(`${import.meta.env.VITE_API_URL}/api/mydecisions`)
+    fetch(`${import.meta.env.VITE_API_URL}/api/mydecisions`, {
+      credentials: "include",
+    })
       .then((response) => response.json())
       .then((data) => {
         setDecisions(data);

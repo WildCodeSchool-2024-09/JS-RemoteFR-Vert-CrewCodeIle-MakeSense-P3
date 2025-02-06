@@ -99,6 +99,7 @@ export default function UserProfile({ id }: { id: string }) {
           headers: {
             "Content-Type": "application/json",
           },
+          credentials: "include",
           body: JSON.stringify(updatedData),
         },
       );
