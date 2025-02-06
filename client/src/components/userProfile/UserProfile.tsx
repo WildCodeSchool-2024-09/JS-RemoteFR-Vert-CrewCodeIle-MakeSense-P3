@@ -201,7 +201,6 @@ export default function UserProfile({ id }: { id: string }) {
             </section>
           </section>
           <p>
-            {" "}
             <i>Pour toute modification merci de saisir votre mot de passe.</i>
           </p>
 
