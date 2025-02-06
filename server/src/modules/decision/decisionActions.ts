@@ -29,6 +29,17 @@ const browseMyDecisions: RequestHandler = async (req, res, next) => {
   }
 };
 
+const browseParticipatingDecisions: RequestHandler = async (req, res, next) => {
+  try {
+    const user_id = Number.parseInt(req.params.user_id);
+    const decision =
+      await decisionRepository.readParticipatingDecisions(user_id);
+    res.json(decision);
+  } catch (err) {
+    next(err);
+  }
+};
+
 const browseRunningDecisions: RequestHandler = async (req, res, next) => {
   try {
     const decision = await decisionRepository.readRunningDecisions();
@@ -58,5 +69,6 @@ export default {
   browseAllDecisions,
   browseArchivedDecisions,
   browseMyDecisions,
+  browseParticipatingDecisions,
   browseRunningDecisions,
 };

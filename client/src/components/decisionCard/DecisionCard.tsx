@@ -1,4 +1,3 @@
-//import { getCategoryColor } from "../../utils/categoryColors";
 import style from "./decisionCard.module.css";
 
 export default function DecisionCard({
@@ -6,13 +5,6 @@ export default function DecisionCard({
 }: { decision: DecisionDetailCard }) {
   return (
     <section className={style.card}>
-      {/* <span
-        className={style.category}
-        style={{ backgroundColor: getCategoryColor(decision.DecisionCategory) }}
-      >
-        {decision.DecisionCategory}
-      </span> */}
-
       <p className={style.userInfo}>
         {" "}
         <span className={style.userName}>{decision.country}</span>

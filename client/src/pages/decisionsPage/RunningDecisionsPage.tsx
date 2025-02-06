@@ -15,7 +15,6 @@ export default function AllDecisionPage() {
       })
       .catch(() => toast.error("Erreur de connexion au serveur"));
   }, []);
-  // console.log(decisions);
 
   return (
     <div>

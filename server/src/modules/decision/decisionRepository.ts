@@ -43,16 +43,17 @@ class DecisionRepository {
     return rows as Decision[];
   }
 
-  // async participatingdecisions() {
-  //   const [rows] = await databaseClient.query<Rows>(
-  //     `SELECT decision.*, user.firstname, user.lastname, user.avatar, country.label  AS country FROM decision
-  //     INNER JOIN country ON country.id = decision.country_id
-  //     INNER JOIN user ON user.id = decision.user_id
-  //     WHERE decision.step="in progress"
-  //     `,
-  //   );
-  //   return rows as Decision[];
-  // }
+  async readParticipatingDecisions(user_id: number) {
+    const [rows] = await databaseClient.query<Rows>(
+      `SELECT decision.*, user.firstname, user.lastname, user.avatar, country.label AS country FROM decision
+      INNER JOIN country ON country.id = decision.country_id
+      INNER JOIN user ON user.country_id = decision.country_id
+      WHERE decision.step="in progress" AND user.id =?
+      `,
+      [user_id],
+    );
+    return rows as Decision[];
+  }
 
   async readRunningDecisions() {
     const [rows] = await databaseClient.query<Rows>(
