@@ -63,6 +63,7 @@ export default function UserProfile({ id }: { id: string }) {
           `${import.meta.env.VITE_API_URL}/api/user/${id}`,
           {
             method: "GET",
+            credentials: "include",
           },
         );
 
