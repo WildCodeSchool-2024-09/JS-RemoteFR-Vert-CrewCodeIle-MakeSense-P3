@@ -33,9 +33,17 @@ type ProfileFormValues = {
   lastname: string;
   email: string;
   avatar?: string;
-};
-
-type PasswordFormValues = {
   hash_password: string;
   confirmed_password: string;
+};
+
+type UpdateFormValues = {
+  firstname?: string;
+  lastname?: string;
+  email?: string;
+  avatar?: string;
+  new_password?: string;
+  confirmed_password?: string;
+  country_id: number;
+  role_id: number;
 };

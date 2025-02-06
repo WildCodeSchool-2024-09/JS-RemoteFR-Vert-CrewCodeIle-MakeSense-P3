@@ -1,16 +1,21 @@
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import styles from "./userProfile.module.css";
 
-export default function UserProfile() {
+export default function UserProfile({ id }: { id: string }) {
+  const navigate = useNavigate();
+  const handleback = () => {
+    navigate("/homepage");
+  };
   const [user, setUser] = useState<ProfileFormValues | null>(null);
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [confirmError, setConfirmError] = useState("");
 
-  const { register, handleSubmit, reset } = useForm<ProfileFormValues>();
+  const { register, handleSubmit, reset } = useForm<UpdateFormValues>();
 
   const validatePassword = (value: string) => {
     const pattern =
@@ -55,7 +60,7 @@ export default function UserProfile() {
     const fetchProfileData = async () => {
       try {
         const response = await fetch(
-          `${import.meta.env.VITE_API_URL}/api/user`,
+          `${import.meta.env.VITE_API_URL}/api/user/${id}`,
           {
             method: "GET",
           },
@@ -65,36 +70,40 @@ export default function UserProfile() {
           throw new Error("Erreur lors de la récupération des données");
 
         const data = await response.json();
-        setUser(data);
-        reset(data);
+        const { hash_password, ...userWithoutPassword } = data;
+        setUser(userWithoutPassword);
+        reset(userWithoutPassword);
       } catch (error) {
         toast.error("Erreur lors de la récupération des informations");
       }
     };
 
     fetchProfileData();
-  }, [reset]);
+  }, [reset, id]);
 
-  const onSubmit = async (data: ProfileFormValues) => {
+  const onSubmit = async (data: UpdateFormValues) => {
     try {
-      const transformedData = {
-        lastname: data.lastname.toLowerCase(),
-        firstname: data.firstname.toLowerCase(),
-        email: data.email.toLowerCase(),
+      const updatedData = {
+        lastname: data.lastname?.toLowerCase(),
+        firstname: data.firstname?.toLowerCase(),
+        email: data.email?.toLowerCase(),
         avatar: data.avatar?.toLowerCase(),
+        new_password: data.new_password,
       };
 
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/user`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/api/user/${id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(updatedData),
         },
-        body: JSON.stringify(transformedData),
-      });
+      );
 
       if (!response.ok) throw new Error("Erreur lors de la mise à jour");
 
-      await response.json();
       toast.success("Modifications prises en compte");
     } catch (error) {
       toast.error("Erreur lors de l'envoi...");
@@ -165,6 +174,7 @@ export default function UserProfile() {
                 <input
                   type="password"
                   value={password}
+                  {...register("new_password")}
                   onChange={handlePasswordChange}
                   className={`${styles.input} ${passwordError ? styles.inputError : ""}`}
                   placeholder="Cliquez pour modifier"
@@ -190,8 +200,19 @@ export default function UserProfile() {
               </label>
             </section>
           </section>
+          <p>
+            {" "}
+            <i>Pour toute modification merci de saisir votre mot de passe.</i>
+          </p>
 
           <footer className={styles.buttonContainer}>
+            <button
+              type="button"
+              className={styles.backButton}
+              onClick={handleback}
+            >
+              Retour à l'accueil
+            </button>
             <button type="submit" className={styles.saveButton}>
               Enregistrer
             </button>
