@@ -73,3 +73,23 @@ type CategoryType = {
   label: string;
   color: string;
 };
+
+type ProfileFormValues = {
+  firstname: string;
+  lastname: string;
+  email: string;
+  avatar?: string;
+  hash_password: string;
+  confirmed_password: string;
+};
+
+type UpdateFormValues = {
+  firstname?: string;
+  lastname?: string;
+  email?: string;
+  avatar?: string;
+  new_password?: string;
+  confirmed_password?: string;
+  country_id: number;
+  role_id: number;
+};
