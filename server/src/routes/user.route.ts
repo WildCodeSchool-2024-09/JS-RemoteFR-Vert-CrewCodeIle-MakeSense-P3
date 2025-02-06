@@ -7,6 +7,7 @@ import userActions from "../modules/user/userActions";
 
 const router = express.Router();
 
+router.get("/api/user", userActions.browse);
 router.post(
   "/api/user",
   userActions.validateData,
