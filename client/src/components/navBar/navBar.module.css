@@ -55,16 +55,12 @@
 
 .dropdownMenu li {
   margin-left: 8px;
+  margin-bottom: 5px;
 }
 
-.dropdownItemButton {
-  background: none;
-  border: none;
-  cursor: pointer;
+.navLink {
   color: var(--color-primary-active);
   text-decoration: underline;
-  margin-bottom: 5px;
-  font-size: 16px;
 }
 
 .profileImage {
@@ -98,5 +94,6 @@
 
   .dropdownMenu li {
     margin: 0px 8px;
+    margin-bottom: 5px;
   }
 }

@@ -12,6 +12,14 @@ type Decision = {
   risk: string;
 };
 
+type DecisionCard = {
+  title: string;
+  firstname: string;
+  lastname: string;
+  category: string;
+  country: string;
+};
+
 class DecisionRepository {
   async create(decision: Decision) {
     const [result] = await databaseClient.query<Result>(
@@ -44,6 +52,62 @@ class DecisionRepository {
       [decisionId],
     );
     return rows[0];
+  }
+
+  async readAllDecisions() {
+    const [rows] = await databaseClient.query<Rows>(
+      `SELECT decision.*, user.firstname, user.lastname, country.label AS country FROM decision 
+      INNER JOIN country ON country.id = decision.country_id 
+      INNER JOIN user ON user.id = decision.user_id
+      `,
+    );
+    return rows as DecisionCard[];
+  }
+
+  async readArchivedDecisions() {
+    const [rows] = await databaseClient.query<Rows>(
+      `SELECT decision.*, user.firstname, user.lastname, country.label  AS country FROM decision 
+      INNER JOIN country ON country.id = decision.country_id 
+      INNER JOIN user ON user.id = decision.user_id
+      WHERE decision.step="approved" OR decision.step="rejected"
+      `,
+    );
+    return rows as DecisionCard[];
+  }
+
+  async readMyDecisions(user_id: number) {
+    const [rows] = await databaseClient.query<Rows>(
+      `SELECT decision.*, user.firstname, user.lastname, user.avatar, country.label  AS country FROM decision 
+      INNER JOIN country ON country.id = decision.country_id 
+      INNER JOIN user ON user.id = decision.user_id
+      WHERE user_id=?
+      `,
+      [user_id],
+    );
+    return rows as DecisionCard[];
+  }
+
+  async readParticipatingDecisions(user_id: number) {
+    const [rows] = await databaseClient.query<Rows>(
+      `SELECT decision.*, user.firstname, user.lastname, user.avatar, country.label AS country FROM decision
+      INNER JOIN country ON country.id = decision.country_id
+      INNER JOIN user ON user.country_id = decision.country_id
+      WHERE decision.step="in progress" AND user.id =?
+      `,
+      [user_id],
+    );
+    return rows as DecisionCard[];
+  }
+
+  async readRunningDecisions() {
+    const [rows] = await databaseClient.query<Rows>(
+      `SELECT decision.*, user.firstname, user.lastname, user.avatar, country.label  AS country FROM decision 
+      INNER JOIN country ON country.id = decision.country_id 
+      INNER JOIN user ON user.id = decision.user_id
+      WHERE decision.step="in progress"
+      `,
+    );
+    return rows as DecisionCard[];
   }
 }
 

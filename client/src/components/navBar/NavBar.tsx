@@ -9,10 +9,6 @@ function NavBar() {
     setIsDropdownOpen((currentState) => !currentState);
   };
 
-  const closeDropdown = () => {
-    setIsDropdownOpen(false);
-  };
-
   return (
     <nav className={style.navContainer}>
       <NavLink to={"/homepage"}>
@@ -30,49 +26,32 @@ function NavBar() {
           {isDropdownOpen && (
             <ul className={style.dropdownMenu}>
               <li>
-                <button
-                  type="button"
-                  className={style.dropdownItemButton}
-                  onClick={closeDropdown}
+                <NavLink
+                  to={"/participatingdecision"}
+                  className={style.navLink}
                 >
                   Les décisions où je participe
-                </button>
+                </NavLink>
               </li>
               <li>
-                <button
-                  type="button"
-                  className={style.dropdownItemButton}
-                  onClick={closeDropdown}
-                >
+                <NavLink to={"/mydecision"} className={style.navLink}>
                   Mes décisions
-                </button>
+                </NavLink>
               </li>
               <li>
-                <button
-                  type="button"
-                  className={style.dropdownItemButton}
-                  onClick={closeDropdown}
-                >
+                <NavLink to={"/runningdecision"} className={style.navLink}>
                   Les décisions en cours
-                </button>
+                </NavLink>
               </li>
               <li>
-                <button
-                  type="button"
-                  className={style.dropdownItemButton}
-                  onClick={closeDropdown}
-                >
+                <NavLink to={"/archiveddecision"} className={style.navLink}>
                   Les décisions archivées
-                </button>
+                </NavLink>
               </li>
               <li>
-                <button
-                  type="button"
-                  className={style.dropdownItemButton}
-                  onClick={closeDropdown}
-                >
+                <NavLink to={"/alldecision"} className={style.navLink}>
                   Toutes les décisions
-                </button>
+                </NavLink>
               </li>
             </ul>
           )}
