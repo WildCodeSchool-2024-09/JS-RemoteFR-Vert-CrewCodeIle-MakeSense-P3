@@ -1,6 +1,7 @@
 import type { RequestHandler } from "express";
 import { string } from "joi";
 import {
+  hashModifiedPasswordHelper,
   hashPasswordHelper,
   verifyPasswordHelper,
 } from "../services/argon2id.helper";
@@ -12,6 +13,20 @@ export const hashPassword: RequestHandler = async (req, res, next) => {
     const newPassword: string = await hashPasswordHelper(hash_password);
     if (newPassword) {
       req.body.hash_password = newPassword;
+      next();
+    }
+  } catch (err) {
+    res.status(500);
+  }
+};
+
+export const hashModifiedPassword: RequestHandler = async (req, res, next) => {
+  const { new_password } = req.body;
+
+  try {
+    const newPassword: string = await hashModifiedPasswordHelper(new_password);
+    if (newPassword) {
+      req.body.new_password = newPassword;
       next();
     }
   } catch (err) {

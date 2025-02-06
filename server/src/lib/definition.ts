@@ -12,6 +12,15 @@ type UserType = {
   role_id: number;
 };
 
+type UpdatedUserType = {
+  id: number;
+  firstname: string;
+  lastname: string;
+  email: string;
+  hash_password: string;
+  avatar: string;
+};
+
 type NewUserType = {
   firstname: string;
   lastname: string;
@@ -21,27 +30,23 @@ type NewUserType = {
   country_id: string;
 };
 
-// country
 type Country = {
   id: number;
   label: string;
 };
 
-// category
 type Category = {
   id: number;
   label: string;
   color: string;
 };
 
-//vote
 type Vote = {
   id: number;
   comment: string;
   state: boolean;
   user_id: string;
 };
-
 // comment
 
 type CommentType = {
