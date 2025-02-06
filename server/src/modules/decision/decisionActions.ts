@@ -136,9 +136,11 @@ const validateDataDecisionForm: RequestHandler = async (req, res, next) => {
   }
 };
 
-export default { read, add, addDecision, validateDataDecisionForm };
 export default {
   read,
+  add,
+  addDecision,
+  validateDataDecisionForm,
   browseAllDecisions,
   browseArchivedDecisions,
   browseMyDecisions,
