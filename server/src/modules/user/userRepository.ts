@@ -53,6 +53,13 @@ class UserRepository {
     return result.affectedRows;
   }
 
+  async readAllApplicant() {
+    const [rows] = await databaseClient.query<Rows>(`SELECT * FROM user
+      JOIN role ON user.role_id = role.id 
+      WHERE role.label = "applicant"`);
+    return rows as UserType[];
+  }
+
   async checkUniqueEmail(userEmail: string) {
     const [rows] = await databaseClient.query<Rows>(
       "SELECT * FROM user WHERE email= ?",

@@ -8,6 +8,7 @@ import userActions from "../modules/user/userActions";
 const router = express.Router();
 
 router.get("/api/user", userActions.browse);
+router.get("/api/user/:id", userActions.read);
 router.post(
   "/api/user",
   userActions.validateData,
@@ -15,19 +16,15 @@ router.post(
   userActions.checkEmail,
   userActions.add,
 );
-
-router.get("/api/user", userActions.browse);
-
-router.get("/api/user/:id", userActions.read);
-
 router.put(
   "/api/user/:id",
-
   userActions.modifiedData,
   hashModifiedPassword,
   userActions.edit,
 );
 
+// admin
+router.get("/api/applicant", userActions.browseApplicant);
 router.delete("/api/user/:id", userActions.destroy);
 
 export default router;
