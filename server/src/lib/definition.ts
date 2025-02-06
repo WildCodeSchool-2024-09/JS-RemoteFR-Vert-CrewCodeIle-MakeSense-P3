@@ -12,6 +12,15 @@ type UserType = {
   role_id: number;
 };
 
+type UpdatedUserType = {
+  id: number;
+  firstname: string;
+  lastname: string;
+  email: string;
+  hash_password: string;
+  avatar: string;
+};
+
 type NewUserType = {
   firstname: string;
   lastname: string;
@@ -38,12 +47,10 @@ type Vote = {
   state: boolean;
   user_id: string;
 };
+// comment
 
-type UpdatedUserType = {
-  id: number;
-  firstname: string;
-  lastname: string;
-  email: string;
-  hash_password: string;
-  avatar: string;
+type CommentType = {
+  content: string;
+  // user_id: number;
+  decision_id: number;
 };

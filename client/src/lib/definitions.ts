@@ -73,6 +73,15 @@ type CategoryType = {
   label: string;
   color: string;
 };
+// comment
+
+type CommentType = {
+  content: string;
+  firstname: string;
+  lastname: string;
+};
+
+// profil
 
 type ProfileFormValues = {
   firstname: string;
