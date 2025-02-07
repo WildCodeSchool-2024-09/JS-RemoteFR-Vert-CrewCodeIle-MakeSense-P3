@@ -1,14 +1,15 @@
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import styles from "./userProfile.module.css";
+import styles from "./adminProfile.module.css";
 
-export default function UserProfile({ id }: { id: string }) {
+export default function AdminProfile() {
   const navigate = useNavigate();
   const handleback = () => {
     navigate("/homepage");
   };
+
   const [user, setUser] = useState<ProfileFormValues | null>(null);
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -60,10 +61,9 @@ export default function UserProfile({ id }: { id: string }) {
     const fetchProfileData = async () => {
       try {
         const response = await fetch(
-          `${import.meta.env.VITE_API_URL}/api/user/${id}`,
+          `${import.meta.env.VITE_API_URL}/api/user/1`,
           {
             method: "GET",
-            // credentials: "include",
           },
         );
 
@@ -80,7 +80,7 @@ export default function UserProfile({ id }: { id: string }) {
     };
 
     fetchProfileData();
-  }, [reset, id]);
+  }, [reset]);
 
   const onSubmit = async (data: UpdateFormValues) => {
     try {
@@ -92,17 +92,13 @@ export default function UserProfile({ id }: { id: string }) {
         new_password: data.new_password,
       };
 
-      const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/api/user/${id}`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          // credentials: "include",
-          body: JSON.stringify(updatedData),
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/user`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
         },
-      );
+        body: JSON.stringify(updatedData),
+      });
 
       if (!response.ok) throw new Error("Erreur lors de la mise à jour");
 
@@ -219,6 +215,9 @@ export default function UserProfile({ id }: { id: string }) {
             </button>
           </footer>
         </form>
+        <NavLink to="/admin/userslist">
+          <button type="button">Les utilisateurs</button>
+        </NavLink>
       </section>
     </main>
   );

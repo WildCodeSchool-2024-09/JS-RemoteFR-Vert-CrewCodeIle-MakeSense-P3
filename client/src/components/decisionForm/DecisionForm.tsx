@@ -25,9 +25,12 @@ function CreateDecisionForm() {
         setCategories(data);
       })
       .catch(() => toast.error("Erreur de connexion au serveur"));
-    fetch(`${import.meta.env.VITE_API_URL}/api/user`, {
-      credentials: "include",
-    })
+    fetch(
+      `${import.meta.env.VITE_API_URL}/api/user`,
+      //    {
+      //   credentials: "include",
+      // }
+    )
       .then((response) => response.json())
       .then((data: UserType[]) => {
         setUsers(data);
@@ -44,7 +47,7 @@ function CreateDecisionForm() {
           headers: {
             "Content-Type": "application/json",
           },
-          credentials: "include",
+          // credentials: "include",
           body: JSON.stringify(data),
         },
       );
