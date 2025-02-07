@@ -1,11 +1,14 @@
 import { Outlet } from "react-router-dom";
 import "./App.css";
+import { useState } from "react";
 import { Bounce, ToastContainer } from "react-toastify";
 
 function App() {
+  const [token, setToken] = useState<string | null>(null);
+
   return (
     <>
-      <Outlet />
+      <Outlet context={{ token, setToken }} />
       <ToastContainer
         position="top-right"
         autoClose={5000}
