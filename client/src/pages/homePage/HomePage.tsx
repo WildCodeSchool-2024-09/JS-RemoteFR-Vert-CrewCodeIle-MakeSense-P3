@@ -1,4 +1,8 @@
 import { NavLink } from "react-router-dom";
+import ArchivedDecisions from "../../components/decisions/ArchivedDecisions";
+import MyDecisions from "../../components/decisions/MyDecisions";
+import ParticipatingDecisions from "../../components/decisions/ParticipatingDecisions";
+import RunningDecisions from "../../components/decisions/RunningDecisions";
 import NavBar from "../../components/navBar/NavBar";
 import style from "./homePage.module.css";
 
@@ -15,23 +19,25 @@ export default function HomePage() {
         <section className={style.section}>
           <h2 className={style.titleH2}>Les décisions où je participe</h2>
           <div className={style.cardsContainer}>
-            cards : Les décisions où je participe
+            <ParticipatingDecisions />
           </div>
         </section>
         <section className={style.section}>
           <h2 className={style.titleH2}>Mes décisions</h2>
-          <div className={style.cardsContainer}>cards : Mes décisions</div>
+          <div className={style.cardsContainer}>
+            <MyDecisions />
+          </div>
         </section>
         <section className={style.section}>
           <h2 className={style.titleH2}>Les décisions en cours</h2>
           <div className={style.cardsContainer}>
-            cards : Les décisions en cours
+            <RunningDecisions />
           </div>
         </section>
         <section className={style.section}>
           <h2 className={style.titleH2}>Les décisions archivées</h2>
           <div className={style.cardsContainer}>
-            cards : Les décisions archivées
+            <ArchivedDecisions />
           </div>
         </section>
         <button type="button" className={style.buttonScrollToTop}>
