@@ -1,6 +1,5 @@
 import type { RequestHandler } from "express";
 import userDecisionRepository from "./userDecisionRepository";
-
 // pour créer tous les animateurs dans la table user_decision
 const addUserDecisionAnimator: RequestHandler = async (req, res, next) => {
   try {
@@ -22,7 +21,6 @@ const addUserDecisionAnimator: RequestHandler = async (req, res, next) => {
     next(err);
   }
 };
-
 // pour créer tous les experts dans la table user_decision
 const addUserDecisionExpert: RequestHandler = async (req, res, next) => {
   try {
@@ -43,7 +41,6 @@ const addUserDecisionExpert: RequestHandler = async (req, res, next) => {
     next(err);
   }
 };
-
 // pour créer tous les impactés dans la table user_decision
 const addUserDecisionImpacted: RequestHandler = async (req, res, next) => {
   try {
@@ -64,7 +61,6 @@ const addUserDecisionImpacted: RequestHandler = async (req, res, next) => {
     next(err);
   }
 };
-
 export default {
   addUserDecisionAnimator,
   addUserDecisionImpacted,

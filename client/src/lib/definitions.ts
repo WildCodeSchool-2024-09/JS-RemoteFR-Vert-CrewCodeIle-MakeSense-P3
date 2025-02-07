@@ -87,6 +87,15 @@ type CategoryType = {
   label: string;
   color: string;
 };
+// comment
+
+type CommentType = {
+  content: string;
+  firstname: string;
+  lastname: string;
+};
+
+// profil
 
 type ProfileFormValues = {
   firstname: string;
@@ -106,4 +115,29 @@ type UpdateFormValues = {
   confirmed_password?: string;
   country_id: number;
   role_id: number;
+};
+
+type Decision = {
+  Id: number;
+  ProfilePicture: string;
+  UserName: string;
+  UserFirstname: string;
+  DecisionTitle: string;
+  DecisionCategory: string;
+};
+
+type DecisionDetailCard = {
+  id: number;
+  title: string;
+  min_date: Date;
+  max_date: Date;
+  description: string;
+  context: string;
+  profit: string;
+  risk: string;
+  step: string;
+  country: string;
+  lastname: string;
+  firstname: string;
+  avatar: string;
 };
