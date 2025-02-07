@@ -31,6 +31,6 @@ type Country = {
 
 type CommentType = {
   content: string;
-  // user_id: number;
+  user_id: number;
   decision_id: number;
 };
