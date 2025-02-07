@@ -27,6 +27,7 @@ type UserListType = {
   role_id: number;
   created_at: Date;
   updated_at: Date;
+  label: string;
 };
 
 // decision

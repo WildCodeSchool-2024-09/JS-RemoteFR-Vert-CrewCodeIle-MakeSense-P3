@@ -22,9 +22,13 @@ router.put(
   hashModifiedPassword,
   userActions.edit,
 );
+router.delete("/api/user/:id", userActions.destroy);
 
 // admin
+
 router.get("/api/applicant", userActions.browseApplicant);
-router.delete("/api/user/:id", userActions.destroy);
+router.put("/api/applicant/:id", userActions.editApplicant);
+router.delete("/api/applicant/:id", userActions.destroy);
+router.get("/api/accepted", userActions.browseAccepted);
 
 export default router;

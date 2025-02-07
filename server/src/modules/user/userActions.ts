@@ -86,6 +86,31 @@ const browseApplicant: RequestHandler = async (req, res, next) => {
   }
 };
 
+const browseAccepted: RequestHandler = async (req, res, next) => {
+  try {
+    const user = await userRepository.readAllAccepted();
+    res.json(user);
+  } catch (err) {
+    next(err);
+  }
+};
+
+const editApplicant: RequestHandler = async (req, res, next) => {
+  try {
+    const userId = Number.parseInt(req.params.id);
+
+    const affectedRows = await userRepository.updateApplicant(userId);
+
+    if (affectedRows === 0) {
+      res.sendStatus(404);
+    } else {
+      res.sendStatus(204);
+    }
+  } catch (err) {
+    next(err);
+  }
+};
+
 const validateData: RequestHandler = async (req, res, next) => {
   const dataSchema = Joi.object({
     lastname: Joi.string()
@@ -165,5 +190,7 @@ export default {
   modifiedData,
   checkEmail,
   destroy,
+  browseAccepted,
   browseApplicant,
+  editApplicant,
 };
