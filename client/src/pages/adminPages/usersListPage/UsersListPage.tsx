@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import ApplicantsList from "../../../components/admin/applicantsList/ApplicantsList";
-// import UsersList from "../../../components/admin/usersList/UsersList";
+import UsersList from "../../../components/admin/usersList/UsersList";
 
 export default function UsersListPage() {
-  const [users, setUsers] = useState([]);
+  const [users, setUsers] = useState<UserListType[]>([]);
   const [applicants, setApplicants] = useState<UserListType[]>([]);
 
   useEffect(() => {
@@ -31,11 +31,10 @@ export default function UsersListPage() {
       </section>
       <section>
         <h2>Liste des utilisateurs</h2>
+        {users.map((user) => (
+          <UsersList user={user} key={user.id} />
+        ))}
       </section>
-      {/* {users.map((user) => (
-        <UsersList user={user} key={user.id} />
-      ))} */}
-      {users}
     </>
   );
 }
