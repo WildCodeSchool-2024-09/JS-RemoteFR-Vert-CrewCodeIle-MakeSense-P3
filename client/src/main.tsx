@@ -8,9 +8,16 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 // Import the main app component
 import App from "./App";
 import DecisionDetailPage from "./pages/decisionDetailPage/DecisionDetailPage";
+import DecisionFormPage from "./pages/decisionFormPage/DecisionFormPage";
+import AllDecisionPage from "./pages/decisionsPage/AllDecisionsPage";
+import ArchivedDecisionPage from "./pages/decisionsPage/ArchivedDecisionsPage";
+import MyDecisionPage from "./pages/decisionsPage/MyDecisionsPage";
+import ParticipatingDecisionPage from "./pages/decisionsPage/ParticipatingDecisionsPage";
+import RunningDecisionPage from "./pages/decisionsPage/RunningDecisionsPage";
 import ErrorPage from "./pages/errorPage/ErrorPage";
 import HomePage from "./pages/homePage/HomePage";
-import Loginpage from "./pages/loginPage/LoginPage";
+import LoginPage from "./pages/loginPage/LoginPage";
+import ProfilePage from "./pages/profilePage/ProfilePage";
 import RegisterPage from "./pages/registerPage/RegisterPage";
 
 // Import additional components for new routes
@@ -42,12 +49,40 @@ const router = createBrowserRouter([
         element: <DecisionDetailPage />,
       },
       {
+        path: "/participatingdecision",
+        element: <ParticipatingDecisionPage />,
+      },
+      {
+        path: "/mydecision",
+        element: <MyDecisionPage />,
+      },
+      {
+        path: "/runningdecision",
+        element: <RunningDecisionPage />,
+      },
+      {
+        path: "/archiveddecision",
+        element: <ArchivedDecisionPage />,
+      },
+      {
+        path: "/alldecision",
+        element: <AllDecisionPage />,
+      },
+      {
         path: "*",
         element: <ErrorPage />,
       },
       {
         path: "/login",
-        element: <Loginpage />,
+        element: <LoginPage />,
+      },
+      {
+        path: "/profile/:id",
+        element: <ProfilePage />,
+      },
+      {
+        path: "/decisionformpage",
+        element: <DecisionFormPage />,
       },
     ],
   },
