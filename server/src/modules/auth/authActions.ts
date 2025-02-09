@@ -13,7 +13,7 @@ export const login: RequestHandler = async (req, res) => {
   });
 
   res.status(200).json({
-    message: `Bienvenue sur Intra_Sense ! Token : ${token}`,
+    message: "Bienvenue sur Intra_Sense !",
     token: token,
     email: user.email,
   });
