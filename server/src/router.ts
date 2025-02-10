@@ -3,9 +3,8 @@ const router = express.Router();
 
 import AuthRoute from "./routes/auth.route";
 import CategoryRoute from "./routes/category.route";
-import CountryRoute from "./routes/country.route";
-
 import CommentRoute from "./routes/comment.route";
+import CountryRoute from "./routes/country.route";
 import DecisionRoute from "./routes/decision.route";
 import RoleRoute from "./routes/role.route";
 import UserRoute from "./routes/user.route";
@@ -18,7 +17,6 @@ router.use("/", RoleRoute);
 router.use("/", VoteRoute);
 router.use("/", CategoryRoute);
 router.use("/", DecisionRoute);
-
 router.use("/", CommentRoute);
 
 /* ************************************************************************* */
