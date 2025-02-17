@@ -26,6 +26,14 @@ router.put(
   userActions.edit,
 );
 
+router.get("/api/profile", userActions.getCurrentUser);
+router.put(
+  "/api/profile",
+  userActions.modifiedData,
+  hashModifiedPassword,
+  userActions.edit,
+);
+
 router.delete("/api/user/:id", userActions.destroy);
 
 // affichage des animateurs, impactés, experts d'une décision

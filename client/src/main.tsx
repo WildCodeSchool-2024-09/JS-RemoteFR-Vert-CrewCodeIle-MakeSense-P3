@@ -33,7 +33,6 @@ import RegisterPage from "./pages/registerPage/RegisterPage";
 
 const router = createBrowserRouter([
   {
-    path: "/", // The root path
     element: <App />, // Renders the App component for the home page
     children: [
       {
@@ -73,11 +72,11 @@ const router = createBrowserRouter([
         element: <ErrorPage />,
       },
       {
-        path: "/login",
+        path: "/",
         element: <LoginPage />,
       },
       {
-        path: "/profile/:id",
+        path: "/profile",
         element: <ProfilePage />,
       },
       {

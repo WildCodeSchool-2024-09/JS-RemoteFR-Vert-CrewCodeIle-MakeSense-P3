@@ -4,11 +4,13 @@ import {
   hashPassword,
 } from "../middlewares/argon2.middleware";
 import { getUserByEmail } from "../middlewares/user.middleware";
-import { authWall, login, verifyToken } from "../modules/auth/authActions";
+import { login, logout, verifyToken } from "../modules/auth/authActions";
 
 const router = express.Router();
 
-// router.use(verifyToken, authWall);
+router.post("/logout", logout);
 router.post("/api/auth", getUserByEmail, comparePassword, login);
+
+// router.use(verifyToken);
 
 export default router;
