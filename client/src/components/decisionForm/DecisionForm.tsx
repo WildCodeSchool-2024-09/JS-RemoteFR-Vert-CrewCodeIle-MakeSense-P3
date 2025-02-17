@@ -48,7 +48,6 @@ function CreateDecisionForm() {
           body: JSON.stringify(data),
         },
       );
-
       if (response.ok) {
         reset();
         toast.success("Décision envoyée à l'administrateur");

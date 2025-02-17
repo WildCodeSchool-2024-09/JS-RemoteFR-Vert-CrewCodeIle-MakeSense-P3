@@ -4,6 +4,7 @@ import commentRepository from "./commentRepository";
 
 const add: RequestHandler = async (req, res, next) => {
   try {
+    // console.log(req.body);
     const newComment = {
       content: req.body.content,
       user_id: req.body.user_id,
@@ -34,7 +35,8 @@ const readComments: RequestHandler = async (req, res, next) => {
 const validateDataForm: RequestHandler = async (req, res, next) => {
   const dataSchema = Joi.object({
     content: Joi.string().required(),
-    id: Joi.number().required(),
+    user_id: Joi.number().required(),
+    id: Joi.string().required(),
   });
 
   const { error } = dataSchema.validate(req.body, { abortEarly: false });
