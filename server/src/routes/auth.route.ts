@@ -11,6 +11,4 @@ const router = express.Router();
 router.post("/logout", logout);
 router.post("/api/auth", getUserByEmail, comparePassword, login);
 
-// router.use(verifyToken);
-
 export default router;
