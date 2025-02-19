@@ -14,7 +14,7 @@ export default function DecisionDetailPage() {
     <div>
       <NavBar />
       <DecisionDetail id={id} />
-      <Vote />
+      <Vote id={id} />
       <ToastContainer />
     </div>
   );

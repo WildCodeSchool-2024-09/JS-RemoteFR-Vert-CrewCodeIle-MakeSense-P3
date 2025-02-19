@@ -14,16 +14,17 @@ class VoteRepository {
       " INSERT INTO vote (decision_id, state, user_id) VALUES (?,?,?)",
       [vote.decision_id, vote.state, vote.user_id],
     );
-    // console.log("insertion reussie avec", result.insertId);
+
     return result.insertId;
   }
 
   //READ & READ ALL vote
   async read(id: number) {
     const [rows] = await DatabaseClient.query<Rows>(
-      "SELECT vote.comment, vote.state, user.firstname, user.lastname FROM vote JOIN user ON user.id=vote.user_id WHERE vote.id = ?",
+      "SELECT vote.id, vote.state, vote.created_at, vote.updated_at, user.firstname, user.lastname FROM vote JOIN user ON user.id=vote.user_id WHERE vote.id=?",
       [id],
     );
+    if (rows.length === 0) return null; //verfie si aucun vote est trouvé
     return rows[0] as Vote;
   }
 
@@ -35,10 +36,19 @@ class VoteRepository {
   //UPDATE vote
   async update(vote: Vote) {
     const [result] = await DatabaseClient.query<Result>(
-      "UPDATE vote SET comment = ?, state = ? WHERE id = ?",
-      [vote.decision_id, vote.state, vote.id],
+      "UPDATE vote SET state = ?, decision_id = ? WHERE id = ?",
+      [vote.state, vote.decision_id, vote.id],
     );
+
     return result.affectedRows;
+  }
+  //verifier si utilisateur à deja voté--> relié à checkvote dans action
+  async getUserVote(decisionId: number, userId: number) {
+    const [rows] = await DatabaseClient.query<Rows>(
+      "SELECT id, state  FROM vote WHERE user_id = ? AND decision_id = ?",
+      [userId, decisionId],
+    );
+    return rows.length > 0 ? (rows[0] as Vote) : null; //retourne le vote s'il existe deja sinon retournes null
   }
 }
 

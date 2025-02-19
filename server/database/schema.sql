@@ -102,4 +102,4 @@ INSERT INTO role (id,label) VALUES (1, 'applicant'), (2, 'user'), (3, 'administr
 INSERT INTO country (id,label) VALUES (1, 'France'), (2, 'Mexique'), (3, 'Canada'), (4, 'Pérou'), (5, 'Sénégal'), (6, 'Philippines'), (7, 'Liban'), (8, 'Cote d''Ivoire'), (9, 'Australie'), (10, 'Ukraine');
 INSERT INTO user (firstname,lastname,email,hash_password,avatar,country_id,role_id) VALUES ('lea','monthieux','monthieuxlea@gmail.com','Pommedeterre12*','pomme',2,1);
 
-INSERT INTO decision (title, min_date, max_date,description,context,profit,risk,step,user_id,country_id) VALUES ('titre',"2025-01-04","2025-02-07",'bonjour je decris','context cool','profit askip','risk askip','step askip',1,2);
+INSERT INTO decision (title, min_date, max_date,description,context,profit,risk,step,user_id,country_id) VALUES ('titre',"2025-02-22","2025-02-28",'bonjour je decris','context cool','profit askip','risk askip','step askip',1,2);

@@ -1,85 +1,104 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import "./vote.modules.css";
 
-export default function Vote() {
+interface VoteProps {
+  id: string;
+}
+
+export default function Vote({ id }: VoteProps) {
   const [votesFor, setVotesFor] = useState(0);
   const [votesAgainst, setVotesAgainst] = useState(0);
-  const [hasVoted, setHasVoted] = useState<null | "for" | "against">(null);
+  const [hasVoted, setHasVoted] = useState<"for" | "against" | null>(null);
+  const [voteId, setVoteId] = useState<number | null>(null);
+
+  useEffect(() => {
+    //pas d'exécution si
+
+    const fetchVotes = async () => {
+      try {
+        const response = await fetch(
+          `${import.meta.env.VITE_API_URL}/api/vote/${voteId}`,
+        );
+        if (response.ok) {
+          const voteData = await response.json();
+
+          setVotesFor(voteData.votesFor || 0);
+          setVotesAgainst(voteData.votesAgainst || 0);
+        }
+      } catch (error) {
+        console.error("Erreur lors de la récupération des votes :", error);
+      }
+    };
+
+    const checkUserVote = async () => {
+      try {
+        const response = await fetch(
+          `${import.meta.env.VITE_API_URL}/api/vote/check/${id}`,
+        );
+        if (response.ok) {
+          const existingVote = await response.json();
+
+          setVoteId(existingVote.id);
+          setHasVoted(existingVote.state ? "for" : "against");
+        } else {
+          console.info("Aucun vote trouvé pour cette décision.");
+          setVoteId(null);
+          setHasVoted(null);
+        }
+      } catch (error) {
+        console.error(
+          "Erreur lors de la récupération du vote utilisateur :",
+          error,
+        );
+        toast.error("Erreur lors de la récupération du vote utilisateur.");
+      }
+    };
+
+    checkUserVote();
+    fetchVotes();
+  }, [id, voteId]);
 
   const submitVote = async (state: boolean) => {
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/vote`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+      let url: string;
+      let method: string;
+
+      if (voteId === null) {
+        url = `${import.meta.env.VITE_API_URL}/api/vote`;
+        method = "POST";
+      } else {
+        url = `${import.meta.env.VITE_API_URL}/api/vote/${voteId}`;
+        method = "PUT";
+      }
+
+      const response = await fetch(url, {
+        method: method,
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          decision_id: 1,
+          decision_id: id,
           state: state,
-          user_id: 1, // ID utilisateur à remplacer dynamiquement
+          user_id: 1,
         }),
       });
 
-      //   const responseData = await response.json();
-
-      //   console.log("reponse backend", responseData);
-
-      if (response.ok) {
-        //est ce que lerreur 403 du back est considéré comme ok à false ?? A VERIFIER
-        toast.success("Vote enregistré avec succès !");
-      } else {
+      if (!response.ok) {
         toast.error("Erreur lors de l'enregistrement du vote.");
+        return;
+      }
+
+      toast.success(
+        `Vote ${voteId === null ? "enregistré" : "modifié"} avec succès!`,
+      );
+      setHasVoted(state ? "for" : "against");
+
+      if (voteId === null) {
+        const res = await response.json();
+        setVoteId(res.insertId);
       }
     } catch (error) {
       console.error("Erreur réseau :", error);
       toast.error("Erreur de connexion au serveur.");
-    }
-  };
-
-  const handleVoteFor = () => {
-    if (hasVoted === "for") {
-      // L'utilisateur a déjà voté "Pour", on retire le vote
-      setVotesFor(votesFor - 1);
-      setHasVoted(null);
-      submitVote(false); // Retirer le vote avec état false
-      toast.info("Votre vote POUR a été retiré.");
-    } else if (hasVoted === "against") {
-      // L'utilisateur avait voté "Contre", on retire ce vote et on ajoute un vote "Pour"
-      setVotesAgainst(votesAgainst - 1);
-      setVotesFor(votesFor + 1);
-      setHasVoted("for");
-      submitVote(true); // Enregistrer le nouveau vote
-      toast.success("Vous avez changé votre vote POUR !");
-    } else {
-      // Aucun vote précédent, on ajoute un vote "Pour"
-      setVotesFor(votesFor + 1);
-      setHasVoted("for");
-      submitVote(true); // Enregistrer le nouveau vote
-      toast.success("Vous avez voté POUR !");
-    }
-  };
-
-  const handleVoteAgainst = () => {
-    if (hasVoted === "against") {
-      // L'utilisateur a déjà voté "Contre", on retire le vote
-      setVotesAgainst(votesAgainst - 1);
-      setHasVoted(null);
-      submitVote(false); // Retirer le vote avec état false
-      toast.info("Votre vote CONTRE a été retiré.");
-    } else if (hasVoted === "for") {
-      // L'utilisateur avait voté "Pour", on retire ce vote et on ajoute un vote "Contre"
-      setVotesFor(votesFor - 1);
-      setVotesAgainst(votesAgainst + 1);
-      setHasVoted("against");
-      submitVote(false); // Enregistrer le nouveau vote
-      toast.error("Vous avez changé votre vote CONTRE !");
-    } else {
-      // Aucun vote précédent, on ajoute un vote "Contre"
-      setVotesAgainst(votesAgainst + 1);
-      setHasVoted("against");
-      submitVote(false); // Enregistrer le nouveau vote
-      toast.error("Vous avez voté CONTRE !");
     }
   };
 
@@ -91,18 +110,13 @@ export default function Vote() {
 
       <button
         type="button"
-        onClick={handleVoteFor}
-        disabled={hasVoted === "against"} // Désactive le bouton si l'utilisateur a voté "Contre"
+        className={`toggle-button ${hasVoted === "for" ? "active-positive" : "active-negative"}`}
+        onClick={() => submitVote(hasVoted !== "for")}
       >
-        Voter Pour
-      </button>
-
-      <button
-        type="button"
-        onClick={handleVoteAgainst}
-        disabled={hasVoted === "for"} // Désactive le bouton si l'utilisateur a voté "Pour"
-      >
-        Voter Contre
+        <div className="toggle-circle">.</div>
+        <span className="toggle-label">
+          {hasVoted === "for" ? "Pour" : "Contre"}
+        </span>
       </button>
     </div>
   );
