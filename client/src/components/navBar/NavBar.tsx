@@ -1,36 +1,57 @@
-import { useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { NavLink } from "react-router-dom";
 import style from "./NavBar.module.css";
 
 function NavBar() {
-  const navigate = useNavigate();
+  const [isAdmin, setIsAdmin] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const toggleDropdown = () => {
     setIsDropdownOpen((currentState) => !currentState);
   };
 
-  const handleLogout = async () => {
-    try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/logout`, {
-        method: "POST",
-        credentials: "include",
-      });
-      if (response.ok) {
-        navigate("/");
-      } else {
-        console.error("Erreur lors de la déconnexion");
+  useEffect(() => {
+    const fetchUserRole = async () => {
+      try {
+        const response = await fetch(
+          `${import.meta.env.VITE_API_URL}/api/admin/role`,
+          {
+            method: "GET",
+            credentials: "include",
+          },
+        );
+
+        if (!response.ok)
+          throw new Error("Erreur lors de la récupération du rôle");
+
+        const data = await response.json();
+
+        setIsAdmin(data.isAdmin);
+      } catch (error) {
+        console.error(
+          "Erreur lors de la récupération du rôle utilisateur:",
+          error,
+        );
       }
-    } catch (error) {
-      console.error("Erreur lors de la requiête de déconnexion:", error);
-    }
-  };
+    };
+
+    fetchUserRole();
+  }, []);
 
   return (
     <nav className={style.navContainer}>
-      <NavLink to={"/homepage"}>
-        <img src="/logo.png" alt="Logo img" className={style.logoImage} />
-      </NavLink>
+      <div className={style.logoButtonAdminGroup}>
+        <NavLink to={"/homepage"}>
+          <img src="/logo.png" alt="Logo img" className={style.logoImage} />
+        </NavLink>
+        <div>
+          {isAdmin && (
+            <NavLink to="/admin/profile">
+              <span className={style.adminButton}>Admin</span>
+            </NavLink>
+          )}
+        </div>
+      </div>
       <ul className={style.navBarLink}>
         <li>
           <button
@@ -75,7 +96,7 @@ function NavBar() {
         </li>
         <li>
           <button type="button" className={style.notificationButton}>
-            Notification
+            Notifications
           </button>
         </li>
         <li>
@@ -86,11 +107,6 @@ function NavBar() {
               className={style.profileImage}
             />
           </NavLink>
-        </li>
-        <li>
-          <button type="button" onClick={handleLogout}>
-            <span>Déconnexion</span>
-          </button>
         </li>
       </ul>
     </nav>

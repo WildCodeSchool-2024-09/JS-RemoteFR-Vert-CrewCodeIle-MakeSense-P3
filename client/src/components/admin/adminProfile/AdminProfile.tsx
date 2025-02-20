@@ -61,9 +61,10 @@ export default function AdminProfile() {
     const fetchProfileData = async () => {
       try {
         const response = await fetch(
-          `${import.meta.env.VITE_API_URL}/api/user/1`,
+          `${import.meta.env.VITE_API_URL}/api/profile`,
           {
             method: "GET",
+            credentials: "include",
           },
         );
 
@@ -91,16 +92,23 @@ export default function AdminProfile() {
         avatar: data.avatar?.toLowerCase(),
         new_password: data.new_password,
       };
-
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/user`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/api/user/${user?.id}}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
+          body: JSON.stringify(updatedData),
         },
-        body: JSON.stringify(updatedData),
-      });
+      );
 
-      if (!response.ok) throw new Error("Erreur lors de la mise à jour");
+      if (response.ok) {
+        navigate("/");
+      } else {
+        console.error("Erreur lors de la modification");
+      }
 
       toast.success("Modifications prises en compte");
     } catch (error) {
@@ -203,6 +211,9 @@ export default function AdminProfile() {
           </p>
 
           <footer className={styles.buttonContainer}>
+            <button type="submit" className={styles.saveButton}>
+              Valider
+            </button>
             <button
               type="button"
               className={styles.backButton}
@@ -210,16 +221,14 @@ export default function AdminProfile() {
             >
               Retour à l'accueil
             </button>
-            <button type="submit" className={styles.saveButton}>
-              Enregistrer
-            </button>
+
+            <NavLink to="/admin/userslist">
+              <button type="button" className={styles.usersButton}>
+                Modérer les utilisateurs
+              </button>
+            </NavLink>
           </footer>
         </form>
-        <NavLink to="/admin/userslist">
-          <button type="button" className={styles.usersButton}>
-            Modérer les utilisateurs
-          </button>
-        </NavLink>
       </section>
     </main>
   );

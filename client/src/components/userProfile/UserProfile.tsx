@@ -17,6 +17,22 @@ export default function UserProfile() {
 
   const { register, handleSubmit, reset } = useForm<UpdateFormValues>();
 
+  const handleLogout = async () => {
+    try {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/logout`, {
+        method: "POST",
+        credentials: "include",
+      });
+      if (response.ok) {
+        navigate("/");
+      } else {
+        console.error("Erreur lors de la déconnexion");
+      }
+    } catch (error) {
+      console.error("Erreur lors de la requiête de déconnexion:", error);
+    }
+  };
+
   const validatePassword = (value: string) => {
     const pattern =
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>]).{8,}$/;
@@ -104,7 +120,11 @@ export default function UserProfile() {
         },
       );
 
-      if (!response.ok) throw new Error("Erreur lors de la mise à jour");
+      if (response.ok) {
+        navigate("/");
+      } else {
+        console.error("Erreur lors de la modification");
+      }
 
       toast.success("Modifications prises en compte");
     } catch (error) {
@@ -207,6 +227,9 @@ export default function UserProfile() {
           </p>
 
           <footer className={styles.buttonContainer}>
+            <button type="submit" className={styles.saveButton}>
+              Enregistrer
+            </button>
             <button
               type="button"
               className={styles.backButton}
@@ -214,8 +237,12 @@ export default function UserProfile() {
             >
               Retour à l'accueil
             </button>
-            <button type="submit" className={styles.saveButton}>
-              Enregistrer
+            <button
+              type="button"
+              onClick={handleLogout}
+              className={styles.logout}
+            >
+              <span>Déconnexion</span>
             </button>
           </footer>
         </form>
