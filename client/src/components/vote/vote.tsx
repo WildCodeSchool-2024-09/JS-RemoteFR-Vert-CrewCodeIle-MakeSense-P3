@@ -15,22 +15,6 @@ export default function Vote({ id }: VoteProps) {
   useEffect(() => {
     //pas d'exécution si
 
-    const fetchVotes = async () => {
-      try {
-        const response = await fetch(
-          `${import.meta.env.VITE_API_URL}/api/vote/${voteId}`,
-        );
-        if (response.ok) {
-          const voteData = await response.json();
-
-          setVotesFor(voteData.votesFor || 0);
-          setVotesAgainst(voteData.votesAgainst || 0);
-        }
-      } catch (error) {
-        console.error("Erreur lors de la récupération des votes :", error);
-      }
-    };
-
     const checkUserVote = async () => {
       try {
         const response = await fetch(
@@ -56,8 +40,7 @@ export default function Vote({ id }: VoteProps) {
     };
 
     checkUserVote();
-    fetchVotes();
-  }, [id, voteId]);
+  }, [id]);
 
   const submitVote = async (state: boolean) => {
     try {

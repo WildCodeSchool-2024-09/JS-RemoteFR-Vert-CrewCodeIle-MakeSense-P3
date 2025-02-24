@@ -19,7 +19,7 @@ class DecisionRepository {
   // action read country
   async readCountryAndDates(decisionId: number) {
     const [rows] = await databaseClient.query<Rows>(
-      `SELECT decision.country_id AS country_id, decision.min_date AS min_date, decision.created_at AS created_at FROM decision
+      `SELECT decision.country_id AS country_id, decision.min_date AS min_date, decision.max_date AS max_date, decision.created_at AS created_at FROM decision
       WHERE decision.id=?`,
       [decisionId],
     );
