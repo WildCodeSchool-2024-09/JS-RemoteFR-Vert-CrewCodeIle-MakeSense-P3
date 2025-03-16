@@ -187,6 +187,7 @@ const addUserByTokenEmail: RequestHandler = async (req, res, next) => {
   try {
     const token = req.cookies?.auth_token;
     const decodedToken = (await decodeToken(token)) as DecodedTokenType;
+
     if (!decodedToken) {
       res.status(403).json({ message: "Accès refusé" });
       return;
@@ -195,8 +196,9 @@ const addUserByTokenEmail: RequestHandler = async (req, res, next) => {
     const user = await userRepository.readByEmailForComment(
       decodedToken?.email,
     );
+
     if (!user) {
-      res.status(404).json({ message: "toto" });
+      res.status(404).json({ message: "pas d'utilisateur valide" });
       return;
     }
 
@@ -215,7 +217,6 @@ const getCurrentUser: RequestHandler = async (req, res, next) => {
     )) as PayloadType;
 
     const email: string = tokenFromCookies.email;
-
     const user = await userRepository.readByEmail(email);
 
     res.json(user);
@@ -235,9 +236,10 @@ const readRoleFromToken: RequestHandler = async (req, res, next) => {
         isAdmin: false,
         message: "Accès interdit. Tu n'es pas un admin",
       });
+      return;
     }
 
-    res.json({ isAdmin: true, message: "bienvenue admin" });
+    res.json({ isAdmin: true });
   } catch (err) {
     next(err);
   }
