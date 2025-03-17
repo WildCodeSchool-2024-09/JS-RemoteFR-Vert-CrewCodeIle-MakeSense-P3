@@ -3,6 +3,8 @@ import decisionActions from "../modules/decision/decisionActions";
 
 const router = express.Router();
 
+router.get("/api/decisions", decisionActions.browse);
+
 router.get(
   "/api/decision/:id",
   decisionActions.read,

@@ -11,7 +11,7 @@ function NavBar() {
     <nav>
       <ul className={style.navContainer}>
         <li>
-          <Link to="/homepage">Home</Link>
+          <Link to="/">Home</Link>
         </li>
         {auth == null ? (
           <>

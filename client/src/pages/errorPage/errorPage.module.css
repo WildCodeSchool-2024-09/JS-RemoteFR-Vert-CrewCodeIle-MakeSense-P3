@@ -50,11 +50,6 @@
   margin: 0 2em 2em 0;
 }
 
-a {
-  color: white;
-  text-decoration: none;
-}
-
 @media screen and (max-width: 768px) {
   .gif {
     height: 180px;

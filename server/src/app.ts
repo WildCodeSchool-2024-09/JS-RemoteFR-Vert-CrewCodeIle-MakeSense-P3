@@ -1,5 +1,4 @@
 // Load the express module to create a web application
-import cookieParser from "cookie-parser";
 import express from "express";
 
 const app = express();
@@ -57,7 +56,7 @@ app.use(express.json());
 // app.use(express.urlencoded());
 // app.use(express.text());
 // app.use(express.raw());
-app.use(cookieParser());
+
 /* ************************************************************************* */
 
 // Import the API router

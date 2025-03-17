@@ -50,7 +50,7 @@ export default function LoginForm() {
         toast.error("Erreur lors de la connexion");
       }
       setTimeout(() => {
-        Navigate("/homepage");
+        Navigate("/");
       }, 1500);
     } catch (error) {
       toast.error("Erreur de connexion. Vérifiez vos identifiants.");

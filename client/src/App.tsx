@@ -1,4 +1,4 @@
-import { Outlet } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import { useState } from "react";
 import "./App.css";
 import { Bounce, ToastContainer } from "react-toastify";
@@ -28,7 +28,34 @@ function App() {
         theme="light"
         transition={Bounce}
       />
-
+      <nav>
+        <ul className="navContainer">
+          <li>
+            <Link to="/">Home</Link>
+          </li>
+          {auth == null ? (
+            <>
+              <li>
+                <Link to="/login">Login</Link>
+              </li>
+              <li>
+                <Link to="/register">Register</Link>
+              </li>
+            </>
+          ) : (
+            <li>
+              <button
+                type="button"
+                onClick={() => {
+                  setAuth(null);
+                }}
+              >
+                Logout
+              </button>
+            </li>
+          )}
+        </ul>
+      </nav>
       <main>
         <Outlet context={{ auth, setAuth }} />
       </main>

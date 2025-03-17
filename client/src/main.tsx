@@ -30,6 +30,10 @@ const router = createBrowserRouter([
     element: <App />, // Renders the App component for the home page
     children: [
       {
+        path: "/",
+        element: <HomePage />,
+      },
+      {
         path: "/login",
         element: <LoginPage />,
       },
@@ -38,11 +42,7 @@ const router = createBrowserRouter([
         element: <RegisterPage />,
       },
       {
-        path: "/homepage",
-        element: <HomePage />,
-      },
-      {
-        path: "/decisionslist/:id",
+        path: "/decisions/:id",
         element: <DecisionDetailPage />,
       },
       {

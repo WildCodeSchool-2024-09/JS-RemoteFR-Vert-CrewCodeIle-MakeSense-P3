@@ -29,3 +29,13 @@
     border-left: 0;
   }
 }
+
+.navContainer {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  list-style: none;
+  padding: 1rem;
+  margin: 0;
+  gap: 1rem;
+}

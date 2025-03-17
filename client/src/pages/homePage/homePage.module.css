@@ -8,12 +8,10 @@ main > div {
 /* bouton pour créer une prise de décision */
 
 .buttonCreateDecision {
-  width: 20%;
-  padding: 0.25em 0.25em;
+  padding: 0.5em 1em;
   background-color: var(--color-tertiary-active);
   border-radius: 1em;
   color: white;
-  margin-left: 70%;
   border-color: var(--color-tertiary-active);
   font-size: 1em;
 
