@@ -3,7 +3,7 @@ type UserType = {
   firstname: string;
   lastname: string;
   email: string;
-  hash_password: string;
+  hashed_password: string;
   avatar: string;
   created_at: number;
   updated_at: number;
@@ -11,16 +11,30 @@ type UserType = {
   role_id: number;
 };
 
-type NewUserType = {
-  firstname: string;
-  lastname: string;
-  email: string;
-  hash_password: string;
-  avatar: string;
-  country_id: string;
-};
-
 type Country = {
   id: number;
   label: string;
+};
+// //pour comparer les emails
+// type Credentials = {
+//   email: string;
+//   hashed_password: string;
+// };
+// token
+
+type DecodedTokenType = {
+  email: string;
+  iat: number;
+  exp: number;
+};
+
+type PayloadType = {
+  email: string;
+  iat: number;
+  exp: number;
+};
+type Category = {
+  id: number;
+  label: string;
+  color: string;
 };

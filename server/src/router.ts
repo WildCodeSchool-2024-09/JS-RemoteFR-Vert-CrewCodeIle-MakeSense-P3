@@ -13,6 +13,8 @@ router.use("/", CountryRoute);
 router.use("/", DecisionRoute);
 router.use("/", UserRoute);
 router.use("/", VoteRoute);
+router.use("/", DecisionRoute);
+
 /* ************************************************************************* */
 
 export default router;

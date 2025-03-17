@@ -18,7 +18,7 @@ id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
 firstname VARCHAR(50) NOT NULL,
 lastname VARCHAR(50) NOT NULL,
 email VARCHAR(150) NOT NULL UNIQUE,
-hash_password VARCHAR(255) NOT NULL,
+hashed_password VARCHAR(255) NOT NULL,
 avatar VARCHAR(255) NOT NULL,
 created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
 updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -100,6 +100,8 @@ FOREIGN KEY (decision_id) REFERENCES decision(id)
 
 INSERT INTO role (id,label) VALUES (1, 'applicant'), (2, 'user'), (3, 'administrator'), (4, 'rejected');
 INSERT INTO country (id,label) VALUES (1, 'France'), (2, 'Mexique'), (3, 'Canada'), (4, 'Pérou'), (5, 'Sénégal'), (6, 'Philippines'), (7, 'Liban'), (8, 'Cote d''Ivoire'), (9, 'Australie'), (10, 'Ukraine');
-INSERT INTO user (firstname,lastname,email,hash_password,avatar,country_id,role_id) VALUES ('lea','monthieux','monthieuxlea@gmail.com','Pommedeterre12*','pomme',2,1);
+INSERT INTO user (firstname,lastname,email,hashed_password,avatar,country_id,role_id) VALUES ('lea','monthieux','monthieuxlea@gmail.com','Pommedeterre12*','pomme',2,1);
 
 INSERT INTO decision (title, min_date, max_date,description,context,profit,risk,step,user_id,country_id) VALUES ('titre',"2025-02-2","2025-04-30",'bonjour je decris','context cool','profit askip','risk askip','step askip',1,2);
+INSERT INTO category (label, color) 
+VALUES ('Sport', 'blue');

@@ -11,6 +11,7 @@ import DecisionDetailPage from "./pages/decisionDetailPage/DecisionDetailPage";
 import ErrorPage from "./pages/errorPage/ErrorPage";
 import HomePage from "./pages/homePage/HomePage";
 import RegisterPage from "./pages/registerPage/RegisterPage";
+import LoginPage from "./pages/loginPage/loginPage";
 
 // Import additional components for new routes
 // Try creating these components in the "pages" folder
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
     path: "/", // The root path
     element: <App />, // Renders the App component for the home page
     children: [
+      {
+        path: "/login",
+        element: <LoginPage />,
+      },
       {
         path: "/register",
         element: <RegisterPage />,

@@ -75,7 +75,7 @@ const verifyCountryMatch = async (decisionId: number, userId: number) => {
 const verifyDate = async (decisionId: number) => {
   try {
     const dataDate = await decisionRepository.readCountryAndDates(decisionId);
-    console.log(dataDate);
+    // console.log(dataDate);
     if (!dataDate) {
       console.error(
         "Erreur lors de la récupération des données de la décision:",
@@ -86,7 +86,7 @@ const verifyDate = async (decisionId: number) => {
     const maxDate = Date.parse(dataDate.max_date);
     const minDate = Date.parse(dataDate.min_date);
     const currentDate = Date.now();
-    console.log(maxDate, minDate, currentDate);
+    // console.log(maxDate, minDate, currentDate);
 
     if (currentDate > minDate && currentDate < maxDate) {
       return true;

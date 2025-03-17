@@ -10,7 +10,10 @@
     "type": "git",
     "url": "git+https://github.com/wild code school/mn_template-p3.git"
   },
-  "workspaces": ["client", "server"],
+  "workspaces": [
+    "client",
+    "server"
+  ],
   "scripts": {
     "build": "npm run build --workspaces --if-present",
     "check": "biome check --error-on-warnings --no-errors-on-unmatched --staged . && npm run check-types --workspaces --if-present",
@@ -31,6 +34,7 @@
     "@biomejs/biome": "1.9.2",
     "@commitlint/cli": "^19.5.0",
     "@commitlint/config-conventional": "^19.5.0",
+    "@types/css-modules": "^1.0.5",
     "concurrently": "^9.0.1",
     "husky": "^9.1.6",
     "validate-branch-name": "^1.3.1"

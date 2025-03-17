@@ -1,14 +1,18 @@
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import "./vote.modules.css";
+import { useOutletContext } from "react-router-dom";
 
 interface VoteProps {
   id: string;
 }
 
 export default function Vote({ id }: VoteProps) {
-  const [votesFor, setVotesFor] = useState(0);
-  const [votesAgainst, setVotesAgainst] = useState(0);
+  const { auth } = useOutletContext() as {
+    auth: Auth | null;
+  };
+  // const [votesFor, setVotesFor] = useState(0);
+  // const [votesAgainst, setVotesAgainst] = useState(0);
   const [hasVoted, setHasVoted] = useState<"for" | "against" | null>(null);
   const [voteId, setVoteId] = useState<number | null>(null);
 
@@ -57,7 +61,11 @@ export default function Vote({ id }: VoteProps) {
 
       const response = await fetch(url, {
         method: method,
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${(auth as Auth).token}`, // Inclusion du jeton JWT
+        },
+
         body: JSON.stringify({
           decision_id: id,
           state: state,
@@ -88,8 +96,8 @@ export default function Vote({ id }: VoteProps) {
   return (
     <div>
       <h2>Votez :</h2>
-      <p>Votes Pour : {votesFor}</p>
-      <p>Votes Contre : {votesAgainst}</p>
+      {/* <p>Votes Pour : {votesFor}</p>
+      <p>Votes Contre : {votesAgainst}</p> */}
 
       <button
         type="button"

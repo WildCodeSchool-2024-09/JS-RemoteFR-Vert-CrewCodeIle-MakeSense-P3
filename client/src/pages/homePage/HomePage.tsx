@@ -3,9 +3,9 @@ import style from "./homePage.module.css";
 
 export default function HomePage() {
   return (
-    <div>
+    <>
       <NavBar />
-      <main>
+      <div>
         <button type="button" className={style.buttonCreateDecision}>
           Créer une prise de décision
         </button>
@@ -34,7 +34,7 @@ export default function HomePage() {
         <button type="button" className={style.buttonScrollToTop}>
           Revenir en haut
         </button>
-      </main>
-    </div>
+      </div>
+    </>
   );
 }

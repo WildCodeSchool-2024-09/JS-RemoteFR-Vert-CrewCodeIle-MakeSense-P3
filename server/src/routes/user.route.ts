@@ -1,16 +1,20 @@
 import express from "express";
-import { hashPassword } from "../middlewares/argon2.middleware";
 import userActions from "../modules/user/userActions";
-
+import authActions from "../auth/authActions";
 const router = express.Router();
-
+//register
 router.post(
   "/api/user",
-  userActions.validateData,
-  hashPassword,
+  //passeword recu en clair avec le formulaire envoyé de l'utilisateur
+  userActions.validateData, //recoit requete entre les deux on doit hacher le passord
+  authActions.hashPassword, // haché ici
   userActions.checkEmail,
-  userActions.add,
+  userActions.add, //paseword haché sur
 );
 router.get("/api/user", userActions.read); // pour lire la country de user
-
+//login
+//comparer les emails mdp
+//router.post("/api/auth", getUserByEmail, comparePassword, login);
+router.post("/api/login", authActions.login);
+//se connecte
 export default router;

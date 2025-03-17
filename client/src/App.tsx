@@ -1,11 +1,21 @@
 import { Outlet } from "react-router-dom";
+import { useState } from "react";
 import "./App.css";
 import { Bounce, ToastContainer } from "react-toastify";
 
+type Auth = {
+  credentials: {
+    id: number;
+    email: string;
+  };
+  token: string;
+};
 function App() {
+  //mettre à disposition les données d'authentifications sur toutes les pages
+
+  const [auth, setAuth] = useState(null as Auth | null);
   return (
     <>
-      <Outlet />
       <ToastContainer
         position="top-right"
         autoClose={5000}
@@ -18,6 +28,10 @@ function App() {
         theme="light"
         transition={Bounce}
       />
+
+      <main>
+        <Outlet context={{ auth, setAuth }} />
+      </main>
     </>
   );
 }

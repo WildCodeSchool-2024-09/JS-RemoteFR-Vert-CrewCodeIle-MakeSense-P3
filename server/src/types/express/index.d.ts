@@ -2,6 +2,7 @@
 export type {};
 
 declare global {
+  export type MyPayload = JwtPayload & { sub: string };
   namespace Express {
     export interface Request {
       /* ************************************************************************* */
@@ -9,6 +10,9 @@ declare global {
       //
       // user?: { ... }
       /* ************************************************************************* */
+      //propriétés nouvelles créent sur ma requete, faire muter des propriétés, sert à communiquer des propriétés sur
+      // res et res entre les middlewear;
+      auth: MyPayload;
     }
   }
 }

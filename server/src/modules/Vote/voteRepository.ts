@@ -25,12 +25,12 @@ class VoteRepository {
       [id],
     );
     if (rows.length === 0) return null; //verfie si aucun vote est trouvé
-    return rows[0] as Vote;
+    return rows[0] as Vote; //je retourne object = premier ligne du tableau
   }
 
   async readAll() {
     const [rows] = await DatabaseClient.query<Rows>("SELECT * FROM vote");
-    return rows as Vote[];
+    return rows as Vote[]; //retourne un tableau entier
   }
 
   //UPDATE vote
