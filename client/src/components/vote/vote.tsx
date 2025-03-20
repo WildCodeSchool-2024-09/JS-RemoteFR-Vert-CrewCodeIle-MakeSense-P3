@@ -11,6 +11,9 @@ export default function Vote({ id }: VoteProps) {
   const { auth } = useOutletContext() as {
     auth: Auth | null;
   };
+  console.info(auth);
+  console.info(auth?.user);
+  console.info(auth?.user.id);
   // const [votesFor, setVotesFor] = useState(0);
   // const [votesAgainst, setVotesAgainst] = useState(0);
   const [hasVoted, setHasVoted] = useState<"for" | "against" | null>(null);
@@ -23,6 +26,13 @@ export default function Vote({ id }: VoteProps) {
       try {
         const response = await fetch(
           `${import.meta.env.VITE_API_URL}/api/vote/check/${id}`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${auth?.token}`, // Inclusion du jeton JWT
+            },
+          },
         );
         if (response.ok) {
           const existingVote = await response.json();
@@ -44,10 +54,16 @@ export default function Vote({ id }: VoteProps) {
     };
 
     checkUserVote();
-  }, [id]);
+    console.info(auth?.token);
+  }, [id, auth?.token]);
 
   const submitVote = async (state: boolean) => {
     try {
+      const user_id = auth?.user.id;
+      if (user_id === undefined || user_id === null) {
+        console.error("erreur l'id de l'utilisateur est introuvable");
+        return;
+      }
       let url: string;
       let method: string;
 
@@ -69,7 +85,7 @@ export default function Vote({ id }: VoteProps) {
         body: JSON.stringify({
           decision_id: id,
           state: state,
-          user_id: 1,
+          user_id: user_id, // utilisation de l'id user recupéré
         }),
       });
 

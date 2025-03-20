@@ -8,7 +8,7 @@ import userRepository from "../modules/user/userRepository";
 
 const login: RequestHandler = async (req, res, next) => {
   //JWT
-  console.log(req.body);
+  console.info(req.body);
   try {
     //getUserbyemail
     // Fetch a specific user from the database based on the provided email
@@ -33,7 +33,6 @@ const login: RequestHandler = async (req, res, next) => {
       //separe hash passeword du reste (...)
       const myPayload: MyPayload = {
         sub: credentials.id.toString(),
-        // isAdmin: credentials.role_id === 3, //PAS DE TYPE IS ADMIN
       };
       const token = await jwt.sign(
         myPayload,

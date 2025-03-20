@@ -32,7 +32,7 @@ const read: RequestHandler = async (req, res, next) => {
 //EDIT vote
 const edit: RequestHandler = async (req, res, next) => {
   try {
-    const user_id = 1;
+    const user_id = req.auth.sub;
     const vote = {
       id: Number.parseInt(req.params.id),
       decision_id: req.body.decision_id,
@@ -102,7 +102,7 @@ const verifyDate = async (decisionId: number) => {
 const add: RequestHandler = async (req, res, next) => {
   try {
     const { decision_id, state } = req.body;
-    const user_id = 1;
+    const user_id = req.auth.sub;
 
     const existingVote = await voteRepository.getUserVote(decision_id, user_id);
 
@@ -150,10 +150,10 @@ const add: RequestHandler = async (req, res, next) => {
 
 const checkUserVote: RequestHandler = async (req, res, next) => {
   try {
-    const userId = 1;
+    const user_id = req.auth.sub;
     const decisionId = Number.parseInt(req.params.id);
 
-    const existingVote = await voteRepository.getUserVote(userId, decisionId);
+    const existingVote = await voteRepository.getUserVote(user_id, decisionId);
     if (existingVote != null) {
       res.json(existingVote);
     } else {
