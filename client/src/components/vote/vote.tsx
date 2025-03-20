@@ -60,10 +60,10 @@ export default function Vote({ id }: VoteProps) {
   const submitVote = async (state: boolean) => {
     try {
       const user_id = auth?.user.id;
-      if (user_id === undefined || user_id === null) {
-        console.error("erreur l'id de l'utilisateur est introuvable");
-        return;
-      }
+      // if (user_id === undefined || user_id === null) {
+      //   console.error("erreur l'id de l'utilisateur est introuvable");
+      //   return;
+      // }
       let url: string;
       let method: string;
 
