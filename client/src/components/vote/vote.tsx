@@ -11,9 +11,6 @@ export default function Vote({ id }: VoteProps) {
   const { auth } = useOutletContext() as {
     auth: Auth | null;
   };
-  console.info(auth);
-  console.info(auth?.user);
-  console.info(auth?.user.id);
   // const [votesFor, setVotesFor] = useState(0);
   // const [votesAgainst, setVotesAgainst] = useState(0);
   const [hasVoted, setHasVoted] = useState<"for" | "against" | null>(null);
@@ -58,8 +55,12 @@ export default function Vote({ id }: VoteProps) {
   }, [id, auth?.token]);
 
   const submitVote = async (state: boolean) => {
+    if (auth == null) {
+      throw new Error("go to login");
+    }
+
     try {
-      const user_id = auth?.user.id;
+      const user_id = auth.credentials.id;
       if (user_id === undefined || user_id === null) {
         console.error("erreur l'id de l'utilisateur est introuvable");
         return;
@@ -75,11 +76,12 @@ export default function Vote({ id }: VoteProps) {
         method = "PUT";
       }
 
+      console.info(auth.token);
       const response = await fetch(url, {
         method: method,
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${(auth as Auth).token}`, // Inclusion du jeton JWT
+          Authorization: `Bearer ${auth.token}`, // Inclusion du jeton JWT
         },
 
         body: JSON.stringify({
