@@ -21,7 +21,7 @@ function AddCategoryForm({ onCategoryAdded }: AddCategoryFormProps) {
    * Fonction pour ajouter une catégorie
    */
   const AddCategory = async (data: CategoryFormData) => {
-    // console.log("données", data);
+    console.info("données category envoyées au serveur", data);
     const newCategory = data.newCategory.trim();
 
     if (newCategory === "") {
@@ -37,7 +37,7 @@ function AddCategoryForm({ onCategoryAdded }: AddCategoryFormProps) {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ label: newCategory }),
+          body: JSON.stringify({ label: newCategory, color: "#FFFFFF" }),
         },
       );
 
@@ -53,39 +53,9 @@ function AddCategoryForm({ onCategoryAdded }: AddCategoryFormProps) {
       toast.error("Erreur de connexion au serveur");
     }
   };
-  // const AddCategory = async (data: CategoryFormData) => {
-  //   try {
-  //     const response = await fetch(
-  //       `${import.meta.env.VITE_API_URL}/api/category`,
-  //       {
-  //         method: "POST",
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //         },
-  //         body: JSON.stringify({ label: data.newCategory.trim() }),
-  //       },
-  //     );
-
-  //     if (!response.ok) {
-  //       const errorData = await response.json();
-  //       console.error("Erreur API :", errorData);
-  //       toast.error(
-  //         `Erreur serveur : ${errorData.message || "Erreur inconnue"}`,
-  //       );
-  //       return;
-  //     }
-
-  //     onCategoryAdded(data.newCategory);
-  //     reset();
-  //     toast.success("Catégorie ajoutée avec succès !");
-  //   } catch (error) {
-  //     console.error("Erreur lors de l'ajout :", error);
-  //     toast.error("Erreur de connexion au serveur");
-  //   }
-  // };
 
   return (
-    <form onSubmit={handleSubmit(AddCategory)} className={style.addCategory}>
+    <div>
       <label htmlFor="newCategory"> Ajoutez une nouvelle catégorie: </label>
       <article className={style.addCategoryContainer}>
         <input
@@ -97,18 +67,15 @@ function AddCategoryForm({ onCategoryAdded }: AddCategoryFormProps) {
             // onChange: (e) => console.log("VALEUR saisie", e.target.value),
           })}
         />
-        <button type="submit" className={style.addButton}>
-          ➕
-        </button>
         <button
           type="button"
-          onClick={() => AddCategory({ newCategory: "test manuel" })}
+          onClick={handleSubmit(AddCategory)}
           className={style.addButton}
         >
           ➕
         </button>
       </article>
-    </form>
+    </div>
   );
 }
 

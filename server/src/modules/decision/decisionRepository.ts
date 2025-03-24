@@ -11,12 +11,13 @@ type Decision = {
   context: string;
   profit: string;
   risk: string;
+  // category_id: number; //ajout de category id
 };
 //CREATE role
 class DecisionRepository {
   async create(decision: Omit<Decision, "id">) {
     const [result] = await databaseClient.query<Result>(
-      " INSERT INTO decision (title, category, country, description, max_date, min_date,context, profit, risk)  VALUES (?,?,?,?,?,?,?,?,?,?)",
+      " INSERT INTO decision (title, category, country, description, max_date, min_date,context, profit, risk)  VALUES (?,?,?,?,?,?,?,?,?)",
       [
         decision.title,
         decision.category,

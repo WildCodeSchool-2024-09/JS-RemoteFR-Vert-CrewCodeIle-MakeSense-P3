@@ -20,6 +20,7 @@ const catAlreadyExist: RequestHandler = async (req, res, next) => {
 };
 
 const add: RequestHandler = async (req, res, next): Promise<void> => {
+  console.info("requete recue pour ajouter category", req.body);
   try {
     const newCategory = {
       label: req.body.label,

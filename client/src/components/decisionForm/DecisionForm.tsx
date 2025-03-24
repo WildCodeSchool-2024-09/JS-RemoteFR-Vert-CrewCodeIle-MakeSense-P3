@@ -17,9 +17,7 @@ type dataDecision = {
   context: string;
   profit: string;
   risk: string;
-  expert: string;
-  animateurs: string;
-  impactedperson: string;
+
   categories: string[];
   newcategories: string;
 };
@@ -37,9 +35,7 @@ function CreateDecisionForm() {
         context: "",
         profit: "",
         risk: "",
-        expert: "",
-        animateurs: "",
-        impactedperson: "",
+
         categories: ["Category1", "Category2"],
         newcategories: "",
       },
@@ -97,6 +93,7 @@ function CreateDecisionForm() {
   // console.log(fetchCategories);
 
   const onSubmit = async (data: FieldValues) => {
+    console.info("donnée envoyées :", data);
     try {
       const response = await fetch(
         `${import.meta.env.VITE_API_URL}/api/decision`,
@@ -243,25 +240,6 @@ function CreateDecisionForm() {
           </p>
         </section>
 
-        {/* section liste  */}
-        <section>
-          <legend> Listes: </legend>
-          <label htmlFor="impactedperson">
-            {" "}
-            Qui sont les personnes impactées ?{" "}
-          </label>
-          <input
-            type="text"
-            id="impactedperson"
-            // {...register("impactedperson")}
-          />
-
-          <label htmlFor="animateurs"> Qui sont les animateurs ? </label>
-          <input type="text" id="animateurs" />
-
-          <label htmlFor="experts"> Qui sont les experts ? </label>
-          <input type="text" id="experts" />
-        </section>
         {/* section boutons  */}
         <section className={style.buttongroup}>
           <button type="button" className={style.canceldButton}>

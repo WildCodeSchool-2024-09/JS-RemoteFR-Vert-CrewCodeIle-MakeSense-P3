@@ -1,9 +1,9 @@
-import DecisionForm from "../../components/decisionForm/DecisionForm";
+import CreateDecisionForm from "../../components/decisionForm/DecisionForm";
 
 function DecisionFormPage() {
   return (
     <>
-      <DecisionForm />
+      <CreateDecisionForm />
     </>
   );
 }

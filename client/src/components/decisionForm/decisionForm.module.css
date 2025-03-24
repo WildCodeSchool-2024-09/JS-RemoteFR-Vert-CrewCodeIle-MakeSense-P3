@@ -1,193 +1,148 @@
-/* style des éléments de haut de page: */
+/* 🌟 Conteneur principal du formulaire */
+.decisioncontainer {
+  width: 60%;
+  margin: auto;
+  padding: 20px;
+  background: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* 🏷️ Logo et bouton de sortie */
 .logo_exit {
-  flex-direction: row;
-  justify-content: space-between;
-}
-
-/* titres: */
-h1 {
-  font-size: 24px;
-  margin-bottom: 20px;
-  color: #196c84;
-  font-weight: bold;
-}
-legend {
-  font-size: 18px;
-  margin-bottom: 10px;
-  color: #196c84;
-}
-.section h2 {
-  font-size: 18px;
-  margin-bottom: 10px;
-}
-h2 {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
 }
 
-/* général: */
-.section {
-  margin-bottom: 30px;
+#logo {
+  width: 120px;
 }
 
+.exitButton {
+  background: transparent;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+/* 🎯 Titres */
+h2 {
+  text-align: center;
+  color: #333;
+  font-size: 1.8rem;
+}
+
+/* 📑 Formulaire global */
+.formcontainer {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* 📌 Label */
 label {
-  font-size: 14px;
-  display: block;
+  font-weight: bold;
   margin-bottom: 5px;
-  color: #196c84;
+  display: block;
 }
 
+/* 📋 Input & Select */
 input,
 select,
 textarea {
   width: 100%;
   padding: 10px;
-}
-textarea {
-  resize: vertical;
-  height: 300px;
-}
-section {
-  margin-bottom: 60px;
-}
-/* boutton: */
-.canceldButton {
-  background-color: #196c84;
-  color: white;
-  padding: 10px;
-  cursor: pointer;
+  border: 1px solid #ccc;
   border-radius: 5px;
+  font-size: 1rem;
+  background: #fff;
 }
-.exitButton {
-  background-color: white;
 
-  padding: 10px;
-  cursor: pointer;
-  border-radius: 5px;
-  border: none;
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: #007bff;
+  outline: none;
 }
+
+/* 🎛️ Section des dates */
+.planningDates {
+  border-top: 2px solid #ccc;
+  padding-top: 10px;
+}
+
+.gridContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+/* ℹ️ Remarque sur les dates */
+.remarqueNb {
+  font-size: 0.9rem;
+  color: #666;
+  margin-top: 5px;
+}
+
+/* 📌 Boutons */
+.buttongroup {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.canceldButton,
 .addDecisionButton {
-  background-color: #9b084f;
-  color: white;
-  padding: 10px;
+  padding: 10px 15px;
+  font-size: 1rem;
+  border: none;
   cursor: pointer;
   border-radius: 5px;
 }
-/* style liés à la décision: */
-.decision-container {
-  padding: 20px;
-  margin: 0 auto;
-  max-width: 100%;
-  background: #f9f9f9;
-  border-radius: 10px;
-}
-#logo {
-  width: 20px;
+
+.canceldButton {
+  background: #ccc;
+  color: #333;
 }
 
-/* style liés aux catégories : */
+.addDecisionButton {
+  background: #007bff;
+  color: white;
+}
 
+.addDecisionButton:hover {
+  background: #0056b3;
+}
+
+.canceldButton:hover {
+  background: #999;
+}
+
+/* 🏷️ Ajout de catégorie */
 .addCategory {
-  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 10px;
 }
+
 .addCategoryContainer {
   display: flex;
   align-items: center;
   gap: 10px;
 }
-/* .addCategoryContainer input{
-  flex:1;
-  /* input prend toute la taille disponible */
 
-.addPlaceContainer {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.addCategoryContainer button {
-  padding: 10px;
-  cursor: pointer;
+.addButton {
+  background: #28a745;
+  color: white;
+  border: none;
+  padding: 5px 10px;
   border-radius: 5px;
-  color: black;
-  background-color: #fff30d;
-}
-.addCategoryContainer button:hover {
-  background-color: #9b084f;
-}
-.addPlaceButton {
-  padding: 10px;
   cursor: pointer;
-  border-radius: 5px;
-  color: black;
-  background-color: #fff30d;
-}
-.addPlaceContainer button:hover {
-  background-color: #9b084f;
 }
 
-/* style de la grid et autres liés aux Planning: */
-.gridContainer {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr); /* Définit 3 colonnes de taille égale */
-  gap: 20px;
-}
-
-.gridContainer article {
-  display: flex;
-  flex-direction: column;
-}
-
-.gridContainer label {
-  margin-bottom: 5px;
-  font-weight: bold;
-}
-
-.gridContainer input {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-.remarqueNb {
-  font-size: 12px;
-  color: #666;
-  margin-top: 10px;
-  line-height: 1.4; /* Pour améliorer la lisibilité */
-  font-style: italic;
-}
-
-/* style lié au bouttons en bas de page ( annuler, et crée la prise de décision): */
-.buttongroup {
-  display: flex;
-  /* gap: 50px; */
-  justify-content: space-evenly;
-  flex-direction: row;
-}
-/* Breakpoint : écrans plus larges (768px et plus) */
-@media (max-width: 768px) {
-  .decision-container {
-    max-width: 800px;
-    padding: 40px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
-
-  h1 {
-    font-size: 28px;
-  }
-
-  .section h2 {
-    font-size: 20px;
-  }
-
-  input,
-  select,
-  textarea {
-    font-size: 16px;
-    padding: 15px;
-  }
-
-  .gridContainer {
-    grid-template-columns: repeat(1, 1fr); /* 1 colonne sur les petits écrans */
-  }
+.addButton:hover {
+  background: #218838;
 }

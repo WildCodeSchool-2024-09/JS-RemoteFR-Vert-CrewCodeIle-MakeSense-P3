@@ -27,6 +27,8 @@ role_id INTEGER NOT NULL DEFAULT 1,
 FOREIGN KEY (role_id) REFERENCES role(id)
 );
 
+-- modification category id
+
 CREATE TABLE IF NOT EXISTS decision (
 id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
 title VARCHAR(255) NOT NULL,
@@ -36,13 +38,15 @@ description TEXT NOT NULL,
 context TEXT NOT NULL,
 profit TEXT NOT NULL,
 risk TEXT NOT NULL,
-step VARCHAR(50) NOT NULL,
+-- step VARCHAR(50) NOT NULL,
 created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
 updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 user_id INTEGER NOT NULL,
 FOREIGN KEY (user_id) REFERENCES user(id),
 country_id INTEGER NOT NULL,
 FOREIGN KEY (country_id) REFERENCES country(id)
+category_id INTEGER NOT NULL,
+FOREIGN KEY (category_id) REFERENCES category(id)
 );
 
 CREATE TABLE IF NOT EXISTS category (
@@ -95,5 +99,5 @@ decision_id INTEGER NOT NULL,
 FOREIGN KEY (decision_id) REFERENCES decision(id)
 );
 
-INSERT INTO role (id,label) VALUES (1, 'applicant'), (2, 'user'), (3, 'administrator'), (4, 'rejected');
+
 INSERT INTO country (id,label) VALUES (1, 'France'), (2, 'Mexique'), (3, 'Canada'), (4, 'Pérou'), (5, 'Sénégal'), (6, 'Philippines'), (7, 'Liban'), (8, 'Cote d''Ivoire'), (9, 'Australie'), (10, 'Ukraine');

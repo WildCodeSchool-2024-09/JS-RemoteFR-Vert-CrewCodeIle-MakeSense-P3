@@ -2,14 +2,15 @@ import type { RequestHandler } from "express";
 import decisionRepository from "./decisionRepository";
 
 const add: RequestHandler = async (req, res, next) => {
+  console.info("nouvelle decision ", req.body);
   try {
     const newDecision = {
       title: req.body.title,
       category: req.body.category,
       country: req.body.country,
       description: req.body.description,
-      max_date: req.body.max_date,
-      min_date: req.body.min_date,
+      max_date: req.body.max_date.split("T")[0],
+      min_date: req.body.min_date.split("T")[0],
       context: req.body.context,
       profit: req.body.profit,
       risk: req.body.risk,
