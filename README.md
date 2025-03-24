@@ -377,10 +377,10 @@ Ce projet répond à une double ambition :
 
 ### Objectifs et enjeux
 
-✔️ Coordination efficace entre les membres
-✔️ Transparence des échanges
-✔️ Soumission et suivi des décisions
-✔️ Participation active via un système de vote
+✔️ Coordination efficace entre les membres  
+✔️ Transparence des échanges  
+✔️ Soumission et suivi des décisions  
+✔️ Participation active via un système de vote  
 ✔️ Archivage et consultation des décisions passées
 
 En offrant un espace structuré pour l’**idéation, le débat, la validation et le suivi des décisions**, cette plateforme contribue à renforcer l’impact de **MakeSense** dans ses missions.
