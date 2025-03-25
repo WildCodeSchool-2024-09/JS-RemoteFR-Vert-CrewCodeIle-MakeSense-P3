@@ -44,7 +44,7 @@ type User = {
 };
 
 type Auth = {
-  user: User;
+  credentials: User;
   token: string;
 };
 // category

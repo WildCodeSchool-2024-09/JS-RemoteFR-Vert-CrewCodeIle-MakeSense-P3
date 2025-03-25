@@ -1,15 +1,8 @@
-import { Link, Outlet } from "react-router-dom";
 import { useState } from "react";
+import { Link, Outlet } from "react-router-dom";
 import "./App.css";
 import { Bounce, ToastContainer } from "react-toastify";
 
-type Auth = {
-  credentials: {
-    id: number;
-    email: string;
-  };
-  token: string;
-};
 function App() {
   //mettre à disposition les données d'authentifications sur toutes les pages
 
