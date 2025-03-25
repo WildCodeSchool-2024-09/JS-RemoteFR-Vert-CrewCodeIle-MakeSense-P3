@@ -365,9 +365,13 @@ Nous accueillons avec plaisir les contributions ! Veuillez suivre ces étapes po
 - Ajoutez des tests pour toute nouvelle fonctionnalité ou correction de bug.
 - Documentez clairement vos modifications dans la description de la pull request.  
 
-![Logo Intra_Sense](client/public/logo.png)
+
 
 # Intra_Sense - Plateforme de Gestion Collaborative de Prises de Décision
+
+<div align="center">
+  <img src="client/public/logo.png" alt="Logo Intra_Sense">
+</div>
 
 ## Table des Matières
 
