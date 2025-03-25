@@ -365,11 +365,11 @@ Nous accueillons avec plaisir les contributions ! Veuillez suivre ces étapes po
 - Ajoutez des tests pour toute nouvelle fonctionnalité ou correction de bug.
 - Documentez clairement vos modifications dans la description de la pull request.  
 
-<!-- saut de ligne -->
+Test 3 tirets
+---
 
-<div align="center">
-  <img src="client/public/logo.png" alt="Logo Intra_Sense">
-</div>
+Test 3 étoiles
+***
 
 # Intra_Sense - Plateforme de Gestion Collaborative de Prises de Décision
 
