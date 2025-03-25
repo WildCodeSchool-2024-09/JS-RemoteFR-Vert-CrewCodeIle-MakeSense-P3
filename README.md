@@ -363,9 +363,30 @@ Nous accueillons avec plaisir les contributions ! Veuillez suivre ces étapes po
 
 - Assurez-vous que votre code respecte les standards de codage en exécutant `npm run check` avant de pousser vos modifications.
 - Ajoutez des tests pour toute nouvelle fonctionnalité ou correction de bug.
-- Documentez clairement vos modifications dans la description de la pull request.
+- Documentez clairement vos modifications dans la description de la pull request.  
+
+![Logo Intra_Sense](client/public/logo.png)
 
 # Intra_Sense - Plateforme de Gestion Collaborative de Prises de Décision
+
+## Table des Matières
+
+- [Intra_Sense - Plateforme de Gestion Collaborative de Prises de Décision](#intra_sense---plateforme-de-gestion-collaborative-de-prises-de-décision)
+  - [Table des Matières](#table-des-matières)
+  - [📝 Introduction](#-introduction)
+    - [Objectifs et enjeux](#objectifs-et-enjeux)
+  - [👥 Équipe de développement](#équipe-de-développement)
+  - [⚙️ Environnement technique](#-environnement-technique)
+    - [Outils et technologies utilisées](#outils-et-technologies-utilisées)
+  - [📦 Packages NPM](#-packages-npm)
+    - [Frontend](#frontend)
+    - [Backend](#backend)
+  - [🗄️ Modélisation de la base de données](#-modélisation-de-la-base-de-données)
+    - [Modèle Conceptuel de Données (MCD)](#modèle-conceptuel-de-données-mcd)
+    - [Modèle Logique de Données (MLD)](#modèle-logique-de-données-mld)
+    - [Modèle Physique de Données (MPD)](#modèle-physique-de-données-mpd)
+  - [🏗 Architecture du projet](#-architecture-du-projet)
+  - [🛠 Outils utilisés](#-outils-utilisés)
 
 ## 📝 Introduction
 
@@ -385,14 +406,14 @@ Ce projet répond à une double ambition :
 
 En offrant un espace structuré pour l’**idéation, le débat, la validation et le suivi des décisions**, cette plateforme contribue à renforcer l’impact de **MakeSense** dans ses missions.
 
-## Équipe de développement
+## 👥 Équipe de développement
 
 - [Amandine Grard Laurent](https://github.com/AmandineGrardLaurent)
 - [Léa Monthieux](https://github.com/LEAMTX)
 - [Damien Baczkiewicz](https://github.com/DamBKZ)
 - [Aurélien Haye](https://github.com/Aurel1H)
 
-## 🚀 Environnement technique
+## ⚙️ Environnement technique
 
 ### Outils et technologies utilisées
 
