@@ -6,5 +6,6 @@ const router = express.Router();
 router.post("/api/decision", decisionActions.add);
 
 router.get("/api/decision/:id", decisionActions.read);
-
+//afficher toutes les decisions
+router.get("/api/decision", decisionActions.browse);
 export default router;

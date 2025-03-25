@@ -7,7 +7,7 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
 // Import the main app component
 import App from "./App";
-import DecisionDetailPage from "./pages/decisionDetailPage/DecisionDetailPage";
+import DecisionList from "./components/decisionForm/DecisionList";
 import DecisionFormPage from "./pages/decisionFormPage/DecisionFormPage";
 import ErrorPage from "./pages/errorPage/ErrorPage";
 import HomePage from "./pages/homePage/HomePage";
@@ -38,10 +38,6 @@ const router = createBrowserRouter([
         element: <HomePage />,
       },
       {
-        path: "/decisionslist/:id",
-        element: <DecisionDetailPage />,
-      },
-      {
         path: "*",
         element: <ErrorPage />,
       },
@@ -52,6 +48,10 @@ const router = createBrowserRouter([
       {
         path: "/register",
         element: <RegisterPage />,
+      },
+      {
+        path: "/decisionlist",
+        element: <DecisionList />,
       },
     ],
   },

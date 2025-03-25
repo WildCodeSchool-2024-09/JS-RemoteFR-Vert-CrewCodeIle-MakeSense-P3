@@ -1,99 +1,93 @@
+// CreateDecisionForm.tsx
 import style from "./decisionForm.module.css";
 import "react-toastify/dist/ReactToastify.css";
-// import { useEffect } from "react"; // Pour effectuer le fetch au montage du composant
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import type { FieldValues } from "react-hook-form";
 import { toast } from "react-toastify";
 import AddCategoryForm from "./Add";
 
+type Category = {
+  id: number;
+  label: string;
+};
+
 type dataDecision = {
   title: string;
-  category: string;
-  // addcategory: string;
-  country: string;
+  country_id: number;
+  // country: string;
   min_date: Date;
   max_date: Date;
   description: string;
   context: string;
   profit: string;
   risk: string;
-
-  categories: string[];
-  newcategories: string;
+  category_id: number;
 };
 
 function CreateDecisionForm() {
-  const { register, handleSubmit, setValue, watch, reset } =
-    useForm<dataDecision>({
-      defaultValues: {
-        title: "",
-        category: "",
-        country: "",
-        min_date: new Date(),
-        max_date: new Date(),
-        description: "",
-        context: "",
-        profit: "",
-        risk: "",
+  // 1. État pour stocker les catégories
+  const [categoryList, setCategoryList] = useState<Category[]>([]);
 
-        categories: ["Category1", "Category2"],
-        newcategories: "",
-      },
-    });
+  // 2. Formulaire
+  const { register, handleSubmit, reset } = useForm<dataDecision>({
+    defaultValues: {
+      title: "",
+      country_id: 0,
+      min_date: new Date(),
+      max_date: new Date(),
+      description: "",
+      context: "",
+      profit: "",
+      risk: "",
+      category_id: 0,
+    },
+  });
 
-  const categories = watch("categories");
-  //BEUG GRISÉ
-  // const newcategories = watch("newcategories");
-  // const fetchCategories = async () => {
-  //   try {
-  //     const response = await fetch(
-  //       `${import.meta.env.VITE_API_URL}/api/category`,
-  //     ); // Récupère les catégories avec un GET
-  //     if (response.ok) {
-  //       const data = await response.json();
-  //       // console.log("categories recupérées :", data);
-  //       setValue(
-  //         "categories",
-  //         data.map((category: { label: string }) => category.label),
-  //       ); // Met à jour les catégories
-  //     } else {
-  //       toast.error("Erreur lors du chargement des catégories");
-  //     }
-  //   } catch (error) {
-  //     toast.error("Erreur de connexion au serveur");
-  //   }
-  // };
+  // 4. Charger au montage
+  useEffect(() => {
+    // 3. Fonction pour charger les catégories
+    const fetchCategories = async () => {
+      try {
+        const response = await fetch(
+          `${import.meta.env.VITE_API_URL}/api/category`,
+        );
+        if (response.ok) {
+          const data = await response.json();
+          setCategoryList(data); // [{ id: 1, label: "RH" }, ...]
+        } else {
+          toast.error("Erreur lors du chargement des catégories");
+        }
+      } catch (error) {
+        toast.error("Erreur de connexion au serveur");
+      }
+    };
+    fetchCategories();
+  }, []);
 
-  // // Appelle `fetchCategories` au montage du composant
-  // useEffect(() => {
-  //   fetchCategories();
-  // }, []);
-
-  /**
-   * 🔹 Fonction appelée après l'ajout d'une nouvelle catégorie par `AddCategoryForm`
-   */
-  const handleCategoryAdded = (newCategory: string) => {
-    // console.log("nouvelle catégorie ajoutée", newCategory);
-    setValue("categories", [...categories, newCategory]); // Met à jour la liste localement
+  // 5. Quand une catégorie est ajoutée depuis <AddCategoryForm />
+  const handleCategoryAdded = () => {
+    toast.success("Catégorie ajoutée !");
+    // fetchCategories(); // Recharge les catégories
+    window.location.reload();
   };
 
   const country = [
-    "France",
-    "Mexique",
-    "Canada",
-    "Pérou",
-    "Sénégal",
-    "Philippines",
-    "Liban",
-    "Cote d'Ivoire",
-    "Australie",
-    "Ukraine",
+    { id: 1, label: "France" },
+    { id: 2, label: "Mexique" },
+    { id: 3, label: "Canada" },
+    { id: 4, label: "Pérou" },
+    { id: 5, label: "Sénégal" },
+    { id: 6, label: "Philippines" },
+    { id: 7, label: "Liban" },
+    { id: 8, label: "Cote d'Ivoire" },
+    { id: 9, label: "Australie" },
+    { id: 10, label: "Ukraine" },
   ];
 
-  // console.log(fetchCategories);
-
+  // 6. Envoi du formulaire
   const onSubmit = async (data: FieldValues) => {
-    console.info("donnée envoyées :", data);
+    console.info("Données envoyées :", data);
     try {
       const response = await fetch(
         `${import.meta.env.VITE_API_URL}/api/decision`,
@@ -106,152 +100,163 @@ function CreateDecisionForm() {
         },
       );
 
-      // console.log(data);
       if (response.ok) {
         await response.json();
-        // console.log(result);
         reset();
-        toast.success("Demande envoyée à l'administrateur");
+        toast.success("Décision envoyée !");
       } else {
-        toast.error("Erreur lors de l'envoi de la demande");
+        toast.error("Erreur lors de l'envoi");
       }
     } catch (error) {
-      toast.error("Erreur lors de l'envoi de la connexion au serveur");
+      toast.error("Erreur de connexion au serveur");
     }
   };
 
   return (
     <section className={style.decisioncontainer}>
+           {" "}
       <section className={style.logo_exit}>
-        <img id="logo" src="/intrasenselogo.png" alt="logo" />
-
+                <img id="logo" src="/intrasenselogo.png" alt="logo" />       {" "}
         <button type="button" className={style.exitButton}>
-          {" "}
-          ✖{" "}
+          ✖
         </button>
+             {" "}
       </section>
-
-      <h2> Prise de décision: </h2>
+            <h2>Prise de décision:</h2>     {" "}
       <form onSubmit={handleSubmit(onSubmit)} className="formcontainer">
+                {/* Titre */}       {" "}
         <section>
-          <label htmlFor="intitule"> Intitulé de la prise de décision: </label>
+                    <label htmlFor="title">Intitulé :</label>         {" "}
           <input
             type="text"
             id="title"
-            placeholder="saisissez le texte ici"
+            placeholder="Saisissez le titre ici"
             {...register("title")}
           />
+                 {" "}
         </section>
-
-        {/* liste déroulante des catégories */}
+                {/* Catégorie */}       {" "}
         <section>
-          <label htmlFor="category"> Saisissez une catégorie: </label>
+                    <label htmlFor="category_id">Catégorie :</label>         {" "}
           <select
-            id="category"
-            {...register("category", {
-              required: "selectionnez une categorie",
+            id="category_id"
+            {...register("category_id", {
+              required: "Sélectionnez une catégorie",
             })}
           >
-            <option value=""> Choississez une catégorie </option>
-            {categories.map((category) => (
-              <option key={category} value={category}>
-                {" "}
-                {category}{" "}
+                        <option value="">Choisissez une catégorie</option>     
+                 {" "}
+            {categoryList.map((cat) => (
+              <option key={cat.id} value={cat.id}>
+                                {cat.label}             {" "}
               </option>
             ))}
+                     {" "}
           </select>
+                 {" "}
         </section>
-        {/* 🔹 Ajout du formulaire d'ajout de catégorie */}
-        <AddCategoryForm onCategoryAdded={handleCategoryAdded} />
-
+                {/* Formulaire d'ajout de catégorie */}       {" "}
+        <AddCategoryForm onCategoryAdded={handleCategoryAdded} />       {" "}
+        {/* Pays */}       {" "}
         <section>
-          <label htmlFor="country"> Saisissez une localisation: </label>
+                    <label htmlFor="country">Localisation :</label>         {" "}
           <select
-            id="country"
-            {...register("country", {
-              required: "choisissez une localisation",
+            id="country_id"
+            {...register("country_id", {
+              required: "Choisissez un pays",
             })}
           >
-            <option value=""> Choississez une localisation </option>
-            {country.map((country) => (
-              <option key={country} value={country}>
-                {" "}
-                {country}{" "}
+                        <option value="">Choisissez un pays</option>           {" "}
+            {country.map((c) => (
+              <option key={c.id} value={c.id}>
+                {c.label}
               </option>
             ))}
+                     {" "}
           </select>
+                 {" "}
         </section>
-        {/* section description  */}
+                {/* Description */}       {" "}
         <section>
-          <label htmlFor="description"> Description: </label>
+                    <label htmlFor="description">Description :</label>         {" "}
           <textarea
             id="description"
-            placeholder="saisissez la description ici"
+            placeholder="Saisissez la description ici"
             {...register("description")}
           />
+                 {" "}
         </section>
-
-        {/* section context sur l'organisation  */}
+                {/* Contexte */}       {" "}
         <section>
-          <label htmlFor="context"> Quel impact sur l'organisation ? </label>
+                    <label htmlFor="context">Impact sur l'organisation :</label>
+                   {" "}
           <textarea
             id="context"
-            placeholder="saisissez l'impact ici"
+            placeholder="Saisissez le contexte ici"
             {...register("context")}
           />
+                 {" "}
         </section>
-
-        {/* Bénéfices :  */}
+                {/* Bénéfices */}       {" "}
         <section>
-          <label htmlFor="profit"> Quels sont les bénéfices? </label>
+                    <label htmlFor="profit">Bénéfices :</label>         {" "}
           <textarea
             id="profit"
-            placeholder="saisissez les bénéfices ici"
+            placeholder="Saisissez les bénéfices ici"
             {...register("profit")}
           />
+                 {" "}
         </section>
-
-        {/* Risques */}
+                {/* Risques */}       {" "}
         <section>
-          <label htmlFor="risk"> Quels sont les risques? </label>
+                    <label htmlFor="risk">Risques :</label>         {" "}
           <textarea
             id="risk"
-            placeholder="saisissez les risques ici"
+            placeholder="Saisissez les risques ici"
             {...register("risk")}
           />
+                 {" "}
         </section>
-
-        {/* section planning */}
+                {/* Dates */}       {" "}
         <section className={style.planningDates}>
-          <legend>Planning: </legend>
+                    <legend>Planning :</legend>         {" "}
           <article className={style.gridContainer}>
+                       {" "}
             <article>
-              <label htmlFor="min_date"> Date de clôture des votes </label>
-              <input type="date" id="min_date" {...register("min_date")} />
+                            <label htmlFor="min_date">Début :</label>           
+                <input type="date" id="min_date" {...register("min_date")} />   
+                     {" "}
             </article>
+                       {" "}
             <article>
-              <label htmlFor="max_date">Date de clôture de la décision</label>
-              <input type="date" id="max_date" {...register("max_date")} />
+                            <label htmlFor="max_date">Fin :</label>             {" "}
+              <input type="date" id="max_date" {...register("max_date")} />     
+                   {" "}
             </article>
+                     {" "}
           </article>
+                   {" "}
           <p className={style.remarqueNb}>
-            NB: La période de prise de décision totale doit être comprise entre
-            15 jours et 90 jours.
+                        NB: La durée doit être comprise entre 15 et 90 jours.  
+                   {" "}
           </p>
+                 {" "}
         </section>
-
-        {/* section boutons  */}
+                {/* Boutons */}       {" "}
         <section className={style.buttongroup}>
+                   {" "}
           <button type="button" className={style.canceldButton}>
-            {" "}
-            Annuler{" "}
+            Annuler
           </button>
+                   {" "}
           <button type="submit" className={style.addDecisionButton}>
-            {" "}
-            Ajouter une décision{" "}
+            Ajouter
           </button>
+                 {" "}
         </section>
+             {" "}
       </form>
+         {" "}
     </section>
   );
 }

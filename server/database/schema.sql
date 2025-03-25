@@ -27,6 +27,13 @@ role_id INTEGER NOT NULL DEFAULT 1,
 FOREIGN KEY (role_id) REFERENCES role(id)
 );
 
+CREATE TABLE IF NOT EXISTS category (
+id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+label VARCHAR(50) NOT NULL,
+color VARCHAR(25) NOT NULL,
+created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
 -- modification category id
 
 CREATE TABLE IF NOT EXISTS decision (
@@ -44,18 +51,12 @@ updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 user_id INTEGER NOT NULL,
 FOREIGN KEY (user_id) REFERENCES user(id),
 country_id INTEGER NOT NULL,
-FOREIGN KEY (country_id) REFERENCES country(id)
+FOREIGN KEY (country_id) REFERENCES country(id),
 category_id INTEGER NOT NULL,
 FOREIGN KEY (category_id) REFERENCES category(id)
 );
 
-CREATE TABLE IF NOT EXISTS category (
-id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
-label VARCHAR(50) NOT NULL,
-color VARCHAR(25) NOT NULL,
-created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-);
+
 
 CREATE TABLE IF NOT EXISTS decision_category (
 id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
@@ -101,3 +102,6 @@ FOREIGN KEY (decision_id) REFERENCES decision(id)
 
 
 INSERT INTO country (id,label) VALUES (1, 'France'), (2, 'Mexique'), (3, 'Canada'), (4, 'Pérou'), (5, 'Sénégal'), (6, 'Philippines'), (7, 'Liban'), (8, 'Cote d''Ivoire'), (9, 'Australie'), (10, 'Ukraine');
+INSERT INTO role (label) VALUES ('Utilisateur');
+INSERT INTO user (firstname, lastname, email, hash_password, avatar, country_id, role_id)
+VALUES ('Lea', 'Test', 'lea@example.com', 'hash', 'avatar.jpg', 1, 1);

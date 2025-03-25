@@ -7,7 +7,8 @@ type CategoryFormData = {
 };
 
 type AddCategoryFormProps = {
-  onCategoryAdded: (category: string) => void;
+  onCategoryAdded: () => void;
+  // onCategoryAdded: (category: string) => void;
 };
 
 function AddCategoryForm({ onCategoryAdded }: AddCategoryFormProps) {
@@ -42,7 +43,9 @@ function AddCategoryForm({ onCategoryAdded }: AddCategoryFormProps) {
       );
 
       if (response.ok) {
-        onCategoryAdded(newCategory); // Met à jour la liste des catégories dans CreateDecisionForm
+        // onCategoryAdded(newCategory); //
+        // Met à jour la liste des catégories dans CreateDecisionForm
+        onCategoryAdded();
         reset(); // Réinitialise le champ après l'ajout
         toast.success("Catégorie ajoutée avec succès !");
       } else {
