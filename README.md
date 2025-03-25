@@ -494,8 +494,8 @@ En offrant un espace structuré pour l’**idéation, le débat, la validation e
 
 ## 🛠 Outils utilisés
 
-✅ Backlog : GitHub Projects
-✅ Dépôt de code : GitHub
+✅ Backlog : GitHub Projects  
+✅ Dépôt de code : GitHub  
 ✅ Communication : Discord
 
 🚀 **Intra_Sense : Pour une prise de décision collaborative, transparente et efficace !** 🎯
