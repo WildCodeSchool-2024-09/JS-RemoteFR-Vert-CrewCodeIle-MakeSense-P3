@@ -1,5 +1,4 @@
 // Load the express module to create a web application
-
 import express from "express";
 
 const app = express();
@@ -21,6 +20,7 @@ const app = express();
 import cors from "cors";
 
 if (process.env.CLIENT_URL != null) {
+  console.log(process.env.CLIENT_URL);
   app.use(cors({ origin: [process.env.CLIENT_URL] }));
 }
 

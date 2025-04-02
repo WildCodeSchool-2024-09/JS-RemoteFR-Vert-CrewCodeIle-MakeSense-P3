@@ -49,11 +49,21 @@ class DecisionRepository {
     );
     return rows[0];
   }
+  //read all pour lire les decisisons postées
   async readAll() {
     const [rows] = await databaseClient.query<Rows>(
       "SELECT decision.id, decision.title, decision.min_date, decision.max_date, decision.description, decision.context, decision.profit, decision.risk, country.label AS country, user.firstname, user.lastname, user.avatar FROM decision INNER JOIN country ON decision.country_id = country.id INNER JOIN user ON decision.user_id = user.id",
     );
     return rows;
+  }
+  // action read country pour vote module
+  async readCountryAndDates(decisionId: number) {
+    const [rows] = await databaseClient.query<Rows>(
+      `SELECT decision.country_id AS country_id, decision.min_date AS min_date, decision.max_date AS max_date, decision.created_at AS created_at FROM decision
+      WHERE decision.id=?`,
+      [decisionId],
+    );
+    return rows[0];
   }
 }
 

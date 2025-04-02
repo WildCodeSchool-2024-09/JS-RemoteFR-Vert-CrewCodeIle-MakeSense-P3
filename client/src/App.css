@@ -5,17 +5,67 @@
   font-family: var(--font-heading);
   font-weight: normal;
 }
+/* //css de main */
+.appWrap {
+  display: flex; 
+  flex-direction: column;
+  min-height: 100vh;
+}
 
+.mainContent { 
+  flex: 1;
+}
+.navContainer{
+   background-color: var(--color-primary-active);
+}
+.footer {
+  background-color: var(--color-primary-active);
+  color: white;
+  text-align: center;
+  padding: 1rem;
+  font-size: 0.9rem;
+}
+
+/* //css de main */
+.navContainer a {
+  color: var(--color-secondary-active);
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+.navContainer a:hover {
+  color: white;
+}
+.navContainer li {
+  margin: 0 1rem;
+}
+
+.navContainer button {
+  background-color: var(--color-tertiary-active);
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.navContainer button:hover {
+  background-color: var(--color-secondary-active);
+  color: black;
+}
 @font-face {
   font-family: "raleway";
   src: url(./assets/font/raleway.ttf);
 }
 
 :root {
-  border-top: 1.5em solid var(--color-primary-active);
-  border-bottom: 1.5em solid var(--color-primary-active);
-  border-right: 1.5em solid var(--color-primary-active);
-  border-left: 1.5em solid var(--color-primary-active);
+  border-top: 0em solid var(--color-primary-active);
+  border-bottom: 0em solid var(--color-primary-active);
+  border-right: 0em solid var(--color-primary-active);
+  border-left: 0em solid var(--color-primary-active);
 
   --color-primary-active: #2088a7;
   --color-tertiary-active: #c10b63;
@@ -23,9 +73,19 @@
   --font-heading: "raleway";
 
   @media screen and (max-width: 768px) {
-    border-top: 2.5em solid var(--color-primary-active);
-    border-bottom: 2.5em solid var(--color-primary-active);
+    border-top: 0em solid var(--color-primary-active);
+    border-bottom: 0em solid var(--color-primary-active);
     border-right: 0;
     border-left: 0;
   }
+}
+
+.navContainer {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  list-style: none;
+  padding: 1rem;
+  margin: 0;
+  gap: 1rem;
 }

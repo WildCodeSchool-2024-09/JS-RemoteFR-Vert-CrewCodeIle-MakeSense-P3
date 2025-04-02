@@ -4,6 +4,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import type { FieldValues } from "react-hook-form";
+import { useOutletContext } from "react-router";
 import { toast } from "react-toastify";
 import AddCategoryForm from "./Add";
 
@@ -26,6 +27,10 @@ type dataDecision = {
 };
 
 function CreateDecisionForm() {
+  const { auth } = useOutletContext() as {
+    auth: Auth | null;
+  };
+
   // 1. État pour stocker les catégories
   const [categoryList, setCategoryList] = useState<Category[]>([]);
 
@@ -95,6 +100,7 @@ function CreateDecisionForm() {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${auth?.token}`, // Inclusion du jeton JWT
           },
           body: JSON.stringify(data),
         },
@@ -116,7 +122,14 @@ function CreateDecisionForm() {
     <section className={style.decisioncontainer}>
            {" "}
       <section className={style.logo_exit}>
-                <img id="logo" src="/intrasenselogo.png" alt="logo" />       {" "}
+               {" "}
+        <img
+          className={style.logo}
+          id="logo"
+          src="/intrasenselogo.png"
+          alt="logo"
+        />
+               {" "}
         <button type="button" className={style.exitButton}>
           ✖
         </button>

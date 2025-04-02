@@ -7,11 +7,14 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
 // Import the main app component
 import App from "./App";
-import DecisionList from "./components/decisionForm/DecisionList";
+import DecisionDetailPage from "./pages/decisionDetailPage/DecisionDetailPage";
+import DecisionList from "./pages/decisionListPage/DecisionListPage";
+import DecisionVotePage from "./pages/decisionVotePage/DecisionVotePage";
 import DecisionFormPage from "./pages/decisionFormPage/DecisionFormPage";
 import ErrorPage from "./pages/errorPage/ErrorPage";
 import HomePage from "./pages/homePage/HomePage";
 import RegisterPage from "./pages/registerPage/RegisterPage";
+import LoginPage from "./pages/loginPage/loginPage";
 
 // Import additional components for new routes
 // Try creating these components in the "pages" folder
@@ -30,19 +33,27 @@ const router = createBrowserRouter([
     element: <App />, // Renders the App component for the home page
     children: [
       {
+        path: "/",
+        element: <HomePage />,
+      },
+      {
+        path: "/login",
+        element: <LoginPage />,
+      },
+      {
         path: "/register",
         element: <RegisterPage />,
       },
       {
-        path: "/homepage",
-        element: <HomePage />,
+        path: "/decisions/:id",
+        element: <DecisionDetailPage />,
       },
       {
         path: "*",
         element: <ErrorPage />,
       },
       {
-        path: "/decisionformpage",
+        path: "/decisionformpage/:id?",
         element: <DecisionFormPage />,
       },
       {
@@ -52,6 +63,10 @@ const router = createBrowserRouter([
       {
         path: "/decisionlist",
         element: <DecisionList />,
+      },
+      {
+        path: "/decisionslist/:id",
+        element: <DecisionVotePage />,
       },
     ],
   },

@@ -1,14 +1,17 @@
 import express from "express";
-import voteActions from "../modules/vote/voteActions";
+import authActions from "../auth/authActions";
+import voteActions from "../modules/vote/voteAction";
 
 const router = express.Router();
 
 router.get("/api/vote", voteActions.browse);
-
 router.get("/api/vote/:id", voteActions.read);
-
-router.put("/api/vote/:id", voteActions.edit);
-
-router.post("/api/vote", voteActions.add);
+router.get(
+  "/api/vote/check/:id",
+  authActions.verifyToken,
+  voteActions.checkUserVote,
+);
+router.put("/api/vote/:id", authActions.verifyToken, voteActions.edit);
+router.post("/api/vote", authActions.verifyToken, voteActions.add);
 
 export default router;

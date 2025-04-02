@@ -59,9 +59,13 @@ function AddCategoryForm({ onCategoryAdded }: AddCategoryFormProps) {
 
   return (
     <div>
-      <label htmlFor="newCategory"> Ajoutez une nouvelle catégorie: </label>
+      <label className={style.addCategoryTitle} htmlFor="newCategory">
+        {" "}
+        Ajoutez une nouvelle catégorie :{" "}
+      </label>
       <article className={style.addCategoryContainer}>
         <input
+          className={style.addInput}
           type="text"
           id="newCategory"
           placeholder="Nouvelle catégorie"

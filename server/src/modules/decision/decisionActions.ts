@@ -13,7 +13,7 @@ const browse: RequestHandler = async (req, res, next) => {
 const add: RequestHandler = async (req, res, next) => {
   console.info("nouvelle decision ", req.body);
   try {
-    const userId = 1; //temporaire à remplacer avec token
+    const userId = req.auth.sub;
     const newDecision = {
       title: req.body.title,
       // category: req.body.category,
@@ -48,5 +48,19 @@ const read: RequestHandler = async (req, res, next) => {
     next(err);
   }
 };
+const readCountryAndMaxDate: RequestHandler = async (req, res, next) => {
+  try {
+    const decisionId = Number.parseInt(req.params.id);
+    const decision = await decisionRepository.readCountryAndDates(decisionId);
 
-export default { add, read, browse };
+    if (decision == null) {
+      res.sendStatus(404);
+    } else {
+      res.json(decision);
+    }
+  } catch (err) {
+    next(err);
+  }
+};
+
+export default { add, browse, read, readCountryAndMaxDate };

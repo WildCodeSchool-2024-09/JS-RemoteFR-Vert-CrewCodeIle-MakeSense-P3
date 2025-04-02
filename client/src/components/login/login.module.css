@@ -1,0 +1,151 @@
+.card {
+  background: white;
+  padding: 2rem;
+  border-radius: 24px;
+  width: 100%;
+  max-width: 320px;
+  box-shadow: 0 4px 6px -1px rgba(26, 26, 26, 0.1);
+  /* position: relative; */
+  margin: 0 auto;
+}
+.container {
+display: flex;
+justify-content: center;
+align-items: center;
+min-height: 100vh;
+padding: 2rem;
+}
+
+.title {
+  color: var(--color-tertiary-active);
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.formGroup {
+  margin-bottom: 1.5rem;
+}
+
+.label {
+  display: block;
+  color: #0891b2;
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+}
+
+.input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  background: white;
+}
+
+.input::placeholder {
+  color: #9ca3af;
+}
+
+.inputError {
+  border-color: #ef4444;
+}
+
+.errorText {
+  color: #ff0101;
+  font-size: 0.8rem;
+  margin-top: 0.25rem;
+  display: block;
+}
+
+.buttonGroup {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  
+}
+
+.containerButton {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  align-items: center;
+  flex-direction: column;
+  
+}
+
+.buttonLogin {
+  background-color: var(--color-tertiary-active);
+  color: white;
+  padding: 5px 15px;
+  border: none;
+  border-radius: 1rem;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.buttonRegister {
+  background-color: var(--color-primary-active);
+  color: white;
+  padding: 5px 15px;
+  border: none;
+  border-radius: 1rem;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.buttonRegister:hover {
+  background-color: var(--color-tertiary-active);
+}
+
+.buttonLogin:hover {
+  background-color: var(--color-primary-active);
+}
+
+.underscore {
+  color: var(--color-secondary-active);
+  font-weight: bolder;
+}
+.forgotPassword {
+  display: block;
+  text-align: left;
+  color: #6b7280;
+  font-size: 0.8rem;
+  text-decoration: none;
+  margin-top: 1rem;
+}
+
+@media (min-width: 600px) {
+  .card {
+    max-width: 480px;
+    padding: 3rem;
+  }
+
+  .title {
+    font-size: 2rem;
+    margin-bottom: 3rem;
+  }
+
+  .input {
+    padding: 1rem;
+    font-size: 1rem;
+  }
+
+  .label {
+    font-size: 1rem;
+  }
+
+  .buttonGroup {
+    margin-top: 2rem;
+    gap: 2rem;
+  }
+
+  .forgotPassword {
+    font-size: 0.9rem;
+    margin-top: 1.5rem;
+  }
+  .containerButton {
+  flex-direction: row;
+}
+}

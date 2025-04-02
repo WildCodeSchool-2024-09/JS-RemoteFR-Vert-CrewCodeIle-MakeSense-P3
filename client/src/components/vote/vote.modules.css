@@ -1,0 +1,58 @@
+.toggle-button {
+  width: 120px;
+  height: 40px;
+  border-radius: 20px;
+  background-color: gray;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  user-select: none;
+}
+
+.toggle-button.active-positive {
+  background-color: green;
+}
+
+.toggle-button.active-negative {
+  background-color: red;
+}
+
+.toggle-circle {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: white;
+  position: absolute;
+  left: 5px;
+  transition: left 0.3s ease;
+}
+
+.toggle-button.active-positive .toggle-circle {
+  left: 75px;
+}
+
+.toggle-button.active-negative .toggle-circle {
+  left: 5px;
+}
+
+.toggle-label {
+  color: white;
+  font-weight: bold;
+  margin-left: 40px;
+}
+.voteWrapper {
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+ justify-content: center;
+ padding: 2rem;
+}
+
+.voteWrapper h2 {
+ color: var(--color-tertiary-active);
+ margin-bottom: 1.5rem;
+}

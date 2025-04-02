@@ -1,148 +1,190 @@
-/* 🌟 Conteneur principal du formulaire */
+:root {
+  --color-primary-active: #2088a7;
+  --color-secondary-active: #f4e804;
+  --color-tertiary-active: #c10b63;
+  --font-heading: "raleway";
+}
+.buttongroup{
+  flex-direction: row;
+}
 .decisioncontainer {
-  width: 60%;
-  margin: auto;
-  padding: 20px;
-  background: #f9f9f9;
+  max-width: 700px;
+  margin: 2rem auto;
+  padding: 2rem;
+  border: 2px solid var(--color-primary-active);
   border-radius: 10px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  background-color: #f9f9f9;
+  font-family: var(--font-heading);
 }
 
-/* 🏷️ Logo et bouton de sortie */
 .logo_exit {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 2rem;
 }
 
-#logo {
-  width: 120px;
+.logo {
+    width: 40%;
+    height: auto;
 }
 
 .exitButton {
-  background: transparent;
+  background: none;
   border: none;
-  font-size: 24px;
+  font-size: 1.5rem;
   cursor: pointer;
+  color: var(--color-tertiary-active);
+}
+/* css de add  */
+.addCategoryContainer {
+  padding-top: 1rem;
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+}
+.addButton{
+  margin-left: 1rem;
+  background-color: #2088a7;
+  width: 3rem;
+  background-color: var(--color-primary-active);
+color: white;
+border: none;
+padding: 0.6rem 1rem;
+border-radius: 5px;
+cursor: pointer;
+font-size: 1.2rem;
+display: flex;
+align-items: center;
+justify-content: center;
+}
+.addInput{
+  width: auto;
+  flex: 1;
+  min-width: 150px;
+  padding: 0.5rem;
 }
 
-/* 🎯 Titres */
+/* ADD CATEGORY */
+
+.addCategoryTitle {
+color: var(--color-tertiary-active);
+font-weight: bold;
+margin-top: 1rem;
+}
+
 h2 {
   text-align: center;
-  color: #333;
-  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  color: var(--color-primary-active);
 }
 
-/* 📑 Formulaire global */
-.formcontainer {
+form {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 1rem;
 }
 
-/* 📌 Label */
+form section {
+  display: flex;
+  flex-direction: column;
+}
+
 label {
   font-weight: bold;
-  margin-bottom: 5px;
-  display: block;
+  margin-bottom: 0.25rem;
+  color: var(--color-tertiary-active);
 }
 
-/* 📋 Input & Select */
 input,
-select,
-textarea {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ccc;
+textarea,
+select {
+  padding: 0.6rem;
   border-radius: 5px;
+  border: 1px solid #ccc;
+  font-family: var(--font-heading);
   font-size: 1rem;
-  background: #fff;
+  resize: vertical;
 }
 
-input:focus,
-select:focus,
-textarea:focus {
-  border-color: #007bff;
-  outline: none;
+textarea {
+  min-height: 80px;
 }
 
-/* 🎛️ Section des dates */
-.planningDates {
-  border-top: 2px solid #ccc;
-  padding-top: 10px;
+input[type="date"] {
+  width: 100%;
+  max-width: 100%;
+  padding: 0.5rem;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-family: var(--font-heading);
+  font-size: 1rem;
+}
+
+.planningDates legend {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  color: var(--color-primary-active);
 }
 
 .gridContainer {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.gridContainer article {
+  flex: 1;
 }
 
-/* ℹ️ Remarque sur les dates */
 .remarqueNb {
   font-size: 0.9rem;
-  color: #666;
-  margin-top: 5px;
+  color: gray;
+  margin-top: 0.5rem;
 }
 
-/* 📌 Boutons */
 .buttongroup {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 20px;
+    display: flex;
+    gap: 1rem;
+    flex-direction: column;
+    align-items: center;
 }
 
-.canceldButton,
 .addDecisionButton {
-  padding: 10px 15px;
-  font-size: 1rem;
+  background-color: var(--color-primary-active);
+  color: white;
   border: none;
-  cursor: pointer;
+  padding: 0.8rem 1.2rem;
   border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  width: 50%;
+  flex: 1;
 }
 
 .canceldButton {
-  background: #ccc;
-  color: #333;
-}
-
-.addDecisionButton {
-  background: #007bff;
-  color: white;
-}
-
-.addDecisionButton:hover {
-  background: #0056b3;
-}
-
-.canceldButton:hover {
-  background: #999;
-}
-
-/* 🏷️ Ajout de catégorie */
-.addCategory {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin-top: 10px;
-}
-
-.addCategoryContainer {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.addButton {
-  background: #28a745;
+  background-color: #c10b63;
   color: white;
   border: none;
-  padding: 5px 10px;
+  padding: 0.8rem 1.2rem;
   border-radius: 5px;
+  font-weight: bold;
   cursor: pointer;
+  width: 50%;
+  flex:1;
 }
 
-.addButton:hover {
-  background: #218838;
+
+@media (min-width: 600px) {
+  .gridContainer {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  .buttongroup{
+  flex-direction:row;
+  
 }
+}
+

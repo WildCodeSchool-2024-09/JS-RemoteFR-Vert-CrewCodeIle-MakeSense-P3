@@ -25,7 +25,7 @@ export default function DecisionList() {
     const fetchDecisions = async () => {
       try {
         const response = await fetch(
-          `${import.meta.env.VITE_API_URL}/api/decision`,
+          `${import.meta.env.VITE_API_URL}/api/decisions`,
         );
         if (response.ok) {
           const data = await response.json();
@@ -52,8 +52,14 @@ export default function DecisionList() {
             <h2 className={style.title}>{decision.title}</h2>
             <p className={style.description}>{decision.description}</p>
             <p className={style.dates}>
-              Du <strong>{decision.min_date}</strong> au{" "}
-              <strong>{decision.max_date}</strong>
+              Du{" "}
+              <strong>
+                {new Date(decision.min_date).toLocaleDateString("fr-FR")}
+              </strong>{" "}
+              au{" "}
+              <strong>
+                {new Date(decision.max_date).toLocaleDateString("fr-FR")}
+              </strong>
             </p>
             <p className={style.detail}>
               <strong>Contexte :</strong> {decision.context}
@@ -66,7 +72,11 @@ export default function DecisionList() {
             </p>
             <article className={style.footer}>
               <img
-                src={decision.avatar}
+                src={
+                  decision.avatar === null || decision.avatar === undefined
+                    ? decision.avatar
+                    : "/utilisateur.png"
+                }
                 alt={`${decision.firstname} ${decision.lastname}`}
                 className={style.profilePicture}
               />

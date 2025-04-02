@@ -5,11 +5,6 @@ const router = express.Router();
 /* ************************************************************************* */
 // Define Your API Routes Here
 
-import UserRoute from "./routes/user.route";
-
-router.use("/", UserRoute);
-router.use("/", DecisionRoute);
-
 import CountryRoute from "./routes/country.route";
 
 router.use("/", CountryRoute);
@@ -29,6 +24,10 @@ router.use("/", CategoryRoute);
 import DecisionRoute from "./routes/decision.route";
 
 router.use("/", DecisionRoute);
+
+import UserRoute from "./routes/user.route";
+
+router.use("/", UserRoute);
 /* ************************************************************************* */
 
 export default router;
