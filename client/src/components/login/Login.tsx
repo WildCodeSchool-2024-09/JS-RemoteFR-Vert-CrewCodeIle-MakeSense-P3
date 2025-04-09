@@ -24,7 +24,7 @@ export default function LoginForm() {
         email: email.toLowerCase(),
         password,
       };
-      console.log("donneees envoyées au backend", loginData);
+      console.info("donneees envoyées au backend", loginData);
       const response = await fetch(
         `${import.meta.env.VITE_API_URL}/api/login`,
         {
@@ -36,12 +36,12 @@ export default function LoginForm() {
           body: JSON.stringify(loginData),
         },
       );
-      console.log("statu reponse", response.status);
+      console.info("statu reponse", response.status);
       //auth dans le back contient token et credentials
 
       if (response.ok) {
         const auth = await response.json();
-        console.log("reponse du backend", auth);
+        console.info("reponse du backend", auth);
         setAuth(auth); //je mets à jour les données du context avec les données du serveur que j'ai récupéré lors du login, contenant
         //maintenant token et credentials.
         reset();
